@@ -1,0 +1,49 @@
+h1{
+    text-align: center;
+}
+
+.article{
+    text-decoration: underline;
+}
+
+fieldset{
+    border-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div a {
+    text-decoration: none;
+    margin-right: 10px;
+    align-self: center;
+}
+
+.globalEncheres{
+    display: flex;
+
+    align-items: center;
+    border-style: solid;
+    width: 600px;
+    height: 200px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.displayEnchere{
+    margin: 5px 0;
+    margin-left: auto;
+    align-self: center;
+}
+
+.articleEncheres{
+    display: block;
+    height: 30%;
+}
+
+.infosItems{
+    text-align: center;
+}
