@@ -37,7 +37,7 @@ public class ConfigSecurity {
                         login -> {
                             login.loginPage("/login");
                             login.failureUrl("/login?error");
-                            login.defaultSuccessUrl("/encheres");
+                            login.defaultSuccessUrl("/encheres").permitAll();
                         }
                 ).logout(logout -> {
                     logout
