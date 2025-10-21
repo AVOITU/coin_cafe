@@ -1,0 +1,16 @@
+.likert {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.likert .icheck-primary {
+    margin-right: .25rem;
+}
+
+.question legend {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}

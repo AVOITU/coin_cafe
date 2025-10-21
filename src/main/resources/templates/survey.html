@@ -10,12 +10,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <!-- iCheck Bootstrap (facultatif, pour radios/checkbox stylés) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icheck-bootstrap@3.0.1/icheck-bootstrap.min.css">
-    <style>
-        .likert { display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; }
-        .likert .icheck-primary { margin-right:.25rem; }
-        .question legend { font-size:1rem; font-weight:600; margin-bottom:.5rem; }
-        .required::after{ content:" *"; color:#dc3545; }
-    </style>
+    <!--  css du projet  -->
+    <link rel="stylesheet" href="/static/css/pages/survey.css">
+
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
@@ -36,6 +33,7 @@
                     <div class="col-sm-12">
                         <h1 class="m-0">Votre avis nous intéresse</h1>
                         <p class="text-muted mb-0">Merci d'évaluer chaque point de 1 (Très mauvais) à 5 (Excellent).</p>
+                        <p class="text-muted mb-0" > (Veuillez répondre à au moins une question, merci!) </p>
                     </div>
                 </div>
             </div>
@@ -63,9 +61,9 @@
                                 <!-- Questions -->
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">1) Hygiène du coin café ? <small class="text-muted">(Espace de service et toilettes)</small></legend>
+                                        <legend>1) Hygiène du coin café ? <small class="text-muted">(Espace de service et toilettes)</small></legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q1_1" name="q1" value="1" required><label for="q1_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q1_1" name="q1" value="1" ><label for="q1_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q1_2" name="q1" value="2"><label for="q1_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q1_3" name="q1" value="3"><label for="q1_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q1_4" name="q1" value="4"><label for="q1_4">4</label></div>
@@ -76,9 +74,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">2) L'accueil au coin café ?</legend>
+                                        <legend >2) L'accueil au coin café ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q2_1" name="q2" value="1" required><label for="q2_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q2_1" name="q2" value="1" ><label for="q2_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q2_2" name="q2" value="2"><label for="q2_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q2_3" name="q2" value="3"><label for="q2_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q2_4" name="q2" value="4"><label for="q2_4">4</label></div>
@@ -89,9 +87,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">3) L’ambiance au coin café ?</legend>
+                                        <legend >3) L’ambiance au coin café ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q3_1" name="q3" value="1" required><label for="q3_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q3_1" name="q3" value="1" ><label for="q3_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q3_2" name="q3" value="2"><label for="q3_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q3_3" name="q3" value="3"><label for="q3_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q3_4" name="q3" value="4"><label for="q3_4">4</label></div>
@@ -102,9 +100,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">4) Accessibilité du coin café ? <small class="text-muted">(Espace de service et toilettes)</small></legend>
+                                        <legend >4) Accessibilité du coin café ? <small class="text-muted">(Espace de service et toilettes)</small></legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q4_1" name="q4" value="1" required><label for="q4_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q4_1" name="q4" value="1" ><label for="q4_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q4_2" name="q4" value="2"><label for="q4_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q4_3" name="q4" value="3"><label for="q4_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q4_4" name="q4" value="4"><label for="q4_4">4</label></div>
@@ -115,9 +113,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">5) Indications pour accéder au coin café ?</legend>
+                                        <legend >5) Indications pour accéder au coin café ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q5_1" name="q5" value="1" required><label for="q5_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q5_1" name="q5" value="1" ><label for="q5_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q5_2" name="q5" value="2"><label for="q5_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q5_3" name="q5" value="3"><label for="q5_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q5_4" name="q5" value="4"><label for="q5_4">4</label></div>
@@ -130,9 +128,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">6) Qualité du service ?</legend>
+                                        <legend >6) Qualité du service ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q6_1" name="q6" value="1" required><label for="q6_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q6_1" name="q6" value="1" ><label for="q6_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q6_2" name="q6" value="2"><label for="q6_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q6_3" name="q6" value="3"><label for="q6_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q6_4" name="q6" value="4"><label for="q6_4">4</label></div>
@@ -143,9 +141,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">7) Qualité des produits vendus ?</legend>
+                                        <legend >7) Qualité des produits vendus ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q7_1" name="q7" value="1" required><label for="q7_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q7_1" name="q7" value="1" ><label for="q7_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q7_2" name="q7" value="2"><label for="q7_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q7_3" name="q7" value="3"><label for="q7_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q7_4" name="q7" value="4"><label for="q7_4">4</label></div>
@@ -156,9 +154,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">8) Rapport qualité/prix des produits vendus ?</legend>
+                                        <legend >8) Rapport qualité/prix des produits vendus ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q8_1" name="q8" value="1" required><label for="q8_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q8_1" name="q8" value="1" ><label for="q8_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q8_2" name="q8" value="2"><label for="q8_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q8_3" name="q8" value="3"><label for="q8_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q8_4" name="q8" value="4"><label for="q8_4">4</label></div>
@@ -169,9 +167,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">9) Diversité des produits ?</legend>
+                                        <legend >9) Diversité des produits ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q9_1" name="q9" value="1" required><label for="q9_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q9_1" name="q9" value="1" ><label for="q9_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q9_2" name="q9" value="2"><label for="q9_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q9_3" name="q9" value="3"><label for="q9_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q9_4" name="q9" value="4"><label for="q9_4">4</label></div>
@@ -182,9 +180,9 @@
 
                                 <div class="form-group question">
                                     <fieldset>
-                                        <legend class="required">10) Connexion WI‑FI ?</legend>
+                                        <legend >10) Connexion WI‑FI ?</legend>
                                         <div class="likert">
-                                            <div class="icheck-primary d-inline"><input type="radio" id="q10_1" name="q10" value="1" required><label for="q10_1">1</label></div>
+                                            <div class="icheck-primary d-inline"><input type="radio" id="q10_1" name="q10" value="1" ><label for="q10_1">1</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q10_2" name="q10" value="2"><label for="q10_2">2</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q10_3" name="q10" value="3"><label for="q10_3">3</label></div>
                                             <div class="icheck-primary d-inline"><input type="radio" id="q10_4" name="q10" value="4"><label for="q10_4">4</label></div>
