@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <!-- AdminLTE -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/pages/survey.css">
 
     <!-- jQuery / Bootstrap / AdminLTE -->
@@ -22,9 +24,10 @@
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light align-items-center" id="nav-sondage">
         <div class="container">
             <a class="navbar-brand" href="#">
+                <img src="../static/img/logo_ravy.webp" alt="" class="logo">
                 <span class="brand-text">Ravy – Statistiques du sondage</span>
             </a>
         </div>
@@ -73,12 +76,12 @@
                         <div class="card card-success">
                             <div class="card-header"><h3 class="card-title">Évolution temporelle</h3></div>
                             <div class="card-body"><canvas id="lineChart" class="chart-box"></canvas></div>
-                            <div class="card-footer text-muted">Moyenne globale par période.</div>
+                            <div class="card-footer text-muted">Moyenne globale par période </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
+                <div class="row">
 
                     <!-- HBar: moyenne par question -->
                     <div class="col-md-6">
@@ -87,7 +90,14 @@
                             <div class="card-body"><canvas id="barQuestionChart" class="chart-box"></canvas></div>
                         </div>
                     </div>
+
+                    <fieldset>
+                        <legend> Votre conseiller IA </legend>
+                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi consectetur distinctio esse minus modi nam nihil, numquam quidem sit velit. Atque et, in laboriosam magnam minima perferendis quos rerum totam! </p>
+                    </fieldset>
+
                 </div>
+
             </div>
         </section>
     </div>

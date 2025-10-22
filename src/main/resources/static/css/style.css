@@ -2,15 +2,27 @@ h1{
     text-align: center;
 }
 
+img{
+    max-width: 8rem;
+}
+
 .article{
     text-decoration: underline;
 }
 
 fieldset{
-    border-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    border: 2px solid black;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+legend {
+    background-color: yellow;
+    color: white;
+    padding: 3px 6px;
+    width: 50%;
 }
 
 div a {
@@ -46,4 +58,12 @@ div a {
 
 .infosItems{
     text-align: center;
+}
+
+.content-wrapper{
+    padding-bottom: 2em;
+}
+
+.logo{
+    width: 10em;
 }
