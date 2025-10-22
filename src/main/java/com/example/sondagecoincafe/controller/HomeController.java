@@ -25,19 +25,19 @@ public class HomeController {
 
     @GetMapping("")
     public String localhostPort(){
-        return "redirect:encheres";
+        return "redirect:survey";
     }
 
-    @GetMapping("/encheres")
+    @GetMapping("/survey")
     public String displayItems(Model model) {
 
-        List<Item> items = itemService.findItemsInProgress();
-        model.addAttribute("items", items);
+//        List<Item> items = itemService.findItemsInProgress();
+//        model.addAttribute("items", items);
+//
+//        List<Category> categories = categoryService.getAllCategories();
+//        model.addAttribute("categories", categories);
 
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories", categories);
-
-        return "encheres";
+        return "survey";
     }
 
     @PostMapping("/encheres")
