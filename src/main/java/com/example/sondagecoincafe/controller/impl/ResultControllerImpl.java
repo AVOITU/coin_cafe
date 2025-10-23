@@ -1,4 +1,6 @@
-package com.example.sondagecoincafe.controller;
+package com.example.sondagecoincafe.controller.impl;
 
-public class ResultController {
+import com.example.sondagecoincafe.controller.ResultController;
+
+public class ResultControllerImpl implements ResultController {
 }

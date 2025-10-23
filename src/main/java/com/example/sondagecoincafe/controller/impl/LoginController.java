@@ -1,4 +1,4 @@
-package com.example.sondagecoincafe.controller;
+package com.example.sondagecoincafe.controller.impl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

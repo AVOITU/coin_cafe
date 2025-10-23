@@ -1,4 +1,4 @@
-package com.example.sondagecoincafe.controller;
+package com.example.sondagecoincafe.controller.impl;
 
 import com.example.sondagecoincafe.bll.UserService;
 import com.example.sondagecoincafe.bo.User;

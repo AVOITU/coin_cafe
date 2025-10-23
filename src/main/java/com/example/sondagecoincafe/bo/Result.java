@@ -1,4 +1,4 @@
 package com.example.sondagecoincafe.bo;
 
-public class Question {
+public class Result {
 }
