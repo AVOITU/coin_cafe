@@ -3,7 +3,7 @@ const survey = {
     globalRating: 3.8,  // sur 5
     pieCounts: { 1: 8, 2: 12, 3: 22, 4: 28, 5: 30 },
     timeline: {
-        labels: ["Semaine 1","Semaine 2","Semaine 3","Semaine 4","Semaine 5"],
+        labels: ["mois 1","mois 2","mois 3","mois 4","mois 5"],
         values:  [19, 27, 23, 31, 34].map(v=> (v/10)) // converti sur échelle 0..5
     },
     categories: {
