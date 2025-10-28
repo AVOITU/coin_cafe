@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ResultService {
 
-    public ResultsDto getSurvey();
+    ResultsDto getResultsDto();
 }

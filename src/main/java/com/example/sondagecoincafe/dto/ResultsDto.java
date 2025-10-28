@@ -1,8 +1,13 @@
 package com.example.sondagecoincafe.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.Map;
 
+@Data
+@NoArgsConstructor
 public class ResultsDto {
 
     private double globalRating;
@@ -11,35 +16,25 @@ public class ResultsDto {
     private Category categories;
     private Question byQuestion;
 
-    public void setGlobalRating(double v) {
-    }
-
-    public void setPieCounts(Map<Integer,Integer> map) {
-    }
-
-    public void setTimeline(Timeline t) {
-    }
-
     // getters / setters
 
+    @Data
+    @NoArgsConstructor
     public static class Timeline {
         private List<String> labels;
         private List<Double> values;
-
-        public void setLabels(List<String> strings) {
-        }
-
-        public void setValues(List<Double> doubles) {
-        }
-        // getters / setters
     }
 
+    @Data
+    @NoArgsConstructor
     public static class Category {
         private List<String> labels;
         private List<Double> values;
         // getters / setters
     }
 
+    @Data
+    @NoArgsConstructor
     public static class Question {
         private List<String> labels;
         private List<Double> values;
