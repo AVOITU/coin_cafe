@@ -19,7 +19,7 @@ public class ResultControllerImpl implements ResultController {
     @GetMapping("/results")
     public String updateResults(Model m){
         ResultsDto resultsDto = resultService.getResultsDto();
-        m.addAttribute("resultService", resultService);
+        m.addAttribute("resultsDto", resultsDto);
         return "results";
     }
 }

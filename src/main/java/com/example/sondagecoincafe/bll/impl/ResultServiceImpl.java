@@ -17,12 +17,17 @@ public class ResultServiceImpl implements ResultService {
 
         resultsDto.setPieCounts(Map.of(1, 8, 2, 12, 3, 22, 4, 28, 5, 30));
 
-        ResultsDto.Timeline t = new ResultsDto.Timeline();
-        t.setLabels(List.of("mois 1", "mois 2", "mois 3", "mois 4", "mois 5"));
-        t.setValues(List.of(1.9, 2.7, 2.3, 3.1, 3.4));
-        resultsDto.setTimeline(t);
+        ResultsDto.Timeline timeline = new ResultsDto.Timeline();
+        timeline.setLabels(List.of("mois 1", "mois 2", "mois 3", "mois 4", "mois 5"));
+        timeline.setValues(List.of(1.9, 2.7, 2.3, 3.1, 3.4));
+        resultsDto.setTimeline(timeline);
 
-        // idem pour categories et byQuestion...
+        ResultsDto.Question byQuestion = new ResultsDto.Question();
+        byQuestion.setLabels(List.of("Hygiène","Accueil","Ambiance","Accessibilité",
+                "Signalétique","Service","Produits","Qualité/Prix","Diversité","Wi‑Fi"));
+        byQuestion.setValues(List.of(3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5));
+        resultsDto.setByQuestion(byQuestion);
+
         return resultsDto;
     }
 }
