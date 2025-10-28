@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ResultControllerImpl implements ResultController {
 
-    private ResultService resultService;
+    private final ResultService resultService;
 
     public ResultControllerImpl(ResultService resultService) {
         this.resultService = resultService;
