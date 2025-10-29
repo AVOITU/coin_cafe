@@ -2,9 +2,11 @@ package com.example.sondagecoincafe.dal.impl;
 
 import com.example.sondagecoincafe.bo.Item;
 import com.example.sondagecoincafe.dal.PeriodeDao;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class PeriodeDaoImpl implements PeriodeDao {
     @Override
     public void create(Item item) {

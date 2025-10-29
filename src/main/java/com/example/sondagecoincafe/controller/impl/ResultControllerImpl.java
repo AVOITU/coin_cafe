@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.controller.impl;
 
 import com.example.sondagecoincafe.bll.ResultService;
+import com.example.sondagecoincafe.bo.Note;
 import com.example.sondagecoincafe.controller.ResultController;
 import com.example.sondagecoincafe.dto.ResultsDto;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,9 @@ public class ResultControllerImpl implements ResultController {
 
     @GetMapping("/results")
     public String updateResults(Model m){
-        ResultsDto resultsDto = resultService.getResultsDto();
+        Note note = resultService.getDtoNotes();
+
+        ResultsDto resultsDto = resultService.fillResultsDto();
         m.addAttribute("resultsDto", resultsDto);
         return "results";
     }

@@ -1,6 +1,9 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.ResultService;
+import com.example.sondagecoincafe.bo.Note;
+import com.example.sondagecoincafe.bo.Periode;
+import com.example.sondagecoincafe.bo.Result;
 import com.example.sondagecoincafe.dto.ResultsDto;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +14,22 @@ import java.util.Map;
 public class ResultServiceImpl implements ResultService {
 
     @Override
-    public ResultsDto getResultsDto() {
+    public Note getDtoNotes() {
+        return null;
+    }
+
+    @Override
+    public Periode getDtoPeriodes() {
+        return null;
+    }
+
+    @Override
+    public Result getDtoResults() {
+        return null;
+    }
+
+    @Override
+    public ResultsDto fillResultsDto() {
         ResultsDto resultsDto = new ResultsDto();
         resultsDto.setGlobalRating(3.8);
 

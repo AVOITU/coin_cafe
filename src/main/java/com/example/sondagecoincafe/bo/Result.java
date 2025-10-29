@@ -1,21 +1,20 @@
 package com.example.sondagecoincafe.bo;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Getter @Setter
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Result {
 
     @NonNull
     private String questionName;
 
-    private String questionGlobalNotation;
+    private float questionGlobalNotation;
     private String chatGptComments;
     private Timestamp timestampResult ;
     private int totalVoteCount ;
+
 }
