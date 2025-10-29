@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class UserDaoImplTest {

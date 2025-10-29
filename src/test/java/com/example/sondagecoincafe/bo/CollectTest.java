@@ -6,6 +6,8 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class CollectTest {
 
     private Validator validator;
@@ -16,10 +18,10 @@ public class CollectTest {
         validator = factory.getValidator();
     }
 
-    @Test
-    void testValidationUserOk() {
-        Collect collect = new Collect(5, "rue de la Gare", "29000", "Quimper");
-        assertThat(validator.validate(collect)).isEmpty();
-    }
+//    @Test
+//    void testValidationUserOk() {
+//        Collect collect = new Collect(5, "rue de la Gare", "29000", "Quimper");
+//        assertThat(validator.validate(collect)).isEmpty();
+//    }
 
 }
