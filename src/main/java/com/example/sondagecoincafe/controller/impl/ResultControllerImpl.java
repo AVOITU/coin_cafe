@@ -1,7 +1,9 @@
 package com.example.sondagecoincafe.controller.impl;
 
+import com.example.sondagecoincafe.bll.NoteService;
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.ResultService;
+import com.example.sondagecoincafe.bo.Note;
 import com.example.sondagecoincafe.bo.Result;
 import com.example.sondagecoincafe.controller.ResultController;
 import com.example.sondagecoincafe.dto.ResultsDto;
