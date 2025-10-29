@@ -18,18 +18,24 @@ public class ResultControllerImpl implements ResultController {
 
     private final ResultService resultService;
     private final ResultDtoService resultDtoService;
+    private final NoteService noteService;
 
-    public ResultControllerImpl(ResultService resultService, ResultDtoService resultDtoService) {
+    public ResultControllerImpl(ResultService resultService, ResultDtoService resultDtoService, NoteService noteService) {
         this.resultService = resultService;
         this.resultDtoService = resultDtoService;
+        this.noteService = noteService;
     }
 
+//    TODO : décommenter le code quand la BDD sera accessible
     @GetMapping("/results")
     public String updateResults(Model m){
 //        List<Result> results = resultService.getDtoResults();
 //        float averageGlobalRating = resultService.calculateAverageRating(results);
 //        List<String> totalVoteCounts = resultService.getTotalVoteCounts(results);
 //        List<Float> questionGlobalNotations = resultService.getQuestionGlobalNotations(results);
+
+//        List <Note> notesList = noteService.findAllVoteCount();
+//        List <Integer> notes = noteService.getVoteCounts(notesList);
 
         ResultsDto resultsDto = resultDtoService.fillResultsDto();
         m.addAttribute("resultsDto", resultsDto);
