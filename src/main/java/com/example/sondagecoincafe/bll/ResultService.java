@@ -1,19 +1,15 @@
 package com.example.sondagecoincafe.bll;
 
-import com.example.sondagecoincafe.bo.Note;
-import com.example.sondagecoincafe.bo.Periode;
 import com.example.sondagecoincafe.bo.Result;
-import com.example.sondagecoincafe.dto.ResultsDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface ResultService {
 
-    Note getDtoNotes();
-
-    Periode getDtoPeriodes();
-
-    Result getDtoResults();
-
-    ResultsDto fillResultsDto();
+    List<Result> getDtoResults();
+    float calculateAverageRating(List<Result> results);
+    List<String> getTotalVoteCounts(List<Result> results);
+    public List<Float> getQuestionGlobalNotations(List<Result> results);
 }

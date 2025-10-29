@@ -4,48 +4,54 @@ import com.example.sondagecoincafe.bll.ResultService;
 import com.example.sondagecoincafe.bo.Note;
 import com.example.sondagecoincafe.bo.Periode;
 import com.example.sondagecoincafe.bo.Result;
+import com.example.sondagecoincafe.dal.ResultDao;
 import com.example.sondagecoincafe.dto.ResultsDto;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Getter @Setter
+@NoArgsConstructor
 public class ResultServiceImpl implements ResultService {
 
-    @Override
-    public Note getDtoNotes() {
-        return null;
+    private ResultDao resultDao;
+
+    public ResultServiceImpl(ResultDao resultDao){
+        this.resultDao = resultDao;
     }
 
     @Override
-    public Periode getDtoPeriodes() {
-        return null;
+    public List<Result> getDtoResults() {
+        return resultDao.findAllResults();
     }
 
     @Override
-    public Result getDtoResults() {
-        return null;
+    public float calculateAverageRating(List<Result> results){
+        float averageGlobalRating = (float) results.stream()
+                .mapToDouble(Result::getQuestionGlobalNotation) // <- extrais le float par resultat remonté
+                .average()
+                .orElse(0);
+        return averageGlobalRating;
     }
 
     @Override
-    public ResultsDto fillResultsDto() {
-        ResultsDto resultsDto = new ResultsDto();
-        resultsDto.setGlobalRating(3.8);
+    public List<String> getTotalVoteCounts(List<Result> results){
+        List<String> totalVoteCounts = results.stream()
+                .map(Result::getQuestionName)
+                .toList();
+        return totalVoteCounts;
+    }
 
-        resultsDto.setPieCounts(Map.of(1, 8, 2, 12, 3, 22, 4, 28, 5, 30));
-
-        ResultsDto.Timeline timeline = new ResultsDto.Timeline();
-        timeline.setLabels(List.of("mois 1", "mois 2", "mois 3", "mois 4", "mois 5"));
-        timeline.setValues(List.of(1.9, 2.7, 2.3, 3.1, 3.4));
-        resultsDto.setTimeline(timeline);
-
-        ResultsDto.Question byQuestion = new ResultsDto.Question();
-        byQuestion.setLabels(List.of("Hygiène","Accueil","Ambiance","Accessibilité",
-                "Signalétique","Service","Produits","Qualité/Prix","Diversité","Wi‑Fi"));
-        byQuestion.setValues(List.of(3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5));
-        resultsDto.setByQuestion(byQuestion);
-
-        return resultsDto;
+    @Override
+    public List<Float> getQuestionGlobalNotations(List<Result> results){
+        List<Float> questionGlobalNotations = results.stream()
+                .map(Result::getQuestionGlobalNotation)
+                .toList();
+        return questionGlobalNotations;
     }
 }
