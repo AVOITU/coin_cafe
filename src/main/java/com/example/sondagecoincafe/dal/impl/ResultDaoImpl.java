@@ -14,7 +14,8 @@ import java.util.List;
 @Repository
 public class ResultDaoImpl implements ResultDao {
 
-    private static final String SELECT_ALL_RESULTS_NAMES_NOTATIONS = "SELECT (question_name, question_global_notation) FROM RESULTS";
+    private static final String SELECT_ALL_RESULTS_NAMES_NOTATIONS =
+            "SELECT (question_name, question_global_notation) FROM RESULTS";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
