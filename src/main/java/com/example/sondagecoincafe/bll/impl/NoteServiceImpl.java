@@ -2,7 +2,6 @@ package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.NoteService;
 import com.example.sondagecoincafe.bo.Note;
-import com.example.sondagecoincafe.bo.Result;
 import com.example.sondagecoincafe.dal.NoteDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
