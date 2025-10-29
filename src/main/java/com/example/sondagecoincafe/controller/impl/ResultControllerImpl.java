@@ -2,7 +2,6 @@ package com.example.sondagecoincafe.controller.impl;
 
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.ResultService;
-import com.example.sondagecoincafe.bo.Note;
 import com.example.sondagecoincafe.bo.Result;
 import com.example.sondagecoincafe.controller.ResultController;
 import com.example.sondagecoincafe.dto.ResultsDto;
@@ -25,10 +24,10 @@ public class ResultControllerImpl implements ResultController {
 
     @GetMapping("/results")
     public String updateResults(Model m){
-        List<Result> results = resultService.getDtoResults();
-        float averageGlobalRating = resultService.calculateAverageRating(results);
-        List<String> totalVoteCounts = resultService.getTotalVoteCounts(results);
-        List<Float> questionGlobalNotations = resultService.getQuestionGlobalNotations(results);
+//        List<Result> results = resultService.getDtoResults();
+//        float averageGlobalRating = resultService.calculateAverageRating(results);
+//        List<String> totalVoteCounts = resultService.getTotalVoteCounts(results);
+//        List<Float> questionGlobalNotations = resultService.getQuestionGlobalNotations(results);
 
         ResultsDto resultsDto = resultDtoService.fillResultsDto();
         m.addAttribute("resultsDto", resultsDto);
