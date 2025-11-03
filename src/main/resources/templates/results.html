@@ -21,20 +21,15 @@
     <!-- Chart.js v4 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-    <script th:inline="javascript"> window.RESULTSDTO = /*[[${resultsDto}]]*/ {}; </script>
     <script src="/javascript/results.js" defer> </script>
+
+    <script th:inline="javascript"> window.RESULTSDTO = /*[[${resultsDto}]]*/ {}; </script>
+
 </head>
 <body class="hold-transition layout-top-nav">
 <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light align-items-center" id="nav-sondage">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="/img/logo_ravy.webp" alt="" class="logo">
-                <span class="brand-text">Ravy – Statistiques du sondage</span>
-            </a>
-        </div>
-    </nav>
+
+    <div th:replace="~{fragments/fragment-navigation :: frag-navigation}"></div>
 
     <!-- Content Wrapper -->
     <div class="content-wrapper">
@@ -105,12 +100,8 @@
         </section>
     </div>
 
-    <footer class="main-footer text-sm">
-        <div class="container">
-            <strong>&copy; <span id="year"></span> Ravy.</strong>
-            <span class="float-right d-none d-sm-inline">AdminLTE 3 · Chart.js</span>
-        </div>
-    </footer>
+    <div th:replace="~{fragments/fragment-footer :: frag-footer}"></div>
+
 </div>
 </body>
 </html>

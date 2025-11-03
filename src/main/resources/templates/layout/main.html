@@ -1,0 +1,16 @@
+
+<html lang="fr" th:fragment="layout(pageTitle, pageContent)">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${pageTitle}">Titre</title>
+</head>
+<body class="hold-transition layout-top-nav">
+<nav>...</nav>
+
+<main class="content-wrapper">
+    <th:block th:replace="${pageContent}">Contenu</th:block>
+</main>
+
+<footer th:replace="~{fragments/fragment-footer :: frag-footer}"></footer>
+</body>
+</html>
