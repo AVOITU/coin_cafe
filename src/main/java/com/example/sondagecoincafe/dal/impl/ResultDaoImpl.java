@@ -30,19 +30,19 @@ public class ResultDaoImpl implements ResultDao {
 
     }
 
-    public List<Result> findAllResults(){
+    public List<Question> findAllResults(){
         return jdbcTemplate.query(
                 SELECT_ALL_RESULTS_NAMES_NOTATIONS,
                 new ResultRowMapper()
         );
     }
 
-    static class ResultRowMapper implements RowMapper<Result> {
+    static class ResultRowMapper implements RowMapper<Question> {
 
 
         @Override
-        public Result mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Result result = new Result();
+        public Question mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Question result = new Question();
             result.setQuestionName(rs.getString("question_name"));
             result.setQuestionGlobalNotation(rs.getFloat("question_global_notation"));
             result.setChatGptComments(rs.getString("chat_gpt_comments"));

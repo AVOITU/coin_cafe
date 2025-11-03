@@ -1,6 +1,6 @@
 package com.example.sondagecoincafe.bll;
 
-import com.example.sondagecoincafe.bo.Result;
+import com.example.sondagecoincafe.bo.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public interface ResultService {
 
-    List<Result> getDtoResults();
-    float calculateAverageRating(List<Result> results);
-    List<String> getTotalVoteCounts(List<Result> results);
-    public List<Float> getQuestionGlobalNotations(List<Result> results);
+    List<Question> getDtoResults();
+    float calculateAverageRating(List<Question> results);
+    List<String> getTotalVoteCounts(List<Question> results);
+    public List<Float> getQuestionGlobalNotations(List<Question> results);
 }

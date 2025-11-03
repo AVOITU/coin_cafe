@@ -1,7 +1,7 @@
 package com.example.sondagecoincafe.bll;
 
 import com.example.sondagecoincafe.bll.impl.ResultServiceImpl;
-import com.example.sondagecoincafe.bo.Result;
+import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.dal.ResultDao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,8 +25,8 @@ class ResultServiceImplTest {
     @InjectMocks
     private ResultServiceImpl service;
 
-    private Result result(String name, float note, int votes) {
-        Result r = new Result(name);
+    private Question result(String name, float note, int votes) {
+        Question r = new Question(name);
         r.setQuestionGlobalNotation(note);
         r.setTotalVoteCount(votes);
         return r;
@@ -34,10 +34,10 @@ class ResultServiceImplTest {
 
     @Test
     void getDtoResults_should_return_all_results_from_dao() {
-        List<Result> expected = List.of(result("Q1", 4f, 10), result("Q2", 3f, 5));
+        List<Question> expected = List.of(result("Q1", 4f, 10), result("Q2", 3f, 5));
         when(resultDao.findAllResults()).thenReturn(expected);
 
-        List<Result> out = service.getDtoResults();
+        List<Question> out = service.getDtoResults();
 
         assertThat(out).hasSize(2);
         verify(resultDao).findAllResults();
@@ -45,7 +45,7 @@ class ResultServiceImplTest {
 
     @Test
     void calculateAverageRating_should_return_correct_average() {
-        List<Result> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
+        List<Question> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
 
         float avg = service.calculateAverageRating(data);
 
@@ -60,7 +60,7 @@ class ResultServiceImplTest {
 
     @Test
     void getTotalVoteCounts_should_return_question_names() {
-        List<Result> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
+        List<Question> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
 
         List<String> names = service.getTotalVoteCounts(data);
 
@@ -69,7 +69,7 @@ class ResultServiceImplTest {
 
     @Test
     void getQuestionGlobalNotations_should_return_notations() {
-        List<Result> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
+        List<Question> data = List.of(result("Q1", 4f, 10), result("Q2", 2f, 5));
 
         List<Float> notes = service.getQuestionGlobalNotations(data);
 
