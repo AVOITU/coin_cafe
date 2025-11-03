@@ -1,8 +1,25 @@
-<nav th:fragment="frag-navigation" class="main-header navbar navbar-expand navbar-white navbar-light align-items-center" id="nav-sondage">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="/img/logo_ravy.webp" alt="" class="logo">
-            <span class="brand-text">Ravy – Statistiques du sondage</span>
-        </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" xmlns:th="http://www.thymeleaf.org" th:fragment="frag-navigation">
+            <a class="navbar-brand" th:href="@{/encheres}">ENI - Enchères</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
+            <a class="nav-link" th:href="@{/login}">Se connecter</a>
+        </li>
+        <li class="nav-item" th:if="${#authorization.expression('!isAuthenticated()')}">
+            <a class="nav-link" th:href="@{/users/register}">S'inscrire</a>
+        </li>
+        <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+            <a class="nav-link" th:href="@{/sell}">Vendre un objet</a>
+        </li>
+        <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+            <a class="nav-link" th:href="@{/users(username=${#authentication.name})}" th:text="'Voir mon profil (' + ${#authentication.name} + ')'"></a>
+        </li>
+        <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+            <a class="nav-link" th:href="@{/logout}">Déconnexion</a>
+        </li>
+    </ul>
     </div>
 </nav>

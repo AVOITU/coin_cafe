@@ -1,0 +1,106 @@
+<html lang="en">
+
+<head xmlns:th="http://www.thymeleaf.org">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        html, body {
+            /*height: 100%;*/
+        }
+
+        .login-form {
+            width: 350px;
+            padding: 2rem 1rem 1rem;
+        }
+
+        form {
+            padding: 1rem;
+        }
+
+        .error {
+            color: darkred;
+        }
+
+    </style>
+
+    <title>Profil</title>
+</head>
+
+<body>
+<header>
+    <div th:replace="~{fragments/fragment-navigation :: frag-navigation}"></div>
+</header>
+<div class="container">
+    <div class="wrapper d-flex align-items-center justify-content-center h-100">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Profil</h5>
+
+                <form class="row g-3"
+                      th:object="${user}"
+                >
+
+                    <p th:if="${#fields.hasErrors('*')}" class="error">Attention, certains champs ne sont pas valides :</p>
+
+                    <div class="col-md-6">
+                        <label for="username" class="form-label">Pseudo</label>
+                        <input type="text" class="form-control" id="username" th:field="*{username}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('username')}"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('name')}"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="firstname" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="firstname" th:field="*{firstname}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('firstname')}"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="mail" class="form-label">E-mail</label>
+                        <input type="email" class="form-control" id="mail" th:field="*{email}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('email')}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Téléphone</label>
+                        <input type="text" class="form-control" id="phone" th:field="*{phone}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('phone')}"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="street" class="form-label">Rue</label>
+                        <input type="text" class="form-control" id="street" th:field="*{street}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('street')}"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="zipcode" class="form-label">Code Postal</label>
+                        <input type="text" class="form-control" id="zipcode" th:field="*{zipCode}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('zipCode')}"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="city" class="form-label">Ville</label>
+                        <input type="text" class="form-control" id="city" th:field="*{city}" disabled>
+                        <div th:replace="~{fragments/fragment-error :: frag-error('city')}"></div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
+
+</html>
