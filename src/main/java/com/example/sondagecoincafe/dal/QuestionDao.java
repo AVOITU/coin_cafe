@@ -1,13 +1,7 @@
 package com.example.sondagecoincafe.dal;
 
-import com.example.sondagecoincafe.bo.Item;
-import com.example.sondagecoincafe.bo.Question;
+import com.example.sondagecoincafe.dto.ResultsDto;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface QuestionDao {
-
-    List<Question> findAllResults();
-
-    void create(Item item);
+public interface QuestionDao extends JpaRepository<ResultsDto.Question, Long> {
 }

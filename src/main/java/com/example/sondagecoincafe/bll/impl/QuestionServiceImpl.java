@@ -1,7 +1,6 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.QuestionService;
-import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,5 @@
 package com.example.sondagecoincafe.controller.converter;
 
-import com.example.sondagecoincafe.bll.CategoryService;
-import com.example.sondagecoincafe.bo.Category;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

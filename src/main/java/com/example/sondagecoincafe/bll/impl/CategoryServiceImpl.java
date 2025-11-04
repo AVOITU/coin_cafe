@@ -1,8 +1,5 @@
 package com.example.sondagecoincafe.bll.impl;
 
-import com.example.sondagecoincafe.bll.CategoryService;
-import com.example.sondagecoincafe.bo.Category;
-import com.example.sondagecoincafe.dal.CategoryDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

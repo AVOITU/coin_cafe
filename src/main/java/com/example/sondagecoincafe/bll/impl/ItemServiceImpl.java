@@ -1,9 +1,5 @@
 package com.example.sondagecoincafe.bll.impl;
 
-import com.example.sondagecoincafe.bll.ItemService;
-import com.example.sondagecoincafe.bo.Item;
-import com.example.sondagecoincafe.dal.CategoryDao;
-import com.example.sondagecoincafe.dal.ItemDao;
 import com.example.sondagecoincafe.dal.UserDao;
 import org.springframework.stereotype.Service;
 

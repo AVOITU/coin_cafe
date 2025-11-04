@@ -1,9 +1,6 @@
 package com.example.sondagecoincafe.dal;
 
-import com.example.sondagecoincafe.bo.Item;
-import com.example.sondagecoincafe.bo.Note;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface NoteDao {
+public interface NoteDao extends JpaRepository<Note,Long> {
 }

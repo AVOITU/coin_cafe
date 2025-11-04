@@ -1,9 +1,5 @@
 package com.example.sondagecoincafe.controller.impl;
 
-import com.example.sondagecoincafe.bll.CategoryService;
-import com.example.sondagecoincafe.bll.ItemService;
-import com.example.sondagecoincafe.bo.Category;
-import com.example.sondagecoincafe.bo.Item;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

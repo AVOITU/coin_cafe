@@ -3,14 +3,11 @@ package com.example.sondagecoincafe.controller.impl;
 import com.example.sondagecoincafe.bll.NoteService;
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.QuestionService;
-import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.controller.ResultController;
 import com.example.sondagecoincafe.dto.ResultsDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @Controller
 public class ResultControllerImpl implements ResultController {

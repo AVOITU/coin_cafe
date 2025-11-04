@@ -1,14 +1,11 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.NoteService;
-import com.example.sondagecoincafe.bo.Note;
 import com.example.sondagecoincafe.dal.NoteDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Getter @Setter
