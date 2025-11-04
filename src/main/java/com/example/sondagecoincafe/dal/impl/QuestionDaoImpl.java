@@ -18,7 +18,7 @@ public class QuestionDaoImpl implements QuestionDao {
             "SELECT (question_name, question_global_notation) FROM RESULTS";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public QuestionDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
