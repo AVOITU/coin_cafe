@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.QuestionService;
+import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,39 +15,35 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
-    private QuestionDao resultDao;
+    private QuestionDao questionDao;
 
     public QuestionServiceImpl(QuestionDao resultDao){
-        this.resultDao = resultDao;
+        this.questionDao = resultDao;
     }
 
-    @Override
     public List<Question> getDtoResults() {
-        return resultDao.findAllResults();
+        return questionDao.findAll();
     }
 
-    @Override
-    public float calculateAverageRating(List<Question> results){
-        float averageGlobalRating = (float) results.stream()
-                .mapToDouble(Question::getQuestionGlobalNotation) // <- extrais le float par resultat remonté
-                .average()
-                .orElse(0);
-        return averageGlobalRating;
-    }
-
-    @Override
-    public List<String> getTotalVoteCounts(List<Question> results){
-        List<String> totalVoteCounts = results.stream()
-                .map(Question::getQuestionName)
-                .toList();
-        return totalVoteCounts;
-    }
-
-    @Override
-    public List<Float> getQuestionGlobalNotations(List<Question> results){
-        List<Float> questionGlobalNotations = results.stream()
-                .map(Question::getQuestionGlobalNotation)
-                .toList();
-        return questionGlobalNotations;
-    }
+//    public float calculateAverageRating(List<Question> results){
+//        float averageGlobalRating = (float) results.stream()
+//                .mapToDouble(Question::getQuestionGlobalNotation) // <- extrais le float par resultat remonté
+//                .average()
+//                .orElse(0);
+//        return averageGlobalRating;
+//    }
+//
+//    public List<String> getTotalVoteCounts(List<Question> results){
+//        List<String> totalVoteCounts = results.stream()
+//                .map(Question::getQuestionName)
+//                .toList();
+//        return totalVoteCounts;
+//    }
+//
+//    public List<Float> getQuestionGlobalNotations(List<Question> results){
+//        List<Float> questionGlobalNotations = results.stream()
+//                .map(Question::getQuestionGlobalNotation)
+//                .toList();
+//        return questionGlobalNotations;
+//    }
 }

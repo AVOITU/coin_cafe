@@ -1,5 +1,7 @@
 package com.example.sondagecoincafe.bo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,8 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@Entity
 public class User implements UserDetails {
 
+    @Id
+    private Long id;
     private Integer no_user;
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Le pseudo doit être alphanumérique")
@@ -112,6 +117,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getNo_user() {

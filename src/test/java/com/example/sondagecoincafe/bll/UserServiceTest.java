@@ -61,7 +61,7 @@ public class UserServiceTest {
 
     @Test
     void should_find_user_by_id() {
-        int id = 1;
+        Long id = 1L;
         String expectedFirstName = "Tracy";
         Optional<User> maybeUser = userService.getById(id);
 

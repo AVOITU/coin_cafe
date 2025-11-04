@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getById(int id) {
-        return userDao.getById(id);
+    public Optional<User> getById(Long id) {
+        return Optional.of(userDao.getById(id));
     }
 
     @Override
     public Optional<User> getByUsername(String username) {
-        return userDao.selectByUsername(username);
+        return userDao.findByUsername(username);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(
                 this.passwordEncoder.encode(user.getPassword())
         );
-        userDao.insertUser(user);
+        userDao.save(user);
     }
 }
