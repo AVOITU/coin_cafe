@@ -1,8 +1,8 @@
 package com.example.sondagecoincafe.bll;
 
-import com.example.sondagecoincafe.bll.impl.ResultServiceImpl;
+import com.example.sondagecoincafe.bll.impl.QuestionServiceImpl;
 import com.example.sondagecoincafe.bo.Question;
-import com.example.sondagecoincafe.dal.ResultDao;
+import com.example.sondagecoincafe.dal.QuestionDao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,10 +20,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ResultServiceImplTest {
 
     @Mock
-    private ResultDao resultDao;
+    private QuestionDao resultDao;
 
     @InjectMocks
-    private ResultServiceImpl service;
+    private QuestionServiceImpl service;
 
     private Question result(String name, float note, int votes) {
         Question r = new Question(name);

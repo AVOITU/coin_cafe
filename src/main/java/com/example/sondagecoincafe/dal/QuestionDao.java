@@ -5,7 +5,7 @@ import com.example.sondagecoincafe.bo.Question;
 
 import java.util.List;
 
-public interface ResultDao {
+public interface QuestionDao {
 
     List<Question> findAllResults();
 

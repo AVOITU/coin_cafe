@@ -1,8 +1,8 @@
 package com.example.sondagecoincafe.bll.impl;
 
-import com.example.sondagecoincafe.bll.ResultService;
+import com.example.sondagecoincafe.bll.QuestionService;
 import com.example.sondagecoincafe.bo.Question;
-import com.example.sondagecoincafe.dal.ResultDao;
+import com.example.sondagecoincafe.dal.QuestionDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 @Getter @Setter
 @NoArgsConstructor
-public class ResultServiceImpl implements ResultService {
+public class QuestionServiceImpl implements QuestionService {
 
-    private ResultDao resultDao;
+    private QuestionDao resultDao;
 
-    public ResultServiceImpl(ResultDao resultDao){
+    public QuestionServiceImpl(QuestionDao resultDao){
         this.resultDao = resultDao;
     }
 

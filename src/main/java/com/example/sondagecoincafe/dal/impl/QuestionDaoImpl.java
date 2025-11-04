@@ -1,7 +1,7 @@
 package com.example.sondagecoincafe.dal.impl;
 
 import com.example.sondagecoincafe.bo.*;
-import com.example.sondagecoincafe.dal.ResultDao;
+import com.example.sondagecoincafe.dal.QuestionDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class ResultDaoImpl implements ResultDao {
+public class QuestionDaoImpl implements QuestionDao {
 
     private static final String SELECT_ALL_RESULTS_NAMES_NOTATIONS =
             "SELECT (question_name, question_global_notation) FROM RESULTS";
@@ -20,7 +20,7 @@ public class ResultDaoImpl implements ResultDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
 
-    public ResultDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate) {
+    public QuestionDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.jdbcTemplate = jdbcTemplate;
     }

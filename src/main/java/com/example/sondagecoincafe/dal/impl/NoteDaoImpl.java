@@ -15,28 +15,12 @@ import java.util.List;
 @Repository
 public class NoteDaoImpl implements NoteDao {
 
-    private static final String SELECT_ALL_PERIODES_VOTE_COUNT =
-            "SELECT (vote_count) FROM NOTES";
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private JdbcTemplate jdbcTemplate;
 
     public NoteDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-    @Override
-    public void create(Item item) {
-
-    }
-
-    @Override
-    public List <Note> findAllVoteCount() {
-        return jdbcTemplate.query(
-                SELECT_ALL_PERIODES_VOTE_COUNT,
-                new NoteRowMapper()
-        );
     }
 
     static class NoteRowMapper implements RowMapper<Note> {

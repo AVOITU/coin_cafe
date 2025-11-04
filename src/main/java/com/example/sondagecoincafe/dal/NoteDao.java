@@ -6,7 +6,4 @@ import com.example.sondagecoincafe.bo.Note;
 import java.util.List;
 
 public interface NoteDao {
-
-    void create(Item item);
-    List <Note> findAllVoteCount();
 }

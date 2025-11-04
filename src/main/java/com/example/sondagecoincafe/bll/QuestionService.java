@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface ResultService {
+public interface QuestionService {
 
     List<Question> getDtoResults();
     float calculateAverageRating(List<Question> results);

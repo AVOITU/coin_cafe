@@ -20,17 +20,4 @@ public class NoteServiceImpl implements NoteService {
     public NoteServiceImpl(NoteDao noteDao) {
         this.noteDao = noteDao;
     }
-
-    @Override
-    public List <Note> findAllVoteCount(){
-        return noteDao.findAllVoteCount();
-    }
-
-    @Override
-    public List <Integer> getVoteCounts(List <Note> note){
-            List<Integer> voteCounts = note.stream()
-                    .map(Note::getVoteCount)
-                    .toList();
-            return voteCounts;
-    }
 }
