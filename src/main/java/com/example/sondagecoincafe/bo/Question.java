@@ -3,27 +3,29 @@ package com.example.sondagecoincafe.bo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
-@Getter
-@Setter
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "questions")
+@Getter @Setter @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "result_id", columnDefinition = "int UNSIGNED not null")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Column(name = "question_id")
     private Long id;
 
-    @Size(max = 200)
-    @NotNull
+    @NotNull @Size(max = 200)
     @Column(name = "question_text", nullable = false, length = 200)
     private String questionText;
 
-    @NotNull
-    @Column(name = "question_total_votes", nullable = false)
+    @NotNull @Column(name = "question_total_votes", nullable = false)
     private Integer questionTotalVotes;
 
     @Size(max = 2000)
@@ -35,4 +37,10 @@ public class Question {
     @Column(name = "all_votes_count", nullable = false)
     private Integer allVotesCount;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "periods",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "period_id"))
+    @ToString.Exclude
+    private Set<Period> periods = new HashSet<>();
 }

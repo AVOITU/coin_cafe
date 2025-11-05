@@ -25,14 +25,11 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDao.findAll();
     }
 
-//    public float calculateAverageRating(List<Question> results){
-//        float averageGlobalRating = (float) results.stream()
-//                .mapToDouble(Question::getQuestionGlobalNotation) // <- extrais le float par resultat remonté
-//                .average()
-//                .orElse(0);
-//        return averageGlobalRating;
-//    }
-//
+    public float calculateAverageRating(List<Question> results){
+        float averageGlobalRating = 1;
+        return averageGlobalRating;
+    }
+
 //    public List<String> getTotalVoteCounts(List<Question> results){
 //        List<String> totalVoteCounts = results.stream()
 //                .map(Question::getQuestionName)
