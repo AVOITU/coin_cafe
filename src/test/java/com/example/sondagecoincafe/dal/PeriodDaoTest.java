@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.dal;
 
 import com.example.sondagecoincafe.bo.Period;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -15,6 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PeriodDaoTest {
 
     @Autowired PeriodDao periodDao;
+
+    @BeforeEach
+    void init() {
+        periodDao.deleteAll();
+    }
 
     @Test
     void creationTimestamp_populated() {
