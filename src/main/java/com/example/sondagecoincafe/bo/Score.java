@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -22,11 +23,13 @@ public class Score {
 
     @NotNull
     @Min(0) @Max(5)
+    @PositiveOrZero
     @Column(name = "score", nullable = false)
     private Integer score;
 
     @NotNull
     @ColumnDefault("0")
+    @PositiveOrZero
     @Column(name = "score_vote_count", nullable = false)
     private Integer scoreVoteCount;
 

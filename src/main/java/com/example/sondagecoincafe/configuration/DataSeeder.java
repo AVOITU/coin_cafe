@@ -52,7 +52,7 @@ public class DataSeeder implements CommandLineRunner {
         for (int i = 0; i < 15; i++) {
             Period p = new Period();
             p.setTimestampPeriod(LocalDateTime.now(ZoneId.of("Europe/Paris")));
-            p.setPeriodTotalVotes(BigDecimal.valueOf(random.nextDouble(5)));
+            p.setPeriodTotalVotes(5);
             periods.add(p);
         }
 

@@ -3,6 +3,7 @@ package com.example.sondagecoincafe.bo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Question {
     private String questionText;
 
     @NotNull @Column(name = "question_total_votes", nullable = false)
+    @PositiveOrZero
     private Integer questionTotalVotes;
 
     @Size(max = 2000)
@@ -36,6 +38,7 @@ public class Question {
     @NotNull
     @ColumnDefault("0")
     @Column(name = "all_votes_count", nullable = false)
+    @PositiveOrZero
     private Integer allVotesCount;
 
     @NotEmpty

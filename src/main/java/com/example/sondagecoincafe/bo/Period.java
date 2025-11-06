@@ -2,6 +2,8 @@ package com.example.sondagecoincafe.bo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +30,8 @@ public class Period {
     private LocalDateTime timestampPeriod;
 
     @Column(name="period_total_votes", precision=4, scale=2)
-    private BigDecimal periodTotalVotes;
+    @PositiveOrZero
+    private int periodTotalVotes;
 
     @ManyToMany(mappedBy="periods", fetch=FetchType.LAZY)
     @ToString.Exclude
