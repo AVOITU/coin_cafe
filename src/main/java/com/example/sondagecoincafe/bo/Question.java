@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.bo;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -37,6 +38,7 @@ public class Question {
     @Column(name = "all_votes_count", nullable = false)
     private Integer allVotesCount;
 
+    @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "questions_periods",
             joinColumns = @JoinColumn(name = "question_id"),
@@ -44,6 +46,7 @@ public class Question {
     @ToString.Exclude
     private Set<Period> periods = new HashSet<>();
 
+    @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "questions_scores",
             joinColumns = @JoinColumn(name = "question_id"),

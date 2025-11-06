@@ -7,6 +7,7 @@ import com.example.sondagecoincafe.dal.PeriodDao;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import com.example.sondagecoincafe.dal.ScoreDao;
 import com.github.javafaker.Faker;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -25,6 +26,7 @@ public class DataSeeder implements CommandLineRunner {
     private final QuestionDao questionDao;
     private final PeriodDao periodDao;
     private final ScoreDao scoreDao;
+    private final EntityManager entityManager;
 
     private final Faker faker = new Faker(new Locale("fr"));
     private final Random random = new Random();
@@ -39,26 +41,25 @@ public class DataSeeder implements CommandLineRunner {
         periodDao.deleteAll();
         scoreDao.deleteAll();
 
-        // 1️⃣ Génération des scores
-        List<Score> scores = scoreDao.saveAll(
-                Set.of(
+        // Génération scores
+        List<Score> scores = List.of(
                         newScore(0), newScore(1), newScore(2),
                         newScore(3), newScore(4), newScore(5)
-                )
         );
 
-        // 2️⃣ Génération des périodes
+        // Génération périodes
         Set<Period> periods = new HashSet<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 15; i++) {
             Period p = new Period();
             p.setTimestampPeriod(LocalDateTime.now(ZoneId.of("Europe/Paris")));
-            periodDao.save(p);
             p.setPeriodTotalVotes(BigDecimal.valueOf(random.nextDouble(5)));
-            periodDao.save(p);
             periods.add(p);
         }
 
-        // 3️⃣ Génération des questions
+        scoreDao.saveAll(scores);
+        periodDao.saveAll(periods);
+
+        // Génération questions
         for (int i = 0; i < 12; i++) {
             Question q = new Question();
             q.setQuestionText(faker.lorem().sentence(3));
@@ -66,9 +67,11 @@ public class DataSeeder implements CommandLineRunner {
             q.setAllVotesCount(random.nextInt(200));
             q.setChatgptComments(faker.lorem().sentence(6));
 
-            // relations aléatoires
-            q.getScores().addAll(scores.subList(0, random.nextInt(scores.size())));
+            int n = 1 + random.nextInt(scores.size()); // [1..size]
+            q.getScores().addAll(scores.subList(0, n));
             q.getPeriods().addAll(periods);
+
+            entityManager.clear();
 
             questionDao.save(q);
         }
