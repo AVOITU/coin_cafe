@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 @Getter @Setter
-@NoArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionDao questionDao;
