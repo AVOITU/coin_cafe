@@ -38,9 +38,15 @@ public class Question {
     private Integer allVotesCount;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "periods",
+    @JoinTable(name = "questions_periods",
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "period_id"))
     @ToString.Exclude
     private Set<Period> periods = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "questions_scores",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "score_id"))
+    private Set<Score> scores = new HashSet<>();
 }

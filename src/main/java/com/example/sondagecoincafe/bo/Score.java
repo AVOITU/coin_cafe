@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -25,4 +27,6 @@ public class Score {
     @Column(name = "score_vote_count", nullable = false)
     private Integer scoreVoteCount;
 
+    @ManyToMany(mappedBy = "scores")
+    private Set<Question> questions;
 }
