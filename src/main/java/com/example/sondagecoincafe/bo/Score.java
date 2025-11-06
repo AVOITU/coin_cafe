@@ -1,6 +1,8 @@
 package com.example.sondagecoincafe.bo;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +21,7 @@ public class Score {
     private Long id;
 
     @NotNull
+    @Min(0) @Max(5)
     @Column(name = "score", nullable = false)
     private Integer score;
 
