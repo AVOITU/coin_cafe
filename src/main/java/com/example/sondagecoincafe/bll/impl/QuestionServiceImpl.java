@@ -21,8 +21,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     private QuestionDao questionDao;
 
-    public QuestionServiceImpl(QuestionDao resultDao){
-        this.questionDao = resultDao;
+    public QuestionServiceImpl(QuestionDao questionDao){
+        this.questionDao = questionDao;
     }
 
     public List<Question> getDtoResults() {
@@ -71,34 +71,6 @@ public class QuestionServiceImpl implements QuestionService {
 
         return mapForPieCount;
     }
-
-    public List < String > getListOfMonths(List<Question> results){
-
-        List < String > listOfMonths = List.of();
-
-        if (results == null) return listOfMonths;
-
-        for (Question question : results){
-            int numberOfPeriods = 0;
-            for (Period period : question.getPeriods()) {
-                String periodMonth = period.getTimestampPeriod().getMonth().toString();
-                listOfMonths.add(periodMonth);
-                numberOfPeriods += 1;
-                if (numberOfPeriods == 4){
-                    return listOfMonths;
-                }
-            }
-            }
-
-        return listOfMonths;
-    }
-
-//    public List<String> getTotalVoteCounts(List<Question> results){
-//        List<String> totalVoteCounts = results.stream()
-//                .map(Question::getQuestionName)
-//                .toList();
-//        return totalVoteCounts;
-//    }
 
 //    public List<Float> getQuestionGlobalNotations(List<Question> results){
 //        List<Float> questionGlobalNotations = results.stream()

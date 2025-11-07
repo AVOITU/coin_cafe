@@ -1,6 +1,5 @@
 package com.example.sondagecoincafe.bll;
 
-import com.example.sondagecoincafe.bll.impl.QuestionServiceImpl;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
@@ -20,16 +19,16 @@ import static org.assertj.core.api.Assertions.offset;
 class RatingCalculatorTest {
 
     @Autowired
-    private QuestionServiceImpl questionServiceImpl;
+    private QuestionService questionService;
 
     @Test
     void returns_zero_on_null_list() {
-        assertThat(questionServiceImpl.calculateAverageRating(null)).isEqualTo(0f);
+        assertThat(questionService.calculateAverageRating(null)).isEqualTo(0f);
     }
 
     @Test
     void returns_zero_on_empty_list() {
-        assertThat(questionServiceImpl.calculateAverageRating(List.of())).isEqualTo(0f);
+        assertThat(questionService.calculateAverageRating(List.of())).isEqualTo(0f);
     }
 
     @Test
@@ -41,7 +40,7 @@ class RatingCalculatorTest {
         // periods total votes = 4
         q.getPeriods().add(period(4));
 
-        float avg = questionServiceImpl.calculateAverageRating(List.of(q));
+        float avg = questionService.calculateAverageRating(List.of(q));
         assertThat(avg).isCloseTo(4.25f, offset(1e-6f));
     }
 
@@ -57,7 +56,7 @@ class RatingCalculatorTest {
         q2.getPeriods().add(period(4));  // votes=4
 
         // totalSum = 11 + 16 = 27 ; totalVotes = 3 + 4 = 7 ; avg = 27/7 ≈ 3.8571429
-        float avg = questionServiceImpl.calculateAverageRating(List.of(q1, q2));
+        float avg = questionService.calculateAverageRating(List.of(q1, q2));
         assertThat(avg).isCloseTo(27f/7f, offset(1e-6f));
     }
 
@@ -67,7 +66,7 @@ class RatingCalculatorTest {
         q.getScores().add(score(5, 0)); // 0 vote
         q.getPeriods().add(period(0));  // 0 vote total
 
-        float avg = questionServiceImpl.calculateAverageRating(List.of(q));
+        float avg = questionService.calculateAverageRating(List.of(q));
         assertThat(avg).isEqualTo(0f);
     }
 
@@ -100,16 +99,16 @@ class RatingCalculatorTest {
 class GetListVotesWithScoreTest {
 
     @Autowired
-    private QuestionServiceImpl questionServiceImpl;
+    private QuestionService questionService;
 
     @Test
     void returns_empty_map_when_input_is_null() {
-        assertThat(questionServiceImpl.getListVotesWithScore(null)).isEmpty();
+        assertThat(questionService.getListVotesWithScore(null)).isEmpty();
     }
 
     @Test
     void returns_empty_map_when_list_is_empty() {
-        assertThat(questionServiceImpl.getListVotesWithScore(List.of())).isEmpty();
+        assertThat(questionService.getListVotesWithScore(List.of())).isEmpty();
     }
 
     @Test
@@ -120,7 +119,7 @@ class GetListVotesWithScoreTest {
                 score(5, 7)
         );
 
-        Map<Integer,Integer> out = questionServiceImpl.getListVotesWithScore(List.of(q));
+        Map<Integer,Integer> out = questionService.getListVotesWithScore(List.of(q));
         assertThat(out).doesNotContainKeys(0);
         assertThat(out).containsEntry(1, 3)
                 .containsEntry(5, 7);
@@ -131,7 +130,7 @@ class GetListVotesWithScoreTest {
         // le besoin ne demande pas d'exclure votes==0, seulement score==0
         Question q = q(score(2, 0), score(1, 5));
 
-        Map<Integer,Integer> out = questionServiceImpl.getListVotesWithScore(List.of(q));
+        Map<Integer,Integer> out = questionService.getListVotesWithScore(List.of(q));
 
         assertThat(out).containsEntry(1, 5)
                 .containsEntry(2, 0);   // accepté car score>0
