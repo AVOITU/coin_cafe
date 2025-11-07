@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "questions")
+@Table(name = "questions", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_question_text", columnNames = {"question_text"})
+})
 @Getter @Setter @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Question {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

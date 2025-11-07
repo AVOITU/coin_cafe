@@ -32,8 +32,8 @@ class PeriodDaoTest {
     void setUp() {
         periodDao.deleteAll();
         questionDao.deleteAll();
-        p1 = periodDao.save(newPeriod("3.40"));
-        p2 = periodDao.save(newPeriod("4.10"));
+        p1 = periodDao.save(newPeriod(340));
+        p2 = periodDao.save(newPeriod(410));
     }
 
     @Test
@@ -55,22 +55,22 @@ class PeriodDaoTest {
         Optional<Period> absent = periodDao.findById(-999L);
 
         assertThat(found).isPresent();
-        assertThat(found.get().getPeriodTotalVotes()).isEqualTo(new BigDecimal("3.40"));
+        assertThat(found.get().getPeriodTotalVotes()).isEqualTo(340);
         assertThat(absent).isNotPresent();
     }
 
     @Test
     void update_totalVotes_persists_changes() {
-        p1.setPeriodTotalVotes(new BigDecimal("4.85"));
+        p1.setPeriodTotalVotes(485);
         Period updated = periodDao.saveAndFlush(p1);
 
-        assertThat(updated.getPeriodTotalVotes()).isEqualTo(new BigDecimal("4.85"));
+        assertThat(updated.getPeriodTotalVotes()).isEqualTo(485);
         assertThat(updated.getTimestampPeriod()).isNotNull();
     }
 
     @Test
     void timestampPeriod_is_set_automatically_on_insert() {
-        Period p = newPeriod("2.70");
+        Period p = newPeriod(270);
         periodDao.saveAndFlush(p);
 
         Period reloaded = periodDao.findById(p.getId()).orElseThrow();
@@ -127,9 +127,9 @@ class PeriodDaoTest {
 //    }
 
     // ---------- helpers ----------
-    private Period newPeriod(String avg) {
+    private Period newPeriod(int totalVotes) {
         Period p = new Period();
-        p.setPeriodTotalVotes(new BigDecimal(avg));
+        p.setPeriodTotalVotes(totalVotes);
         return p;
     }
 }

@@ -17,7 +17,9 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity @Table(name="periods")
+@Entity @Table(name="periods", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_timestamp_period_periods", columnNames = {"timestamp_period"})
+})
 @Getter @Setter
 public class Period {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)

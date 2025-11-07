@@ -11,7 +11,9 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Getter @Setter
@@ -51,13 +53,32 @@ public float calculateAverageRating(List<Question> results) {
     return totalVotes == 0 ? 0f : averageRating;
 }
 
+    public Map <Integer, Integer> getListVotesWithScore(List<Question> results) {
+
+        Map <Integer, Integer> mapForPieCount = new HashMap<>(Map.of());
+
+        if (results == null) return mapForPieCount;
+
+        for (Question question : results){
+            for (Score score : question.getScores()) {
+                if (score.getScore() > 0){
+                    int scoreValue = score.getScore();
+                    int votes = score.getScoreVoteCount();
+                    mapForPieCount.put(scoreValue, votes);
+                }
+            }
+        }
+
+        return mapForPieCount;
+    }
+
 //    public List<String> getTotalVoteCounts(List<Question> results){
 //        List<String> totalVoteCounts = results.stream()
 //                .map(Question::getQuestionName)
 //                .toList();
 //        return totalVoteCounts;
 //    }
-//
+
 //    public List<Float> getQuestionGlobalNotations(List<Question> results){
 //        List<Float> questionGlobalNotations = results.stream()
 //                .map(Question::getQuestionGlobalNotation)
