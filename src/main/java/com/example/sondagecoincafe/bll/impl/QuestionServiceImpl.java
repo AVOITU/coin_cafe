@@ -32,19 +32,6 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public float calculateAverageRating(List<Question> results, int totalVotesCount) {
-        if (results == null || totalVotesCount == 0) return 0f;
-
-        int totalScore = 0;
-        for (Question question : results) {
-            for (Score score : question.getScores()) {
-                totalScore += score.getScore() * score.getScoreVoteCount();
-            }
-        }
-        return (float) totalScore / totalVotesCount;
-    }
-
-    @Override
     public Map <Integer, Integer> getListVotesWithScore(List<Question> results) {
 
         Map <Integer, Integer> mapForPieCount = new HashMap<>(Map.of());
