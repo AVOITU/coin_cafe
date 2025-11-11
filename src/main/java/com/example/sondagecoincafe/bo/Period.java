@@ -23,17 +23,19 @@ import java.util.Set;
 @Getter @Setter
 public class Period {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="period_id")                // pas UNSIGNED
+    @Column(name="period_id")
     private Long id;
 
     @Column(name = "timestamp_period", nullable = false)
     private LocalDateTime timestampPeriod;
 
     @Column(name="period_total_votes")
+    @ColumnDefault("0")
     @PositiveOrZero
     private int periodTotalVotes;
 
     @Column(name = "period_total_score")
+    @ColumnDefault("0")
     @PositiveOrZero
     private int periodTotalScore;
 

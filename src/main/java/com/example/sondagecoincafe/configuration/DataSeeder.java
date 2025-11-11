@@ -64,11 +64,12 @@ public class DataSeeder implements CommandLineRunner {
         periodDao.saveAll(periods);
 
         // Génération questions
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_QUESTIONS; i++) {
             Question q = new Question();
-            q.setQuestionText(faker.lorem().sentence(3));
+            q.setQuestionText(AppConstants.QUESTIONS_SENTENCES[i]);
+            q.setTag(AppConstants.TAGS[i]);
             q.setQuestionTotalVotes(random.nextInt(100));
-            q.setAllVotesCount(random.nextInt(200));
+            q.setQuestionTotalVotes(random.nextInt(200));
             q.setChatgptComments(faker.lorem().sentence(6));
 
             int n = 1 + random.nextInt(scores.size()); // [1..size]

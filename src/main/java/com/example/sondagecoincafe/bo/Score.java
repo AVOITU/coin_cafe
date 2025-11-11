@@ -26,6 +26,7 @@ public class Score {
 
     @NotNull
     @Min(0) @Max(AppConstants.MAX_SCORE)
+    @ColumnDefault("0")
     @PositiveOrZero
     @Column(name = "score", nullable = false)
     private Integer score;

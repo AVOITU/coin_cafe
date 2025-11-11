@@ -29,19 +29,19 @@ public class Question {
     @Column(name = "question_text", nullable = false, length = 200)
     private String questionText;
 
-    @NotNull @Column(name = "question_total_votes", nullable = false)
+    @NotNull @Size(max = 50)
+    @Column(name = "question_tag", nullable = false, length = 200)
+    private String tag;
+
+    @NotNull
     @PositiveOrZero
+    @Column(name = "question_total_votes", nullable = false)
+    @ColumnDefault("0")
     private Integer questionTotalVotes;
 
     @Size(max = 2000)
     @Column(name = "chatgpt_comments", length = 2000)
     private String chatgptComments;
-
-    @NotNull
-    @ColumnDefault("0")
-    @Column(name = "all_votes_count", nullable = false)
-    @PositiveOrZero
-    private Integer allVotesCount;
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
