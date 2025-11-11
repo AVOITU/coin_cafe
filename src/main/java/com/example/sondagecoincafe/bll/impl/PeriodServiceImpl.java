@@ -40,10 +40,12 @@ public class PeriodServiceImpl implements PeriodService {
             listOfMonths.add(periodMonth);
             numberOfPeriods += 1;
             if (numberOfPeriods == 5){
+                Collections.reverse(listOfMonths);
                 return listOfMonths;
             }
         }
 
+        Collections.reverse(listOfMonths);
         return listOfMonths;
     }
 
