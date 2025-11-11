@@ -2,6 +2,7 @@ package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.PeriodService;
 import com.example.sondagecoincafe.bo.Period;
+import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,7 @@ public class PeriodServiceImpl implements PeriodService {
 
     public PeriodServiceImpl(PeriodDao periodDao) { this.periodDao = periodDao; }
 
-    public int getTotalVoteCount(){
-        return  0;
-    }
-
+    @Override
     public List< String > getListOfMonths(List<Period> periods){
 
         List < String > listOfMonths = new ArrayList<>();
@@ -38,6 +36,7 @@ public class PeriodServiceImpl implements PeriodService {
         return listOfMonths;
     }
 
+    @Override
     public List< Float > getAverageScorePerMonth(List<Period> periods, int totalVoteCount){
 
         List < Float > listOfAverageScore = new ArrayList<>();
@@ -56,5 +55,16 @@ public class PeriodServiceImpl implements PeriodService {
         }
 
         return listOfAverageScore;
+    }
+
+    @Override
+    public int calculateTotalVotes(List<Question> results) {
+        int totalVotes = 0;
+        for (Question question : results) {
+            for (Period period : question.getPeriods()) {
+                totalVotes += period.getPeriodTotalVotes();
+            }
+        }
+        return totalVotes;
     }
 }

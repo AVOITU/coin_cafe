@@ -11,7 +11,9 @@ public interface QuestionService {
 
     List<Question> getDtoResults();
 
-    float calculateAverageRating(List<Question> results);
+    float calculateAverageRating(List<Question> results, int totalVoteCount);
 
     Map<Integer, Integer> getListVotesWithScore(List<Question> results);
+
+
 }

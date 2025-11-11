@@ -23,75 +23,58 @@ class RatingCalculatorTest {
 
     @Test
     void returns_zero_on_null_list() {
-        assertThat(questionService.calculateAverageRating(null)).isEqualTo(0f);
+        assertThat(questionService.calculateAverageRating(null, 10)).isEqualTo(0f);
+    }
+
+    @Test
+    void returns_zero_when_totalVotes_is_zero_even_with_scores() {
+        Question q = q();
+        q.getScores().add(score(5, 3)); // pondéré = 15
+        assertThat(questionService.calculateAverageRating(List.of(q), 0)).isEqualTo(0f);
     }
 
     @Test
     void returns_zero_on_empty_list() {
-        assertThat(questionService.calculateAverageRating(List.of())).isEqualTo(0f);
+        assertThat(questionService.calculateAverageRating(List.of(), 0)).isEqualTo(0f);
     }
 
     @Test
     void average_single_question_ok() {
         Question q = q();
-        // scores: 4★ (3 votes), 5★ (1 vote) => sum = 4*3 + 5*1 = 17
-        q.getScores().add(score(4, 3));
-        q.getScores().add(score(5, 1));
-        // periods total votes = 4
-        q.getPeriods().add(period(4));
-
-        float avg = questionService.calculateAverageRating(List.of(q));
+        q.getScores().add(score(4, 3)); // 12
+        q.getScores().add(score(5, 1)); // +5 = 17
+        float avg = questionService.calculateAverageRating(List.of(q), 4);
         assertThat(avg).isCloseTo(4.25f, offset(1e-6f));
     }
 
     @Test
     void average_multiple_questions_aggregates_all() {
         Question q1 = q();
-        q1.getScores().add(score(3, 2)); // 3*2=6
-        q1.getScores().add(score(5, 1)); // 5*1=5  → sum=11
-        q1.getPeriods().add(period(3));  // votes=3
+        q1.getScores().add(score(3, 2)); // 6
+        q1.getScores().add(score(5, 1)); // +5 = 11
 
         Question q2 = q();
-        q2.getScores().add(score(4, 4)); // 4*4=16
-        q2.getPeriods().add(period(4));  // votes=4
+        q2.getScores().add(score(4, 4)); // 16
 
-        // totalSum = 11 + 16 = 27 ; totalVotes = 3 + 4 = 7 ; avg = 27/7 ≈ 3.8571429
-        float avg = questionService.calculateAverageRating(List.of(q1, q2));
+        float avg = questionService.calculateAverageRating(List.of(q1, q2), 7); // 27/7
         assertThat(avg).isCloseTo(27f/7f, offset(1e-6f));
     }
 
-    @Test
-    void returns_zero_when_totalVotes_is_zero() {
-        Question q = q();
-        q.getScores().add(score(5, 0)); // 0 vote
-        q.getPeriods().add(period(0));  // 0 vote total
-
-        float avg = questionService.calculateAverageRating(List.of(q));
-        assertThat(avg).isEqualTo(0f);
-    }
-
-    // ---------- helpers ----------
+    // helpers
     private Question q() {
         Question q = new Question();
-        q.setScores(new HashSet<>());
-        q.setPeriods(new HashSet<>());
+        q.setScores(new java.util.HashSet<>());
+        q.setPeriods(new java.util.HashSet<>());
+        q.setQuestionText("q");
+        q.setQuestionTotalVotes(0);
+        q.setAllVotesCount(0);
         return q;
     }
-
     private Score score(int value, int votes) {
         Score s = new Score();
         s.setScore(value);
         s.setScoreVoteCount(votes);
         return s;
-    }
-
-    private Period period(int totalVotes) {
-        Period p = new Period();
-        // Si ton getter/setter est BigDecimal, adapte en conséquence :
-        // p.setPeriodTotalVotes(new BigDecimal(totalVotes));
-        // et fais évoluer la méthode calcul pour caster en int.
-        p.setPeriodTotalVotes(totalVotes);
-        return p;
     }
 }
 

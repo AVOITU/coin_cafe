@@ -25,34 +25,25 @@ public class QuestionServiceImpl implements QuestionService {
         this.questionDao = questionDao;
     }
 
+    @Override
     public List<Question> getDtoResults() {
         return questionDao.findAllWithRelations();
     }
 
-    public float calculateAverageRating(List<Question> results) {
-        float averageRating = 0;
-        int totalSum = 0;
-        int totalVotes =0;
+    @Override
+    public float calculateAverageRating(List<Question> results, int totalVotesCount) {
+        if (results == null || totalVotesCount == 0) return 0f;
 
-        if (results == null) return 0f; // évite un NullPointerException si la liste passée est null.
+        int totalScore = 0;
         for (Question question : results) {
-
             for (Score score : question.getScores()) {
-                int votes = score.getScoreVoteCount();
-                int value = score.getScore();
-                totalSum += value * votes;
-            }
-
-            for (Period period : question.getPeriods()){
-                int numberOfVotes = period.getPeriodTotalVotes();
-                totalVotes += numberOfVotes;
+                totalScore += score.getScore() * score.getScoreVoteCount();
             }
         }
-
-        averageRating = (float) totalSum / totalVotes;
-        return totalVotes == 0 ? 0f : averageRating;
+        return (float) totalScore / totalVotesCount;
     }
 
+    @Override
     public Map <Integer, Integer> getListVotesWithScore(List<Question> results) {
 
         Map <Integer, Integer> mapForPieCount = new HashMap<>(Map.of());
