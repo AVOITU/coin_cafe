@@ -26,14 +26,16 @@ public class Period {
     @Column(name="period_id")                // pas UNSIGNED
     private Long id;
 
-    @CreationTimestamp
-    @Column(name="timestamp_period", updatable=false,
-            columnDefinition="datetime(6) default current_timestamp(6)")
+    @Column(name = "timestamp_period", nullable = false)
     private LocalDateTime timestampPeriod;
 
-    @Column(name="period_total_votes", precision=4, scale=2)
+    @Column(name="period_total_votes")
     @PositiveOrZero
     private int periodTotalVotes;
+
+    @Column(name = "period_total_score")
+    @PositiveOrZero
+    private int periodTotalScore;
 
     @ManyToMany(mappedBy="periods", fetch=FetchType.LAZY)
     @ToString.Exclude

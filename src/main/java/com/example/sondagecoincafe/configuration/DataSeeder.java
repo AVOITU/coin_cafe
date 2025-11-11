@@ -13,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -46,12 +47,15 @@ public class DataSeeder implements CommandLineRunner {
                         newScore(3), newScore(4), newScore(5)
         );
 
-        // Génération périodes
-        Set<Period> periods = new HashSet<>();
-        for (int i = 0; i < 15; i++) {
+        List<Period> periods = new ArrayList<>();
+        ZoneId tz = ZoneId.of("Europe/Paris");
+        LocalDateTime anchor = LocalDate.now(tz).withDayOfMonth(1).atStartOfDay();
+
+        for (int i = 14; i >= 0; i--) {
             Period p = new Period();
-            p.setTimestampPeriod(LocalDateTime.now(ZoneId.of("Europe/Paris")));
+            p.setTimestampPeriod(anchor.minusMonths(i));
             p.setPeriodTotalVotes(5);
+            p.setPeriodTotalScore(random.nextInt(100));
             periods.add(p);
         }
 

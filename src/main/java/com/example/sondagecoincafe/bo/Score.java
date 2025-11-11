@@ -1,5 +1,6 @@
 package com.example.sondagecoincafe.bo;
 
+import com.example.sondagecoincafe.configuration.AppConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -24,7 +25,7 @@ public class Score {
     private Long id;
 
     @NotNull
-    @Min(0) @Max(5)
+    @Min(0) @Max(AppConstants.MAX_SCORE)
     @PositiveOrZero
     @Column(name = "score", nullable = false)
     private Integer score;

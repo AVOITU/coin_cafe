@@ -4,6 +4,7 @@ import com.example.sondagecoincafe.bll.ScoreService;
 import com.example.sondagecoincafe.bll.PeriodService;
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.QuestionService;
+import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.controller.ResultController;
@@ -34,13 +35,19 @@ public class ResultControllerImpl implements ResultController {
     @GetMapping("/results")
     public String updateResults(Model model){
         List < Score > scores = scoreService.findAllScores();
+        List < Period> periods = periodService.findAllPeriodes();
         List<Question> results = questionService.getDtoResults();
 
         float weightedGlobalRating = scoreService.getWeightedGlobalRating(scores);
 
         Map <Integer, Integer> mapForPieCount = questionService.getListVotesWithScore(results);
 
-        ResultsDto resultsDto = resultDtoService.fillResultsDto(weightedGlobalRating, mapForPieCount);
+        List <String> listOfMonths = periodService.getListOfMonths(periods);
+        int totalVoteCount = periodService.calculateTotalVotes(periods);
+        List <Double> listOfAverageScore = periodService.getAverageScorePerMonth(periods, totalVoteCount);
+
+        ResultsDto resultsDto = resultDtoService.fillResultsDto(weightedGlobalRating, mapForPieCount,
+                listOfMonths, listOfAverageScore);
         model.addAttribute("resultsDto", resultsDto);
         return "results";
     }

@@ -17,15 +17,17 @@ import java.util.Map;
 public class ResultDtoServiceImpl implements ResultDtoService {
 
     @Override
-    public ResultsDto fillResultsDto(float averageGlobalRating, Map < Integer, Integer > mapForPieCount) {
+    public ResultsDto fillResultsDto(float averageGlobalRating, Map < Integer, Integer > mapForPieCount,
+                                     List <String> listOfMonths, List <Double> listOfAverageScore)
+    {
         ResultsDto resultsDto = new ResultsDto();
         resultsDto.setGlobalRating(averageGlobalRating);
 
         resultsDto.setPieCounts(mapForPieCount);
 
         ResultsDto.Timeline timeline = new ResultsDto.Timeline();
-        timeline.setLabels(List.of("mois 1", "mois 2", "mois 3", "mois 4", "mois 5"));
-        timeline.setValues(List.of(1.9, 2.7, 2.3, 3.1, 3.4));
+        timeline.setLabels(listOfMonths);
+        timeline.setValues(listOfAverageScore);
         resultsDto.setTimeline(timeline);
 
         ResultsDto.Question byQuestion = new ResultsDto.Question();

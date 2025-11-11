@@ -2,7 +2,6 @@ package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.PeriodService;
 import com.example.sondagecoincafe.bo.Period;
-import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import org.springframework.stereotype.Service;
 
@@ -17,35 +16,8 @@ public class PeriodServiceImpl implements PeriodService {
     public PeriodServiceImpl(PeriodDao periodDao) { this.periodDao = periodDao; }
 
     @Override
-    public int calculateTotalVotes(List<Question> results) {
-        int totalVotes = 0;
-        for (Question question : results) {
-            for (Period period : question.getPeriods()) {
-                totalVotes += period.getPeriodTotalVotes();
-            }
-        }
-        return totalVotes;
-    }
-
-    @Override
-    public List< Float > getAverageScorePerMonth(List<Period> periods, int totalVoteCount){
-
-        List < Float > listOfAverageScore = new ArrayList<>();
-
-        if (periods == null) return listOfAverageScore;
-
-        int numberOfPeriods = 0;
-        for (Period period : periods) {
-            int periodTotalVotes = period.getPeriodTotalVotes();
-            float averageTotalScore = (float) periodTotalVotes / totalVoteCount;
-            listOfAverageScore.add(averageTotalScore);
-            numberOfPeriods += 1;
-            if (numberOfPeriods == 5){
-                return listOfAverageScore;
-            }
-        }
-
-        return listOfAverageScore;
+    public List <Period> findAllPeriodes(){
+        return periodDao.findAll();
     }
 
     @Override
@@ -66,5 +38,35 @@ public class PeriodServiceImpl implements PeriodService {
         }
 
         return listOfMonths;
+    }
+
+    @Override
+    public List<Double> getAverageScorePerMonth(List<Period> periods, int totalVoteCount){
+
+        List < Double > listOfAverageScore = new ArrayList<>();
+
+        if (periods == null) return listOfAverageScore;
+
+        int numberOfPeriods = 0;
+        for (Period period : periods) {
+            int periodTotalScore = period.getPeriodTotalScore();
+            double averageTotalScore = (double) periodTotalScore / totalVoteCount;
+            listOfAverageScore.add(averageTotalScore);
+            numberOfPeriods += 1;
+            if (numberOfPeriods == 5){
+                return listOfAverageScore;
+            }
+        }
+
+        return listOfAverageScore;
+    }
+
+    @Override
+    public int calculateTotalVotes(List <Period> periods) {
+        int totalVotes = 0;
+        for (Period period : periods) {
+            totalVotes += period.getPeriodTotalVotes();
+        }
+        return totalVotes;
     }
 }
