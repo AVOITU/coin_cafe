@@ -17,9 +17,9 @@ import java.util.Map;
 public class ResultDtoServiceImpl implements ResultDtoService {
 
     @Override
-    public ResultsDto fillResultsDto() {
+    public ResultsDto fillResultsDto(float averageGlobalRating) {
         ResultsDto resultsDto = new ResultsDto();
-        resultsDto.setGlobalRating(3.8);
+        resultsDto.setGlobalRating(averageGlobalRating);
 
         resultsDto.setPieCounts(Map.of(1, 8, 2, 12, 3, 22, 4, 28, 5, 30));
 

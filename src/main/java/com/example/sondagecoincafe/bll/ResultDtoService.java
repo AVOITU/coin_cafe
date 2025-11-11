@@ -4,5 +4,5 @@ import com.example.sondagecoincafe.dto.ResultsDto;
 
 public interface ResultDtoService {
 
-    ResultsDto fillResultsDto();
+    ResultsDto fillResultsDto(float averageGlobalRating);
 }

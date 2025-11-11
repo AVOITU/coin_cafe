@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.controller.impl;
 
 import com.example.sondagecoincafe.bll.NoteService;
+import com.example.sondagecoincafe.bll.PeriodService;
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.QuestionService;
 import com.example.sondagecoincafe.bo.Question;
@@ -16,22 +17,24 @@ import java.util.List;
 public class ResultControllerImpl implements ResultController {
 
     private final QuestionService questionService;
+    private final PeriodService periodService;
     private final ResultDtoService resultDtoService;
 
-    public ResultControllerImpl(QuestionService questionService, ResultDtoService resultDtoService, NoteService noteService) {
+    public ResultControllerImpl(QuestionService questionService, ResultDtoService resultDtoService, NoteService noteService, PeriodService periodService) {
         this.questionService = questionService;
         this.resultDtoService = resultDtoService;
+        this.periodService = periodService;
     }
 
 //    TODO : décommenter le code quand la BDD sera accessible
     @GetMapping("/results")
     public String updateResults(Model m){
         List<Question> results = questionService.getDtoResults();
-//        float averageGlobalRating = questionService.calculateAverageRating(results);
-//        List<String> totalVoteCounts = questionService.getTotalVoteCounts(results);
+        int totalVoteCounts = periodService.calculateTotalVotes(results);
+        float averageGlobalRating = questionService.calculateAverageRating(results, totalVoteCounts);
 //        List<Float> questionGlobalNotations = questionService.getQuestionGlobalNotations(results);
 
-        ResultsDto resultsDto = resultDtoService.fillResultsDto();
+        ResultsDto resultsDto = resultDtoService.fillResultsDto(averageGlobalRating);
         m.addAttribute("resultsDto", resultsDto);
         return "results";
     }
