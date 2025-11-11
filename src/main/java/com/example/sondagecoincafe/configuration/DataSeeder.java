@@ -54,8 +54,9 @@ public class DataSeeder implements CommandLineRunner {
         for (int i = 14; i >= 0; i--) {
             Period p = new Period();
             p.setTimestampPeriod(anchor.minusMonths(i));
-            p.setPeriodTotalVotes(5);
-            p.setPeriodTotalScore(random.nextInt(100));
+            int randomVoters = random.nextInt(20);
+            p.setPeriodTotalVotes(randomVoters);
+            p.setPeriodTotalScore(random.nextInt(((randomVoters*5) - randomVoters + 1) + randomVoters));
             periods.add(p);
         }
 

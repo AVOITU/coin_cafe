@@ -5,8 +5,11 @@ import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class PeriodServiceImpl implements PeriodService {
@@ -17,7 +20,9 @@ public class PeriodServiceImpl implements PeriodService {
 
     @Override
     public List <Period> findAllPeriodes(){
-        return periodDao.findAll();
+        List<Period> periods = periodDao.findAll();
+        Collections.reverse(periods);
+        return periods;
     }
 
     @Override
@@ -27,9 +32,11 @@ public class PeriodServiceImpl implements PeriodService {
 
         if (periods == null) return listOfMonths;
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM", Locale.FRENCH);
+
         int numberOfPeriods = 0;
         for (Period period : periods) {
-            String periodMonth = period.getTimestampPeriod().getMonth().toString();
+            String periodMonth = period.getTimestampPeriod().format(formatter).toUpperCase(Locale.ROOT);
             listOfMonths.add(periodMonth);
             numberOfPeriods += 1;
             if (numberOfPeriods == 5){
@@ -41,7 +48,7 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public List<Double> getAverageScorePerMonth(List<Period> periods, int totalVoteCount){
+    public List<Double> getAverageScorePerMonth(List<Period> periods){
 
         List < Double > listOfAverageScore = new ArrayList<>();
 
@@ -49,8 +56,8 @@ public class PeriodServiceImpl implements PeriodService {
 
         int numberOfPeriods = 0;
         for (Period period : periods) {
-            int periodTotalScore = period.getPeriodTotalScore();
-            double averageTotalScore = (double) periodTotalScore / totalVoteCount;
+            double averageTotalScore = (double) period.getPeriodTotalScore() / period.getPeriodTotalVotes();
+            averageTotalScore = Math.round(averageTotalScore * 10.0) / 10.0;
             listOfAverageScore.add(averageTotalScore);
             numberOfPeriods += 1;
             if (numberOfPeriods == 5){

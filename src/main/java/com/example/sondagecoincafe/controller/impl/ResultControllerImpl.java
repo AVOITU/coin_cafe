@@ -24,11 +24,12 @@ public class ResultControllerImpl implements ResultController {
     private final ScoreService scoreService;
     private final ResultDtoService resultDtoService;
 
-    public ResultControllerImpl(QuestionService questionService, ResultDtoService resultDtoService, ScoreService noteService, PeriodService periodService, ScoreService noteService1) {
+    public ResultControllerImpl(QuestionService questionService, ResultDtoService resultDtoService,
+                                ScoreService scoreService, PeriodService periodService) {
         this.questionService = questionService;
         this.resultDtoService = resultDtoService;
         this.periodService = periodService;
-        this.scoreService = noteService;
+        this.scoreService = scoreService;
     }
 
 //    TODO : décommenter le code quand la BDD sera accessible
@@ -43,8 +44,8 @@ public class ResultControllerImpl implements ResultController {
         Map <Integer, Integer> mapForPieCount = questionService.getListVotesWithScore(results);
 
         List <String> listOfMonths = periodService.getListOfMonths(periods);
-        int totalVoteCount = periodService.calculateTotalVotes(periods);
-        List <Double> listOfAverageScore = periodService.getAverageScorePerMonth(periods, totalVoteCount);
+//        int totalVoteCount = periodService.calculateTotalVotes(periods);
+        List <Double> listOfAverageScore = periodService.getAverageScorePerMonth(periods);
 
         ResultsDto resultsDto = resultDtoService.fillResultsDto(weightedGlobalRating, mapForPieCount,
                 listOfMonths, listOfAverageScore);
