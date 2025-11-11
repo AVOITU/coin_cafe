@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PeriodService {
 
-    List< String > getListOfMonths(List<Period> periods);
+    int calculateTotalVotes(List<Question> results);
 
     List< Float > getAverageScorePerMonth(List<Period> periods, int totalVoteCount);
 
-    int calculateTotalVotes(List<Question> results);
+    List< String > getListOfMonths(List<Period> periods);
 }

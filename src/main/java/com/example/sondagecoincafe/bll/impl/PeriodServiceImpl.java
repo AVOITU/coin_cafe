@@ -17,23 +17,14 @@ public class PeriodServiceImpl implements PeriodService {
     public PeriodServiceImpl(PeriodDao periodDao) { this.periodDao = periodDao; }
 
     @Override
-    public List< String > getListOfMonths(List<Period> periods){
-
-        List < String > listOfMonths = new ArrayList<>();
-
-        if (periods == null) return listOfMonths;
-
-        int numberOfPeriods = 0;
-        for (Period period : periods) {
-            String periodMonth = period.getTimestampPeriod().getMonth().toString();
-            listOfMonths.add(periodMonth);
-            numberOfPeriods += 1;
-            if (numberOfPeriods == 5){
-                return listOfMonths;
+    public int calculateTotalVotes(List<Question> results) {
+        int totalVotes = 0;
+        for (Question question : results) {
+            for (Period period : question.getPeriods()) {
+                totalVotes += period.getPeriodTotalVotes();
             }
         }
-
-        return listOfMonths;
+        return totalVotes;
     }
 
     @Override
@@ -58,13 +49,22 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public int calculateTotalVotes(List<Question> results) {
-        int totalVotes = 0;
-        for (Question question : results) {
-            for (Period period : question.getPeriods()) {
-                totalVotes += period.getPeriodTotalVotes();
+    public List< String > getListOfMonths(List<Period> periods){
+
+        List < String > listOfMonths = new ArrayList<>();
+
+        if (periods == null) return listOfMonths;
+
+        int numberOfPeriods = 0;
+        for (Period period : periods) {
+            String periodMonth = period.getTimestampPeriod().getMonth().toString();
+            listOfMonths.add(periodMonth);
+            numberOfPeriods += 1;
+            if (numberOfPeriods == 5){
+                return listOfMonths;
             }
         }
-        return totalVotes;
+
+        return listOfMonths;
     }
 }

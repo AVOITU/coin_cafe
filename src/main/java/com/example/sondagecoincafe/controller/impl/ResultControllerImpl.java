@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ResultControllerImpl implements ResultController {
@@ -30,11 +31,13 @@ public class ResultControllerImpl implements ResultController {
     @GetMapping("/results")
     public String updateResults(Model m){
         List<Question> results = questionService.getDtoResults();
+
         int totalVoteCounts = periodService.calculateTotalVotes(results);
         float averageGlobalRating = questionService.calculateAverageRating(results, totalVoteCounts);
-//        List<Float> questionGlobalNotations = questionService.getQuestionGlobalNotations(results);
 
-        ResultsDto resultsDto = resultDtoService.fillResultsDto(averageGlobalRating);
+        Map <Integer , Integer> mapForPieCount = questionService.getListVotesWithScore(results);
+
+        ResultsDto resultsDto = resultDtoService.fillResultsDto(averageGlobalRating, mapForPieCount);
         m.addAttribute("resultsDto", resultsDto);
         return "results";
     }

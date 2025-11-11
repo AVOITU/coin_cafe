@@ -17,11 +17,11 @@ import java.util.Map;
 public class ResultDtoServiceImpl implements ResultDtoService {
 
     @Override
-    public ResultsDto fillResultsDto(float averageGlobalRating) {
+    public ResultsDto fillResultsDto(float averageGlobalRating, Map < Integer, Integer > mapForPieCount) {
         ResultsDto resultsDto = new ResultsDto();
         resultsDto.setGlobalRating(averageGlobalRating);
 
-        resultsDto.setPieCounts(Map.of(1, 8, 2, 12, 3, 22, 4, 28, 5, 30));
+        resultsDto.setPieCounts(mapForPieCount);
 
         ResultsDto.Timeline timeline = new ResultsDto.Timeline();
         timeline.setLabels(List.of("mois 1", "mois 2", "mois 3", "mois 4", "mois 5"));
