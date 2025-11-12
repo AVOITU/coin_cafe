@@ -69,13 +69,4 @@ public class PeriodServiceImpl implements PeriodService {
 
         return listOfAverageScore;
     }
-
-    @Override
-    public int calculateTotalVotes(List <Period> periods) {
-        int totalVotes = 0;
-        for (Period period : periods) {
-            totalVotes += period.getPeriodTotalVotes();
-        }
-        return totalVotes;
-    }
 }

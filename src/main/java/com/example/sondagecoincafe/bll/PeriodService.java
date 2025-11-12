@@ -8,8 +8,6 @@ public interface PeriodService {
 
     List <Period> findAllPeriodes();
 
-    int calculateTotalVotes(List <Period> periods);
-
     List<Double> getAverageScorePerMonth(List<Period> periods);
 
     List< String > getListOfMonths(List<Period> periods);

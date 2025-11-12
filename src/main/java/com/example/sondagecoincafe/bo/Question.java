@@ -39,6 +39,12 @@ public class Question {
     @ColumnDefault("0")
     private Integer questionTotalVotes;
 
+    @NotNull
+    @PositiveOrZero
+    @Column(name = "question_total_score", nullable = false)
+    @ColumnDefault("0")
+    private Integer questionTotalScore;
+
     @Size(max = 2000)
     @Column(name = "chatgpt_comments", length = 2000)
     private String chatgptComments;

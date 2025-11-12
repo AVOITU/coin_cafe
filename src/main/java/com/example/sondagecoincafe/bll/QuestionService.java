@@ -13,4 +13,7 @@ public interface QuestionService {
 
     Map<Integer, Integer> getListVotesWithScore(List<Question> results);
 
+    List <String> getTagsFromQuestionList(List <Question> questions);
+
+    List <Double> calculateAverageByTag(List <Question> questions);
 }

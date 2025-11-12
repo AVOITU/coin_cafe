@@ -4,6 +4,7 @@ import com.example.sondagecoincafe.bll.QuestionService;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
+import com.example.sondagecoincafe.configuration.AppConstants;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,10 +52,31 @@ public class QuestionServiceImpl implements QuestionService {
         return mapForPieCount;
     }
 
-//    public List<Float> getQuestionGlobalNotations(List<Question> results){
-//        List<Float> questionGlobalNotations = results.stream()
-//                .map(Question::getQuestionGlobalNotation)
-//                .toList();
-//        return questionGlobalNotations;
-//    }
+    @Override
+    public List <String> getTagsFromQuestionList(List <Question> questions){
+
+        if (questions == null) return null;
+
+        List <String> tagsFromList = new ArrayList<>();
+        for (Question question : questions){
+            String tag = question.getTag();
+            tagsFromList.add(tag);
+        }
+        return tagsFromList;
+    }
+
+    @Override
+    public List <Double> calculateAverageByTag(List <Question> questions){
+
+        if (questions == null) return null;
+
+        double averageQuestion = 0;
+        List <Double> averagesByQuestion = new ArrayList<>();
+        for (Question question : questions){
+            averageQuestion = (double) question.getQuestionTotalScore() / question.getQuestionTotalVotes();
+            averageQuestion = Math.round(averageQuestion * 10.0) / 10.0; // arrondi à 1 chiffre après la virgule
+            averagesByQuestion.add(averageQuestion);
+        }
+        return averagesByQuestion;
+    }
 }

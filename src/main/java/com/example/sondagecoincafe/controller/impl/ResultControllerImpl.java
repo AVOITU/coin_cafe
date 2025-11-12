@@ -44,11 +44,14 @@ public class ResultControllerImpl implements ResultController {
         Map <Integer, Integer> mapForPieCount = questionService.getListVotesWithScore(results);
 
         List <String> listOfMonths = periodService.getListOfMonths(periods);
-//        int totalVoteCount = periodService.calculateTotalVotes(periods);
         List <Double> listOfAverageScore = periodService.getAverageScorePerMonth(periods);
 
+        List <String> listOfTags = questionService.getTagsFromQuestionList(results);
+        List <Double> listOfAverages = questionService.calculateAverageByTag(results);
+
         ResultsDto resultsDto = resultDtoService.fillResultsDto(weightedGlobalRating, mapForPieCount,
-                listOfMonths, listOfAverageScore);
+                                                                listOfMonths, listOfAverageScore,
+                                                                listOfTags, listOfAverages);
         model.addAttribute("resultsDto", resultsDto);
         return "results";
     }

@@ -67,9 +67,9 @@ public class DataSeeder implements CommandLineRunner {
         for (int i = 0; i < AppConstants.MAX_NUMBER_OF_QUESTIONS; i++) {
             Question q = new Question();
             q.setQuestionText(AppConstants.QUESTIONS_SENTENCES[i]);
-            q.setTag(AppConstants.TAGS[i]);
+            q.setTag(AppConstants.TAGS.get(i));
             q.setQuestionTotalVotes(random.nextInt(100));
-            q.setQuestionTotalVotes(random.nextInt(200));
+            q.setQuestionTotalScore(random.nextInt(200));
             q.setChatgptComments(faker.lorem().sentence(6));
 
             int n = 1 + random.nextInt(scores.size()); // [1..size]

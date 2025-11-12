@@ -8,5 +8,6 @@ import java.util.Map;
 public interface ResultDtoService {
 
     ResultsDto fillResultsDto(float averageGlobalRating, Map <Integer, Integer> mapForPieCount,
-                              List<String> listOfMonths, List <Double> listOfAverageScore);
+                              List<String> listOfMonths, List <Double> listOfAverageScore,
+                              List <String> listOfTags, List < Double> listOfAverages);
 }

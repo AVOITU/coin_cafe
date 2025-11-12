@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.ResultDtoService;
+import com.example.sondagecoincafe.configuration.AppConstants;
 import com.example.sondagecoincafe.dto.ResultsDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,8 @@ public class ResultDtoServiceImpl implements ResultDtoService {
 
     @Override
     public ResultsDto fillResultsDto(float averageGlobalRating, Map < Integer, Integer > mapForPieCount,
-                                     List <String> listOfMonths, List <Double> listOfAverageScore)
+                                     List <String> listOfMonths, List <Double> listOfAverageScore,
+                                      List <String> listOfTags, List < Double> listOfAveragesByTag)
     {
         ResultsDto resultsDto = new ResultsDto();
         resultsDto.setGlobalRating(averageGlobalRating);
@@ -31,9 +33,8 @@ public class ResultDtoServiceImpl implements ResultDtoService {
         resultsDto.setTimeline(timeline);
 
         ResultsDto.Question byQuestion = new ResultsDto.Question();
-        byQuestion.setLabels(List.of("Hygiène","Accueil","Ambiance","Accessibilité",
-                "Signalétique","Service","Produits","Qualité/Prix","Diversité","Wi‑Fi"));
-        byQuestion.setValues(List.of(3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5));
+        byQuestion.setLabels(listOfTags);
+        byQuestion.setValues(listOfAveragesByTag);
         resultsDto.setByQuestion(byQuestion);
 
         return resultsDto;
