@@ -19,7 +19,7 @@ fieldset{
 }
 
 legend {
-    background-color: yellow;
+    background-color: hsl(60, 100%, 50%);
     color: white;
     padding: 3px 6px;
     width: 50%;
