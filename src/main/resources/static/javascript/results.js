@@ -1,4 +1,4 @@
-const survey = {
+const resultsDto = {
 
     globalRating: 3.8,  // sur 5
     pieCounts: { 1: 8, 2: 12, 3: 22, 4: 28, 5: 30 },
