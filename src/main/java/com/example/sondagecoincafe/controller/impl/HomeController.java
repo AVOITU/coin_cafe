@@ -4,9 +4,7 @@ import com.example.sondagecoincafe.bll.PeriodService;
 import com.example.sondagecoincafe.bll.QuestionService;
 import com.example.sondagecoincafe.bll.ResultDtoService;
 import com.example.sondagecoincafe.bll.ScoreService;
-import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.configuration.AppConstants;
-import com.example.sondagecoincafe.dto.SurveyDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -48,8 +45,6 @@ public class HomeController {
     @PostMapping("/survey")
     public String handleSurveySubmit(@ModelAttribute Map <String, Integer> questionsScore, Model model) {
 
-        List <Question> questions = questionService.findAllQuestion();
-        questionService.getListVotesWithScore(questions);
 
         model.addAttribute("message", "Merci pour votre participation !");
         return "survey";
