@@ -5,6 +5,8 @@ import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,5 +70,39 @@ public class PeriodServiceImpl implements PeriodService {
         }
 
         return listOfAverageScore;
+    }
+
+    @Override
+    public Period incrementTotalsPeriode(int newTotalScore){
+        LocalDateTime firstDayOfMonth = LocalDateTime.now()
+                .withDayOfMonth(1)
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+
+        // 3) période courante (mois en cours par ex.)
+        Period currentPeriod = getOrCreateCurrentPeriodByTimestamp(Timestamp.valueOf(firstDayOfMonth));
+
+        int currentPeriodTotalVotes = currentPeriod.getPeriodTotalVotes() +1;
+        int currentPeriodTotalScore = currentPeriod.getPeriodTotalScore() + newTotalScore;
+
+        currentPeriod.setPeriodTotalVotes(currentPeriodTotalVotes);
+        currentPeriod.setPeriodTotalScore(currentPeriodTotalScore);
+
+        return currentPeriod;
+    }
+
+    @Override
+    public Period getOrCreateCurrentPeriodByTimestamp(Timestamp actualTimestamp) {
+
+        return periodDao.findCurrentPeriodByTimestampPeriod(actualTimestamp.toLocalDateTime())
+                .orElseGet(() -> {
+                    Period p = new Period();
+                    p.setTimestampPeriod(LocalDateTime.now());
+                    p.setPeriodTotalVotes(0);
+                    p.setPeriodTotalScore(0);
+                    return periodDao.save(p);
+                });
     }
 }

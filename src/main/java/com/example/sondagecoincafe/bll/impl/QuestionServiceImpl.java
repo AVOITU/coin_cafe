@@ -1,7 +1,6 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.QuestionService;
-import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.configuration.AppConstants;
@@ -10,8 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,8 +82,38 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDao.findAll();
     }
 
-    public int incrementQuestionTotalVotesCount(List <Question> questions, List < Integer> scores){
+    @Override
+    public Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
+                                                Question question, String searchedQuestion) {
 
-        return 0;
+        int newTotalScore = question.getQuestionTotalScore() + scoreQuestionSearched;
+        question.setQuestionTotalScore(newTotalScore);
+
+        if (questionsScore.containsKey(searchedQuestion)) {
+            int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
+            question.setQuestionTotalVotes(newQuestionTotalVotes);
+
+            Map<String, String> questionCategoryMap = buildQuestionCategoryMap();
+            String tag = questionCategoryMap.get(searchedQuestion);
+            question.setTag(tag);
+        }
+
+        return question;
+    }
+
+    @Override
+    public Map<String, String> buildQuestionCategoryMap() {
+
+        if (AppConstants.TAGS.size() != AppConstants.QUESTIONS_SENTENCES.length) {
+            throw new IllegalStateException("Les listes TAGS et QUESTIONS_SENTENCES doivent avoir la même taille !");
+        }
+
+        Map<String, String> map = new HashMap<>();
+
+        for (int i = 0; i < AppConstants.QUESTIONS_SENTENCES.length; i++) {
+            map.put(AppConstants.QUESTIONS_SENTENCES[i], AppConstants.TAGS.get(i));
+        }
+
+        return map;
     }
 }

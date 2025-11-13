@@ -14,4 +14,6 @@ public interface ScoreService {
     int getTotalCountVote( List <Score> scores);
 
     float getWeightedGlobalRating(List <Score> scores);
+
+    Score incrementTotalForScore(int scoreQuestionSearched);
 }

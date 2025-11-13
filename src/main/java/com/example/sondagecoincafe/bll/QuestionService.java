@@ -18,4 +18,9 @@ public interface QuestionService {
     List <Double> calculateAverageByTag(List <Question> questions);
 
     List < Question> findAllQuestion ();
+
+    Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
+                                         Question question, String searchedQuestion);
+
+    Map<String, String> buildQuestionCategoryMap();
 }

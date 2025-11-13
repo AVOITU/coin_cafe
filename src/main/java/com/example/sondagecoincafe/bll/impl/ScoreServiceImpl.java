@@ -2,10 +2,8 @@ package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.ScoreService;
 import com.example.sondagecoincafe.bo.Score;
-import com.example.sondagecoincafe.configuration.AppConstants;
 import com.example.sondagecoincafe.dal.ScoreDao;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +54,13 @@ public class ScoreServiceImpl implements ScoreService {
         int totalScore = getTotalScore(scores);
         int totalCountVote = getTotalCountVote(scores);
         return (totalCountVote == 0) ? 0f : (float) totalScore / totalCountVote;
+    }
+
+    @Override
+    public Score incrementTotalForScore(int scoreQuestionSearched){
+        Score score = scoreDao.findByScore(scoreQuestionSearched);
+        int totalScoreVoteCount = score.getScoreVoteCount() +1;
+        score.setScoreVoteCount(totalScoreVoteCount);
+        return score;
     }
 }

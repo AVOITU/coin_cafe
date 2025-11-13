@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface PeriodDao extends JpaRepository<Period, Long> {
-    Optional<Period> findCurrentPeriodByTimestampPeriod(Timestamp timestampPeriod);
+    Optional<Period> findCurrentPeriodByTimestampPeriod(LocalDateTime timestampPeriod);
 }
 
