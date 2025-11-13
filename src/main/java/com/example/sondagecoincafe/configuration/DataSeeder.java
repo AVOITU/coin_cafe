@@ -13,7 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -47,12 +47,16 @@ public class DataSeeder implements CommandLineRunner {
                         newScore(3), newScore(4), newScore(5)
         );
 
-        // Génération périodes
-        Set<Period> periods = new HashSet<>();
-        for (int i = 0; i < 15; i++) {
+        List<Period> periods = new ArrayList<>();
+        ZoneId tz = ZoneId.of("Europe/Paris");
+        LocalDateTime anchor = LocalDate.now(tz).withDayOfMonth(1).atStartOfDay();
+
+        for (int i = 14; i >= 0; i--) {
             Period p = new Period();
-            p.setTimestampPeriod(LocalDateTime.now(ZoneId.of("Europe/Paris")));
-            p.setPeriodTotalVotes(5);
+            p.setTimestampPeriod(anchor.minusMonths(i));
+            int randomVoters = random.nextInt(20);
+            p.setPeriodTotalVotes(randomVoters);
+            p.setPeriodTotalScore(random.nextInt(((randomVoters*5) - randomVoters + 1) + randomVoters));
             periods.add(p);
         }
 
@@ -60,11 +64,12 @@ public class DataSeeder implements CommandLineRunner {
         periodDao.saveAll(periods);
 
         // Génération questions
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < AppConstants.MAX_NUMBER_OF_QUESTIONS; i++) {
             Question q = new Question();
-            q.setQuestionText(faker.lorem().sentence(3));
+            q.setQuestionText(AppConstants.QUESTIONS_SENTENCES[i]);
+            q.setTag(AppConstants.TAGS.get(i));
             q.setQuestionTotalVotes(random.nextInt(100));
-            q.setAllVotesCount(random.nextInt(200));
+            q.setQuestionTotalScore(random.nextInt(200));
             q.setChatgptComments(faker.lorem().sentence(6));
 
             int n = 1 + random.nextInt(scores.size()); // [1..size]

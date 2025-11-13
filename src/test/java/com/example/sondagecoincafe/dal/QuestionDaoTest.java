@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +43,8 @@ public class QuestionDaoTest {
         s5 = scoreDao.save(newScore(5));
 
         // Periods
-        p1 = periodDao.save(newPeriod("3.40"));
-        p2 = periodDao.save(newPeriod("4.10"));
+        p1 = periodDao.save(newPeriod(340));
+        p2 = periodDao.save(newPeriod(410));
     }
 
     // ---------- helpers ----------
@@ -56,9 +55,9 @@ public class QuestionDaoTest {
         return s;
     }
 
-    private Period newPeriod(String avg) {
+    private Period newPeriod(int avg) {
         Period p = new Period();
-        p.setPeriodTotalVotes(new BigDecimal(avg));
+        p.setPeriodTotalVotes(avg);
         return p;
     }
 

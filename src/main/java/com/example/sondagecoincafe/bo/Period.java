@@ -17,21 +17,27 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity @Table(name="periods")
+@Entity @Table(name="periods", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_timestamp_period_periods", columnNames = {"timestamp_period"})
+})
 @Getter @Setter
 public class Period {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="period_id")                // pas UNSIGNED
+    @Column(name="period_id")
     private Long id;
 
-    @CreationTimestamp
-    @Column(name="timestamp_period", updatable=false,
-            columnDefinition="datetime(6) default current_timestamp(6)")
+    @Column(name = "timestamp_period", nullable = false)
     private LocalDateTime timestampPeriod;
 
-    @Column(name="period_total_votes", precision=4, scale=2)
+    @Column(name="period_total_votes")
+    @ColumnDefault("0")
     @PositiveOrZero
     private int periodTotalVotes;
+
+    @Column(name = "period_total_score")
+    @ColumnDefault("0")
+    @PositiveOrZero
+    private int periodTotalScore;
 
     @ManyToMany(mappedBy="periods", fetch=FetchType.LAZY)
     @ToString.Exclude

@@ -1,22 +1,22 @@
-// const survey = {
-//
-//     // globalRating: 3.8,  // sur 5
-//     // pieCounts: { 1: 8, 2: 12, 3: 22, 4: 28, 5: 30 },
-//     // timeline: {
-//     //     labels: ["mois 1","mois 2","mois 3","mois 4","mois 5"],
-//     //     values:  [19, 27, 23, 31, 34].map(v=> (v/10)) // converti sur échelle 0..5
-//     // },
-//     // categories: {
-//     //     labels: ["Hygiène","Accueil","Ambiance","Accessibilité","Signalétique","Service","Produits","Qualité/Prix","Diversité","Wi‑Fi"],
-//     //     values: [3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5]
-//     // },
-//     // byQuestion: {
-//     //     labels: ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],
-//     //     values: [3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5]
-//     // }
-// };
+const resultsDto = {
 
-const resultsDto = window.RESULTSDTO ?? {};
+    globalRating: 3.8,  // sur 5
+    pieCounts: { 1: 8, 2: 12, 3: 22, 4: 28, 5: 30 },
+    timeline: {
+        labels: ["mois 1","mois 2","mois 3","mois 4","mois 5"],
+        values:  [19, 27, 23, 31, 34].map(v=> (v/10)) // converti sur échelle 0..5
+    },
+    categories: {
+        labels: ["Hygiène","Accueil","Ambiance","Accessibilité","Signalétique","Service","Produits","Qualité/Prix","Diversité","Wi‑Fi"],
+        values: [3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5]
+    },
+    byQuestion: {
+        labels: ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","Q9","Q10"],
+        values: [3.9,4.2,3.7,3.8,3.4,4.1,3.6,3.8,3.2,3.5]
+    }
+};
+
+// const resultsDto = window.RESULTSDTO ?? {};
 // -----------------------------------------------------------------------
 
 document.getElementById('year').textContent = new Date().getFullYear();
