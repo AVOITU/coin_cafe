@@ -71,20 +71,28 @@
                                             Question
                                         </legend>
 
+
                                         <div class="likert">
+
+                                            <!-- Notes 1 à 5 -->
                                             <div class="icheck-primary d-inline"
                                                  th:each="note : ${#numbers.sequence(1,5)}">
-
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_' + note}"
                                                        th:name="${'q' + questionNumber.count}"
                                                        th:value="${note}"
                                                        th:required="${note == 1}">
-
                                                 <label th:for="${'q' + questionNumber.count + '_' + note}"
-                                                       th:text="${note}">
-                                                    1
-                                                </label>
+                                                       th:text="${note}"></label>
+                                            </div>
+
+                                            <!-- Option NC (valeur 0) -->
+                                            <div class="icheck-danger d-inline">
+                                                <input type="radio"
+                                                       th:id="${'q' + questionNumber.count + '_0'}"
+                                                       th:name="${'q' + questionNumber.count}"
+                                                       value="0">
+                                                <label th:for="${'q' + questionNumber.count + '_0'}">NC</label>
                                             </div>
                                         </div>
                                     </fieldset>

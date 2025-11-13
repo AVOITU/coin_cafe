@@ -79,4 +79,14 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return averagesByQuestion;
     }
+
+    @Override
+    public List < Question> findAllQuestion (){
+        return questionDao.findAll();
+    }
+
+    public int incrementQuestionTotalVotesCount(List <Question> questions, List < Integer> scores){
+
+        return 0;
+    }
 }
