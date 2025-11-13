@@ -47,7 +47,9 @@
                             <div class="card-header">
                                 <h3 class="card-title">Questionnaire</h3>
                             </div>
-                            <form id="surveyForm" class="card-body">
+                            <form id="surveyForm" class="card-body"
+                                  th:action="@{/survey}" th:object="${surveyDto}"
+                                  method="post">
 
                                 <!-- Helper: labels for scale -->
                                 <div class="mb-3 small text-muted">

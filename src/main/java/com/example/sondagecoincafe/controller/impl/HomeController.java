@@ -1,9 +1,11 @@
 package com.example.sondagecoincafe.controller.impl;
 
+import com.example.sondagecoincafe.dto.SurveyDto;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,12 +24,14 @@ public class HomeController {
     @GetMapping("/survey")
     public String displayItems(Model model) {
 
-//        List<Item> items = itemService.findItemsInProgress();
-//        model.addAttribute("items", items);
-//
-//        List<Category> categories = categoryService.getAllCategories();
-//        model.addAttribute("categories", categories);
-
         return "survey";
+    }
+
+
+    @PostMapping("/survey")
+    public String handleSurveySubmit(@ModelAttribute SurveyDto surveyDto, Model model) {
+        // 🔹 Traitement des réponses ici (ex: enregistrement BDD)
+        model.addAttribute("message", "Merci pour votre participation !");
+        return "survey"; // page de confirmation
     }
 }
