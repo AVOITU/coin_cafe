@@ -32,7 +32,6 @@ public class ResultControllerImpl implements ResultController {
         this.scoreService = scoreService;
     }
 
-//    TODO : décommenter le code quand la BDD sera accessible
     @GetMapping("/results")
     public String updateResults(Model model){
         List < Score > scores = scoreService.findAllScores();

@@ -1,3 +1,18 @@
+fieldset{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 2px solid black;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+legend {
+    background-color: yellow;
+    color: white;
+    padding: 3px 6px;
+    width: 50%;
+}
+
 .chart-box {
     height: 320px;
 }

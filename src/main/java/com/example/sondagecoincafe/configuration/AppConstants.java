@@ -11,11 +11,11 @@ public class AppConstants {
             "Diversité", "Wi-Fi"
     );
     public static final String[] QUESTIONS_SENTENCES = {
-            "1) Hygiène du coin café ?", "2) L'accueil au coin café ?", "3) L’ambiance au coin café ?",
-            "4) Accessibilité du coin café ?",
-            "5) Indications pour accéder au coin café ?", "6) Qualité du service ?",
-            "7) Qualité des produits vendus ?", "8) Rapport qualité/prix des produits vendus ?",
-            "9) Diversité des produits ?", "10) Connexion WI‑FI ?"
+            "Hygiène du coin café ?", "L'accueil au coin café ?", "L’ambiance au coin café ?",
+            "Accessibilité du coin café ?",
+            "Indications pour accéder au coin café ?", "Qualité du service ?",
+            "Qualité des produits vendus ?", "Rapport qualité/prix des produits vendus ?",
+            "Diversité des produits ?", "Connexion WI‑FI ?"
     };
     public static final int MAX_NUMBER_OF_QUESTIONS = QUESTIONS_SENTENCES.length;
 }
