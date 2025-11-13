@@ -7,14 +7,12 @@ import com.example.sondagecoincafe.bll.SurveyService;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
-import com.example.sondagecoincafe.configuration.AppConstants;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import com.example.sondagecoincafe.dal.ScoreDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +38,7 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Transactional
+    @Override
     public void processSurvey(Map<String, Integer> questionsScore) {
 
         List<Question> questions = questionDao.findAll();
@@ -63,7 +62,6 @@ public class SurveyServiceImpl implements SurveyService {
 
         Period currentPeriod = periodService.incrementTotalsPeriode(totalIncrementedScore);
         periodDao.save(currentPeriod);
-
     }
 }
 

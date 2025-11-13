@@ -33,6 +33,7 @@ public class ResultControllerImpl implements ResultController {
     }
 
     @GetMapping("/results")
+    @Override
     public String updateResults(Model model){
         List < Score > scores = scoreService.findAllScores();
         List < Period> periods = periodService.findAllPeriodes();

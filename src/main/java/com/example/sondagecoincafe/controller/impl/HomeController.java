@@ -1,10 +1,8 @@
 package com.example.sondagecoincafe.controller.impl;
 
-import com.example.sondagecoincafe.bll.PeriodService;
-import com.example.sondagecoincafe.bll.QuestionService;
-import com.example.sondagecoincafe.bll.ResultDtoService;
-import com.example.sondagecoincafe.bll.ScoreService;
+import com.example.sondagecoincafe.bll.*;
 import com.example.sondagecoincafe.configuration.AppConstants;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    private final QuestionService questionService;
-    private final PeriodService periodService;
-    private final ScoreService scoreService;
-
-    public HomeController(QuestionService questionService, PeriodService periodService, ScoreService scoreService, ResultDtoService resultDtoService) {
-        this.questionService = questionService;
-        this.periodService = periodService;
-        this.scoreService = scoreService;
-    }
+    private SurveyService surveyService;
 
     @GetMapping("")
     public String localhostPort(){
@@ -45,6 +36,7 @@ public class HomeController {
     @PostMapping("/survey")
     public String handleSurveySubmit(@ModelAttribute Map <String, Integer> questionsScore, Model model) {
 
+        surveyService.processSurvey(questionsScore);
 
         model.addAttribute("message", "Merci pour votre participation !");
         return "survey";
