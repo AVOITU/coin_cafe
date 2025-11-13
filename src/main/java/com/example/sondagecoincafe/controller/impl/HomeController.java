@@ -1,5 +1,6 @@
 package com.example.sondagecoincafe.controller.impl;
 
+import com.example.sondagecoincafe.configuration.AppConstants;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,10 @@ public class HomeController {
 
 
     @GetMapping("")
-    public String localhostPort(){
+    public String localhostPort(Model model){
+
+        var questions = AppConstants.QUESTIONS_SENTENCES;
+        model.addAttribute(questions);
         return "redirect:survey";
     }
 
