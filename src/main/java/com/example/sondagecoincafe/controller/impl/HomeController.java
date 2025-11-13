@@ -37,16 +37,16 @@ public class HomeController {
 
     @GetMapping("/survey")
     public String displayItems(Model model) {
-//        Map <String, Integer> questionsScore= new HashMap<>();
+        Map <String, Integer> questionsScore= new HashMap<>();
         var questions = AppConstants.QUESTIONS_SENTENCES;
         model.addAttribute("questions", questions);
-        model.addAttribute("surveyDto", new SurveyDto());
+        model.addAttribute("questionsScore", questionsScore);
         return "survey";
     }
 
 
     @PostMapping("/survey")
-    public String handleSurveySubmit(@ModelAttribute SurveyDto surveyDto, Model model) {
+    public String handleSurveySubmit(@ModelAttribute Map <String, Integer> questionsScore, Model model) {
 
         List <Question> questions = questionService.findAllQuestion();
         questionService.getListVotesWithScore(questions);

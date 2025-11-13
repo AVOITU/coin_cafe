@@ -17,5 +17,5 @@ public interface QuestionService {
 
     List <Double> calculateAverageByTag(List <Question> questions);
 
-    public List < Question> findAllQuestion ();
+    List < Question> findAllQuestion ();
 }

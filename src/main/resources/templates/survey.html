@@ -49,7 +49,7 @@
                                 <h3 class="card-title">Questionnaire</h3>
                             </div>
                             <form id="surveyForm" class="card-body"
-                                  th:action="@{/survey}" th:object="${surveyDto}"
+                                  th:action="@{/survey}" th:object="${questionsScore}"
                                   method="post">
 
                                 <!-- Helper: labels for scale -->
@@ -79,7 +79,7 @@
                                                  th:each="note : ${#numbers.sequence(1,5)}">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_' + note}"
-                                                       th:name="${'q' + questionNumber.count}"
+                                                       th:name="${'answers[q' + questionNumber.count + ']'}"
                                                        th:value="${note}"
                                                        th:required="${note == 1}">
                                                 <label th:for="${'q' + questionNumber.count + '_' + note}"
@@ -90,7 +90,7 @@
                                             <div class="icheck-danger d-inline">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_0'}"
-                                                       th:name="${'q' + questionNumber.count}"
+                                                       th:name="${'answers[q' + questionNumber.count + ']'}"
                                                        value="0">
                                                 <label th:for="${'q' + questionNumber.count + '_0'}">NC</label>
                                             </div>

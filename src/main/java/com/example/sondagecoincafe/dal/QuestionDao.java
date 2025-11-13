@@ -12,4 +12,6 @@ public interface QuestionDao extends JpaRepository<Question, Long> {
 
     @Query("select distinct q from Question q inner join fetch q.periods inner join fetch q.scores")
     List<Question> findAllWithRelations();
+
+    List<Question> findAllByOrderByIdAsc();
 }
