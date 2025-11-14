@@ -21,7 +21,10 @@ public interface QuestionService {
 
     Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
                                          Question question, String searchedQuestion,
-                                         Map<String, String> questionCategoryMap);
+                                         Map<String, String> questionCategoryMap, int questionIndex);
 
     Map<String, String> buildQuestionCategoryMap();
+
+    Question createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex,
+                                                   Question question);
 }

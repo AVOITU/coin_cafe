@@ -9,10 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Getter @Setter
@@ -85,17 +82,25 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
                                                 Question question, String searchedQuestion,
-                                                Map<String, String> questionCategoryMap) {
+                                                Map<String, String> questionCategoryMap, int questionIndex) {
 
-        int newTotalScore = question.getQuestionTotalScore() + scoreQuestionSearched;
-        question.setQuestionTotalScore(newTotalScore);
+        if ( question != null) {
+            int newTotalScore = question.getQuestionTotalScore() + scoreQuestionSearched;
+            question.setQuestionTotalScore(newTotalScore);
 
-        if (questionsScore.containsKey(searchedQuestion)) {
-            int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
-            question.setQuestionTotalVotes(newQuestionTotalVotes);
+            if (questionsScore.containsKey(searchedQuestion)) {
+                int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
+                question.setQuestionTotalVotes(newQuestionTotalVotes);
 
-            String tag = questionCategoryMap.get(searchedQuestion);
-            question.setTag(tag);
+                String tag = questionCategoryMap.get(searchedQuestion);
+                question.setTag(tag);
+            }
+
+            return question;
+        }
+
+        else {
+            question = createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex, question);
         }
 
         return question;
@@ -108,12 +113,26 @@ public class QuestionServiceImpl implements QuestionService {
             throw new IllegalStateException("Les listes TAGS et QUESTIONS_SENTENCES doivent avoir la même taille !");
         }
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new LinkedHashMap<>();
 
         for (int i = 0; i < AppConstants.QUESTIONS_SENTENCES.length; i++) {
             map.put(AppConstants.QUESTIONS_SENTENCES[i], AppConstants.TAGS.get(i));
         }
 
         return map;
+    }
+
+    @Override
+    public Question createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex,
+                                                          Question question){
+
+        List<String> questions = new ArrayList<>(questionCategoryMap.keySet());
+        String questionSearched = questions.get(questionIndex);
+        question = new Question();
+        question.setQuestionText(questionSearched);
+        question.setTag(questionCategoryMap.get(questionSearched));
+
+        questionDao.save(question);
+        return question;
     }
 }

@@ -47,9 +47,9 @@ public class Question {
 
     @Size(max = 2000)
     @Column(name = "chatgpt_comments", length = 2000)
+    @ColumnDefault("")
     private String chatgptComments;
 
-    @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "questions_periods",
             joinColumns = @JoinColumn(name = "question_id"),
@@ -57,7 +57,6 @@ public class Question {
     @ToString.Exclude
     private Set<Period> periods = new HashSet<>();
 
-    @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "questions_scores",
             joinColumns = @JoinColumn(name = "question_id"),

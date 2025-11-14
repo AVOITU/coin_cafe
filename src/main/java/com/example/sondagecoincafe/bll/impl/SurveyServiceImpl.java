@@ -49,10 +49,12 @@ public class SurveyServiceImpl implements SurveyService {
         for (String searchedQuestion : questionsScore.keySet()) {
             int scoreQuestionSearched = questionsScore.get(searchedQuestion);
 
+            int questionIndex = 0;
             for (Question question : questions) {
                 question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
-                        question, searchedQuestion, questionCategoryMap);
+                        question, searchedQuestion, questionCategoryMap, questionIndex);
                 questionDao.save(question);
+                questionIndex += 1;
         }
 
             Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
