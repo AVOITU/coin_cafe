@@ -20,7 +20,8 @@ public interface QuestionService {
     List < Question> findAllQuestion ();
 
     Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
-                                         Question question, String searchedQuestion);
+                                         Question question, String searchedQuestion,
+                                         Map<String, String> questionCategoryMap);
 
     Map<String, String> buildQuestionCategoryMap();
 }

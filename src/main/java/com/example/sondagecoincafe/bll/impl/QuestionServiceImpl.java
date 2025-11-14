@@ -84,7 +84,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
-                                                Question question, String searchedQuestion) {
+                                                Question question, String searchedQuestion,
+                                                Map<String, String> questionCategoryMap) {
 
         int newTotalScore = question.getQuestionTotalScore() + scoreQuestionSearched;
         question.setQuestionTotalScore(newTotalScore);
@@ -93,7 +94,6 @@ public class QuestionServiceImpl implements QuestionService {
             int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
             question.setQuestionTotalVotes(newQuestionTotalVotes);
 
-            Map<String, String> questionCategoryMap = buildQuestionCategoryMap();
             String tag = questionCategoryMap.get(searchedQuestion);
             question.setTag(tag);
         }
