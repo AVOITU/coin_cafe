@@ -46,14 +46,14 @@ public class SurveyServiceImpl implements SurveyService {
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
-        for (Question question : questions) {
-            String searchedQuestion = question.getQuestionText();
+        for (String searchedQuestion : questionsScore.keySet()) {
             int scoreQuestionSearched = questionsScore.get(searchedQuestion);
 
-            question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
-                                                                    question, searchedQuestion,
-                                                                    questionCategoryMap);
-            questionDao.save(question);
+            for (Question question : questions) {
+                question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
+                        question, searchedQuestion, questionCategoryMap);
+                questionDao.save(question);
+        }
 
             Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
             scoreDao.save(score);
