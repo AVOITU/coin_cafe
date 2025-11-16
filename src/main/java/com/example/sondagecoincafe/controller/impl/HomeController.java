@@ -2,7 +2,6 @@ package com.example.sondagecoincafe.controller.impl;
 
 import com.example.sondagecoincafe.bll.SurveyService;
 import com.example.sondagecoincafe.configuration.AppConstants;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,10 +38,11 @@ public class HomeController {
 
 
     @PostMapping("/survey")
-    public String handleSurveySubmit(@RequestParam Map <String, Integer> questionsScore, Model model) {
+    public String handleSurveySubmit(@RequestParam Map <String, String> params, Model model) {
 
-        System.out.println(questionsScore);
-//        surveyService.processSurvey(questionsScore);
+//        par défaut les paramètres du formulaire sont transmis sous forme de string donc il faut convertir les scores
+        Map<String, Integer> questionsScore = surveyService.convertMapStringStringToStringInteger(params);
+        surveyService.processSurvey(questionsScore);
 
         var questions = AppConstants.QUESTIONS_SENTENCES;
         model.addAttribute("questions", questions);

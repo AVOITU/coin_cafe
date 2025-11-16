@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveyServiceImpl implements SurveyService {
@@ -37,6 +38,16 @@ public class SurveyServiceImpl implements SurveyService {
         this.questionService = questionService;
     }
 
+    @Override
+    public Map<String, Integer> convertMapStringStringToStringInteger(Map<String, String> params){
+        return  params.entrySet().stream()
+                .filter(e -> e.getKey().startsWith("q"))          // ignore _csrf
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> Integer.parseInt(e.getValue())
+                ));
+    }
+
     @Transactional
     @Override
     public void processSurvey(Map<String, Integer> questionsScore) {
@@ -45,31 +56,29 @@ public class SurveyServiceImpl implements SurveyService {
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
-        for (String searchedQuestion : questionsScore.keySet()) {
-            int scoreQuestionSearched = questionsScore.get(searchedQuestion);
-
-            // Questions
-            int questionIndex = 0;
-            for (Question question : questions) {
-                question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
-                        question, searchedQuestion, questionCategoryMap, questionIndex);
-                questionDao.save(question);
-                questionIndex += 1;
-        }
-
-            // Score
-            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
-            scoreDao.save(score);
-
-            // Periode, le résultat par question n'est pas traité si la persone à repondu Non Concerné
-            // cad un résultat =0.
-            if (scoreQuestionSearched >0){
-                Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
-                periodDao.save(currentPeriod);
-            }
-        }
-
-
+//        for (String searchedQuestion : questionsScore.keySet()) {
+//            int scoreQuestionSearched = questionsScore.get(searchedQuestion);
+//
+//            // Questions
+//            int questionIndex = 0;
+//            for (Question question : questions) {
+//                question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
+//                        question, searchedQuestion, questionCategoryMap, questionIndex);
+//                questionDao.save(question);
+//                questionIndex += 1;
+//        }
+//
+//            // Score
+//            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
+//            scoreDao.save(score);
+//
+//            // Periode, le résultat par question n'est pas traité si la persone à repondu Non Concerné
+//            // cad un résultat =0.
+//            if (scoreQuestionSearched >0){
+//                Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
+//                periodDao.save(currentPeriod);
+//            }
+//        }
     }
 }
 
