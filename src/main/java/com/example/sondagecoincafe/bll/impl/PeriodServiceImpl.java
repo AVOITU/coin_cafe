@@ -105,4 +105,10 @@ public class PeriodServiceImpl implements PeriodService {
                     return periodDao.save(p);
                 });
     }
+
+    @Override
+    public void deletePeriodsOlderThan12Months() {
+        LocalDateTime limit = LocalDateTime.now().minusMonths(12);
+        periodDao.deleteOldPeriods(limit);
+    }
 }
