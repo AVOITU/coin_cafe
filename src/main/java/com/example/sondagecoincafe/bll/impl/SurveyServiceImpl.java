@@ -42,13 +42,13 @@ public class SurveyServiceImpl implements SurveyService {
     public void processSurvey(Map<String, Integer> questionsScore) {
 
         List<Question> questions = questionDao.findAll();
-        int totalIncrementedScore = 0;
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
         for (String searchedQuestion : questionsScore.keySet()) {
             int scoreQuestionSearched = questionsScore.get(searchedQuestion);
 
+            // Questions
             int questionIndex = 0;
             for (Question question : questions) {
                 question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
@@ -57,16 +57,19 @@ public class SurveyServiceImpl implements SurveyService {
                 questionIndex += 1;
         }
 
+            // Periode, le résultat par question n'est pas traité si la persoone à repondu Non Concerné
+            // cad un résultat =0.
+            if (scoreQuestionSearched >0){
+                Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
+                periodDao.save(currentPeriod);
+            }
+
+            // Score
             Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
             scoreDao.save(score);
         }
 
-        for (Integer value : questionsScore.values()) {
-            totalIncrementedScore += value;
-        }
 
-        Period currentPeriod = periodService.incrementTotalsPeriode(totalIncrementedScore);
-        periodDao.save(currentPeriod);
     }
 }
 

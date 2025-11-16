@@ -42,7 +42,6 @@ public class QuestionServiceImpl implements QuestionService {
                 }
             }
         }
-
         return mapForPieCount;
     }
 
@@ -95,14 +94,13 @@ public class QuestionServiceImpl implements QuestionService {
                 String tag = questionCategoryMap.get(searchedQuestion);
                 question.setTag(tag);
             }
-
             return question;
         }
 
         else {
-            question = createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex, question);
+            question = createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex,
+                                                              question, scoreQuestionSearched);
         }
-
         return question;
     }
 
@@ -118,13 +116,12 @@ public class QuestionServiceImpl implements QuestionService {
         for (int i = 0; i < AppConstants.QUESTIONS_SENTENCES.length; i++) {
             map.put(AppConstants.QUESTIONS_SENTENCES[i], AppConstants.TAGS.get(i));
         }
-
         return map;
     }
 
     @Override
     public Question createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex,
-                                                          Question question){
+                                                          Question question, int scoreQuestionSearched){
 
         List<String> questions = new ArrayList<>(questionCategoryMap.keySet());
         String questionSearched = questions.get(questionIndex);
@@ -132,7 +129,16 @@ public class QuestionServiceImpl implements QuestionService {
         question.setQuestionText(questionSearched);
         question.setTag(questionCategoryMap.get(questionSearched));
 
-        questionDao.save(question);
+//        ignore les 0 car cela signifie que la personne a voté non concerné
+//        donc il ne faut pas incrémenter le compte des votes car la personne n'a pas
+//        répondu à la question et prends les valeurs par défaut (0) en définies en BO.
+        if (scoreQuestionSearched >0){
+            question.setQuestionTotalVotes(1);
+            question.setQuestionTotalScore(scoreQuestionSearched);
+
+            questionDao.save(question);
+
+        } else { questionDao.save(question); }
         return question;
     }
 }

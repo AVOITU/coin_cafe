@@ -73,7 +73,7 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public Period incrementTotalsPeriode(int newTotalScore){
+    public Period incrementTotalsPeriode(int score){
         LocalDateTime firstDayOfMonth = LocalDateTime.now()
                 .withDayOfMonth(1)
                 .withHour(0)
@@ -85,7 +85,7 @@ public class PeriodServiceImpl implements PeriodService {
         Period currentPeriod = getOrCreateCurrentPeriodByTimestamp(Timestamp.valueOf(firstDayOfMonth));
 
         int currentPeriodTotalVotes = currentPeriod.getPeriodTotalVotes() +1;
-        int currentPeriodTotalScore = currentPeriod.getPeriodTotalScore() + newTotalScore;
+        int currentPeriodTotalScore = currentPeriod.getPeriodTotalScore() + score;
 
         currentPeriod.setPeriodTotalVotes(currentPeriodTotalVotes);
         currentPeriod.setPeriodTotalScore(currentPeriodTotalScore);
@@ -99,7 +99,7 @@ public class PeriodServiceImpl implements PeriodService {
         return periodDao.findCurrentPeriodByTimestampPeriod(actualTimestamp.toLocalDateTime())
                 .orElseGet(() -> {
                     Period p = new Period();
-                    p.setTimestampPeriod(LocalDateTime.now());
+                    p.setTimestampPeriod(actualTimestamp.toLocalDateTime());
                     p.setPeriodTotalVotes(0);
                     p.setPeriodTotalScore(0);
                     return periodDao.save(p);

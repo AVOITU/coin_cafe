@@ -26,5 +26,5 @@ public interface QuestionService {
     Map<String, String> buildQuestionCategoryMap();
 
     Question createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex,
-                                                   Question question);
+                                                   Question question, int scoreQuestionSearched);
 }
