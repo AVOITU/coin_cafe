@@ -52,9 +52,12 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public void processSurvey(Map<String, Integer> questionsScore) {
 
+        System.out.println(questionsScore);
         List<Question> questions = questionDao.findAll();
+        System.out.println(questions);
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
+        System.out.println(questionsScore);
 
 //        for (String searchedQuestion : questionsScore.keySet()) {
 //            int scoreQuestionSearched = questionsScore.get(searchedQuestion);
