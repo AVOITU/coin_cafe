@@ -56,7 +56,8 @@ public class DataSeeder implements CommandLineRunner {
             p.setTimestampPeriod(anchor.minusMonths(i));
             int randomVoters = random.nextInt(20);
             p.setPeriodTotalVotes(randomVoters);
-            p.setPeriodTotalScore(random.nextInt(((randomVoters*5) - randomVoters + 1) + randomVoters));
+            p.setPeriodTotalScore(random.nextInt(
+                    ((randomVoters*AppConstants.MAX_SCORE) - randomVoters + 1) + randomVoters));
             periods.add(p);
         }
 
@@ -68,8 +69,11 @@ public class DataSeeder implements CommandLineRunner {
             Question q = new Question();
             q.setQuestionText(AppConstants.QUESTIONS_SENTENCES[i]);
             q.setTag(AppConstants.TAGS.get(i));
-            q.setQuestionTotalVotes(random.nextInt(100));
-            q.setQuestionTotalScore(random.nextInt(200));
+            int randomVoters = random.nextInt(100);
+            q.setQuestionTotalVotes(randomVoters);
+            q.setQuestionTotalScore(random.nextInt(
+                    ((randomVoters*AppConstants.MAX_SCORE) - randomVoters + 1) + randomVoters));
+
             q.setChatgptComments(faker.lorem().sentence(6));
 
             int n = 1 + random.nextInt(scores.size()); // [1..size]
