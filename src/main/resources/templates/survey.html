@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Sondage – Coin Café</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
@@ -34,7 +34,7 @@
                     <div class="col-sm-12">
                         <h1 class="m-0">Votre avis nous intéresse</h1>
                         <p class="text-muted mb-0">Merci d'évaluer chaque point de 1 (Très mauvais) à 5 (Excellent).</p>
-                        <p class="text-muted mb-0" > (Veuillez répondre à au moins une question, merci!) </p>
+                        <p class="text-muted mb-0"> (Veuillez répondre à au moins une question, merci!) </p>
                     </div>
                 </div>
             </div>
@@ -48,6 +48,8 @@
                             <div class="card-header">
                                 <h3 class="card-title">Questionnaire</h3>
                             </div>
+                            <div th:if="${message}" class="alert alert-success" role="alert"
+                                 th:text="${message}"></div>
                             <form id="surveyForm" class="card-body"
                                   th:action="@{/survey}" th:object="${questionsScore}"
                                   method="post">
@@ -59,7 +61,7 @@
                                     <span class="mr-3"><strong>3</strong> = Moyen</span>
                                     <span class="mr-3"><strong>4</strong> = Bon</span>
                                     <span class="mr-3"><strong>5</strong> = Excellent</span>
-                                    <span ><strong>NC</strong> = Non Concerné</span>
+                                    <span><strong>NC</strong> = Non Concerné</span>
                                 </div>
 
                                 <!-- Questions -->
@@ -68,31 +70,29 @@
                                     <fieldset>
                                         <legend class="required"
                                                 th:text="${questionNumber.count} + ') ' + ${question}">
-                                            Question
                                         </legend>
 
-
                                         <div class="likert">
-
                                             <!-- Notes 1 à 5 -->
                                             <div class="icheck-primary d-inline"
                                                  th:each="note : ${#numbers.sequence(1,5)}">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_' + note}"
-                                                       th:name="${question}"
+                                                       th:name="${'q' + questionNumber.count}"
                                                        th:value="${note}"
                                                        th:required="${note == 1}">
                                                 <label th:for="${'q' + questionNumber.count + '_' + note}"
                                                        th:text="${note}"></label>
                                             </div>
 
-                                            <!-- Option NC (valeur 0) -->
-                                            <div class="icheck-danger d-inline">
+                                            <!-- Option NC -->
+                                            <div class="icheck-primary d-inline">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_0'}"
-                                                       th:name="${'answers[q' + questionNumber.count + ']'}"
+                                                       th:name="${'q' + questionNumber.count}"
                                                        value="0">
-                                                <label th:for="${'q' + questionNumber.count + '_0'}">NC</label>
+                                                <label th:for="${'q' + questionNumber.count + '_0'}"
+                                                       th:text="'NC'"></label>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -102,8 +102,12 @@
                                 <div id="formAlert" class="alert d-none" role="alert"></div>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="reset" class="btn btn-outline-secondary"><i class="fas fa-undo-alt mr-1"></i>Réinitialiser</button>
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane mr-1"></i>Envoyer</button>
+                                    <button type="reset" class="btn btn-outline-secondary">
+                                        <i class="fas fa-undo-alt mr-1"></i>Réinitialiser
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane mr-1"></i>Envoyer
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -128,6 +132,6 @@
 <!-- AdminLTE App -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
-<script src="/javascript/survey.js" defer> </script>
+<script src="/javascript/survey.js" defer></script>
 </body>
 </html>

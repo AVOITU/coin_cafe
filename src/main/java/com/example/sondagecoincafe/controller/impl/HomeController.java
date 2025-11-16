@@ -1,22 +1,27 @@
 package com.example.sondagecoincafe.controller.impl;
 
-import com.example.sondagecoincafe.bll.*;
+import com.example.sondagecoincafe.bll.SurveyService;
 import com.example.sondagecoincafe.configuration.AppConstants;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Controller
-@RequiredArgsConstructor
 public class HomeController {
 
-    private SurveyService surveyService;
+    private final SurveyService surveyService;
+
+    public HomeController(SurveyService surveyService) {
+        this.surveyService = surveyService;
+    }
 
     @GetMapping("")
     public String localhostPort(){
@@ -34,10 +39,14 @@ public class HomeController {
 
 
     @PostMapping("/survey")
-    public String handleSurveySubmit(@ModelAttribute Map <String, Integer> questionsScore, Model model) {
+    public String handleSurveySubmit(@RequestParam Map <String, Integer> questionsScore, Model model) {
 
-        surveyService.processSurvey(questionsScore);
+        System.out.println(questionsScore);
+//        surveyService.processSurvey(questionsScore);
 
+        var questions = AppConstants.QUESTIONS_SENTENCES;
+        model.addAttribute("questions", questions);
+        model.addAttribute("questionsScore", questionsScore);
         model.addAttribute("message", "Merci pour votre participation !");
         return "survey";
     }

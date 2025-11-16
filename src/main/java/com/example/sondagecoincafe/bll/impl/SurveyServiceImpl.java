@@ -57,16 +57,16 @@ public class SurveyServiceImpl implements SurveyService {
                 questionIndex += 1;
         }
 
-            // Periode, le résultat par question n'est pas traité si la persoone à repondu Non Concerné
+            // Score
+            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
+            scoreDao.save(score);
+
+            // Periode, le résultat par question n'est pas traité si la persone à repondu Non Concerné
             // cad un résultat =0.
             if (scoreQuestionSearched >0){
                 Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
                 periodDao.save(currentPeriod);
             }
-
-            // Score
-            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
-            scoreDao.save(score);
         }
 
 
