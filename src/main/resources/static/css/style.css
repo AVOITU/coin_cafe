@@ -8,10 +8,6 @@ h1{
     text-align: center;
 }
 
-img{
-    max-width: 8rem;
-}
-
 .article{
     text-decoration: underline;
 }
@@ -68,8 +64,15 @@ div a {
 
 .content-wrapper{
     padding-bottom: 2em;
+    background-image: url(../img/Arrière%20plan%20test%202.jpg);
+    background-size: 100% 100%;         /* L’image couvre tout l’écran */
+    background-repeat: no-repeat;   /* Pas de répétition */
+    background-position: center;   /* Centrée */
+    min-height: 100vh; /* ➜ l’élément occupe 100% de la hauteur de l’écran */
+    width: 100%;
 }
 
 .logo{
     width: 10em;
 }
+
