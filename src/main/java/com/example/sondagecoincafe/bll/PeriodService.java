@@ -3,6 +3,7 @@ package com.example.sondagecoincafe.bll;
 import com.example.sondagecoincafe.bo.Period;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PeriodService {
@@ -13,9 +14,9 @@ public interface PeriodService {
 
     List< String > getListOfMonths(List<Period> periods);
 
-    Period incrementTotalsPeriode(int newTotalScore);
+    void incrementAndSaveTotalsPeriod(int score, Period currentPeriod);
 
-    Period getOrCreateCurrentPeriodByTimestamp(Timestamp actualTimestamp);
+    Period getOrCreateCurrentPeriodByTimestamp(LocalDateTime actualTimestamp);
 
     void deletePeriodsOlderThan12Months();
 }

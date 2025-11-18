@@ -79,13 +79,12 @@ public class QuestionServiceImpl implements QuestionService {
 
         int questionScore = question.getQuestionTotalScore();
 
-        if (responseScore > 0) {
             int newTotalScore = questionScore + responseScore;
             question.setQuestionTotalScore(newTotalScore);
 
             int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
             question.setQuestionTotalVotes(newQuestionTotalVotes);
-        }
+
         questionDao.save(question);
     }
 

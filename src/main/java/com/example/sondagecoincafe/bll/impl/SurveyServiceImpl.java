@@ -6,13 +6,13 @@ import com.example.sondagecoincafe.bll.ScoreService;
 import com.example.sondagecoincafe.bll.SurveyService;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
-import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import com.example.sondagecoincafe.dal.ScoreDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,8 +22,6 @@ public class SurveyServiceImpl implements SurveyService {
 
 
     private final QuestionDao questionDao;
-    private final ScoreDao scoreDao;
-    private final PeriodDao periodDao;
 
     private final PeriodService periodService;
     private final ScoreService scoreService;
@@ -31,8 +29,6 @@ public class SurveyServiceImpl implements SurveyService {
 
     public SurveyServiceImpl(QuestionDao questionDao, ScoreDao scoreDao, PeriodDao periodDao, PeriodService periodService, ScoreService scoreService, QuestionService questionService) {
         this.questionDao = questionDao;
-        this.scoreDao = scoreDao;
-        this.periodDao = periodDao;
         this.periodService = periodService;
         this.scoreService = scoreService;
         this.questionService = questionService;
@@ -56,6 +52,16 @@ public class SurveyServiceImpl implements SurveyService {
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
+        // fixe au 1 du mois afin de comparer les périodes par la suite
+        LocalDateTime firstDayOfMonth = LocalDateTime.now()
+                .withDayOfMonth(1)
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+
+        Period currentPeriod = periodService.getOrCreateCurrentPeriodByTimestamp(firstDayOfMonth);
+
         // Questions
         questionService.checkAndAddQuestionsIfNotPresent(questionCategoryMap, questions);
 
@@ -66,18 +72,16 @@ public class SurveyServiceImpl implements SurveyService {
 
             int responseScore = formResponses.get(question.getQuestionText());
 
-            questionService.fillAndSaveTotalsForQuestion(question, responseScore);
-
             // Score
             scoreService.incrementAndSaveTotalForScore (question, responseScore);
-        }
 
-//            // Periode, le résultat par question n'est pas traité si la personne à repondu Non Concerné
-//            // cad un résultat =0.
-//            if (scoreQuestionSearched >0){
-//                Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
-//                periodDao.save(currentPeriod);
-//            }
+            // Periodes et Questions, le résultat n'est pas traité si la personne à repondu Non Concerné
+            // cad un résultat =0.
+            if (responseScore >0){
+                questionService.fillAndSaveTotalsForQuestion(question, responseScore);
+                periodService.incrementAndSaveTotalsPeriod(responseScore, currentPeriod);
+            }
+        }
     }
 }
 
