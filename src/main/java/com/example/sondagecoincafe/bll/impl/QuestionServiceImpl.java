@@ -75,20 +75,10 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void processQuestionsSave(Map<String, Integer> formResponses, List<Question> questions,
-                                     Map<String, String> questionCategoryMap) {
-
-        for (Question question : questions){
-            int responseScore = formResponses.get(question.getQuestionText()); // fait le lien entre les réponses et les questions
-            question = fillTotalsAndTagForQuestion(question, responseScore);
-            questionDao.save(question);
-        }
-    }
-
-    @Override
-    public Question fillTotalsAndTagForQuestion(Question question, int responseScore) {
+    public void fillTotalsAndTagForQuestion(Question question, Map<String, Integer> formResponses) {
 
         int questionScore = question.getQuestionTotalScore();
+        int responseScore = formResponses.get(question.getQuestionText());
 
         if (responseScore > 0) {
             int newTotalScore = questionScore + responseScore;
@@ -97,7 +87,7 @@ public class QuestionServiceImpl implements QuestionService {
             int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
             question.setQuestionTotalVotes(newQuestionTotalVotes);
         }
-        return question;
+        questionDao.save(question);
     }
 
     @Override

@@ -58,7 +58,14 @@ public class SurveyServiceImpl implements SurveyService {
 
         // Questions
         questionService.checkAndAddQuestionsIfNotPresent(questionCategoryMap, questions);
-        questionService.processQuestionsSave(questionsScore, questions, questionCategoryMap);
+
+        // réactualisation de la liste au cas où les questions n'existeraient pas
+        questions = questionDao.findAll();
+
+        for (Question question : questions){
+            questionService.fillTotalsAndTagForQuestion(question, questionsScore);
+        }
+
 
 //            // Score
 //            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
