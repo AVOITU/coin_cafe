@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-@Getter @Setter
+@Getter
+@Setter
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionDao questionDao;
 
-    public QuestionServiceImpl(QuestionDao questionDao){
+    public QuestionServiceImpl(QuestionDao questionDao) {
         this.questionDao = questionDao;
     }
 
@@ -27,15 +28,15 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Map <Integer, Integer> getListVotesWithScore(List<Question> results) {
+    public Map<Integer, Integer> getListVotesWithScore(List<Question> results) {
 
-        Map <Integer, Integer> mapForPieCount = new HashMap<>(Map.of());
+        Map<Integer, Integer> mapForPieCount = new HashMap<>(Map.of());
 
         if (results == null) return mapForPieCount;
 
-        for (Question question : results){
+        for (Question question : results) {
             for (Score score : question.getScores()) {
-                if (score.getScore() > 0){
+                if (score.getScore() > 0) {
                     int scoreValue = score.getScore();
                     int votes = score.getScoreVoteCount();
                     mapForPieCount.put(scoreValue, votes);
@@ -46,12 +47,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List <String> getTagsFromQuestionList(List <Question> questions){
+    public List<String> getTagsFromQuestionList(List<Question> questions) {
 
         if (questions == null) return null;
 
-        List <String> tagsFromList = new ArrayList<>();
-        for (Question question : questions){
+        List<String> tagsFromList = new ArrayList<>();
+        for (Question question : questions) {
             String tag = question.getTag();
             tagsFromList.add(tag);
         }
@@ -59,13 +60,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List <Double> calculateAverageByTag(List <Question> questions){
+    public List<Double> calculateAverageByTag(List<Question> questions) {
 
         if (questions == null) return null;
 
-        double averageQuestion = 0;
-        List <Double> averagesByQuestion = new ArrayList<>();
-        for (Question question : questions){
+        double averageQuestion;
+        List<Double> averagesByQuestion = new ArrayList<>();
+        for (Question question : questions) {
             averageQuestion = (double) question.getQuestionTotalScore() / question.getQuestionTotalVotes();
             averageQuestion = Math.round(averageQuestion * 10.0) / 10.0; // arrondi à 1 chiffre après la virgule
             averagesByQuestion.add(averageQuestion);
@@ -74,32 +75,37 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List < Question> findAllQuestion (){
-        return questionDao.findAll();
+    public void processQuestionsSave(Map<String, Integer> formResponses, List<Question> questions, Map<String, String> questionCategoryMap) {
+        int questionIndex = 0;
+        for (String searchedQuestion : formResponses.keySet()) {
+
+            int scoreQuestionSearched = formResponses.get(searchedQuestion);
+            Question questionList = questions.get(questionIndex);
+
+            questionList = fillTotalsAndTagForQuestion(formResponses, scoreQuestionSearched,
+                    questionList, searchedQuestion, questionCategoryMap, questionIndex);
+
+            questionDao.save(questionList);
+            questionIndex += 1;
+        }
     }
 
     @Override
-    public Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
+    public Question fillTotalsAndTagForQuestion(Map<String, Integer> formResponses, int responseScore,
                                                 Question question, String searchedQuestion,
                                                 Map<String, String> questionCategoryMap, int questionIndex) {
 
-        if ( question != null) {
-            int newTotalScore = question.getQuestionTotalScore() + scoreQuestionSearched;
+        int questionScore = question.getQuestionTotalScore();
+
+        if (questionScore > 0) {
+            int newTotalScore = questionScore + responseScore;
             question.setQuestionTotalScore(newTotalScore);
 
-            if (questionsScore.containsKey(searchedQuestion)) {
-                int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
-                question.setQuestionTotalVotes(newQuestionTotalVotes);
+            int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
+            question.setQuestionTotalVotes(newQuestionTotalVotes);
 
-                String tag = questionCategoryMap.get(searchedQuestion);
-                question.setTag(tag);
-            }
-            return question;
-        }
-
-        else {
-            question = createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex,
-                                                              question, scoreQuestionSearched);
+            String tag = questionCategoryMap.get(searchedQuestion);
+            question.setTag(tag);
         }
         return question;
     }
@@ -120,25 +126,32 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex,
-                                                          Question question, int scoreQuestionSearched){
+    public void checkIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions) {
+        int questionIndex = 0;
+        for (String initialQuestion : questionCategoryMap.keySet()) {
+            boolean found = false;
+
+            for (Question questionBdd : questions) {
+                if (questionBdd.getQuestionText().equals(initialQuestion)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex);
+            }
+            questionIndex += 1;
+        }
+    }
+
+    @Override
+    public void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex) {
 
         List<String> questions = new ArrayList<>(questionCategoryMap.keySet());
-        String questionSearched = questions.get(questionIndex);
-        question = new Question();
-        question.setQuestionText(questionSearched);
-        question.setTag(questionCategoryMap.get(questionSearched));
-
-//        ignore les 0 car cela signifie que la personne a voté non concerné
-//        donc il ne faut pas incrémenter le compte des votes car la personne n'a pas
-//        répondu à la question et prends les valeurs par défaut (0) en définies en BO.
-        if (scoreQuestionSearched >0){
-            question.setQuestionTotalVotes(1);
-            question.setQuestionTotalScore(scoreQuestionSearched);
-
-            questionDao.save(question);
-
-        } else { questionDao.save(question); }
-        return question;
+        String questionText = questions.get(questionIndex);
+        Question question = new Question();
+        question.setQuestionText(questionText);
+        question.setTag(questionCategoryMap.get(questionText));
+        questionDao.save(question);
     }
 }

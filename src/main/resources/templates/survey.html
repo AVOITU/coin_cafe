@@ -78,7 +78,7 @@
                                                  th:each="note : ${#numbers.sequence(1,5)}">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_' + note}"
-                                                       th:name="${'q' + questionNumber.count}"
+                                                       th:name="${question}"
                                                        th:value="${note}"
                                                        th:required="${note == 1}">
                                                 <label th:for="${'q' + questionNumber.count + '_' + note}"
@@ -89,7 +89,7 @@
                                             <div class="icheck-primary d-inline">
                                                 <input type="radio"
                                                        th:id="${'q' + questionNumber.count + '_0'}"
-                                                       th:name="${'q' + questionNumber.count}"
+                                                       th:name="${question}"
                                                        value="0">
                                                 <label th:for="${'q' + questionNumber.count + '_0'}"
                                                        th:text="'NC'"></label>

@@ -39,9 +39,9 @@ public class SurveyServiceImpl implements SurveyService {
     }
 
     @Override
-    public Map<String, Integer> convertMapStringStringToStringInteger(Map<String, String> params){
-        return  params.entrySet().stream()
-                .filter(e -> e.getKey().startsWith("q"))          // ignore _csrf
+    public Map<String, Integer> convertMapStringStringToStringInteger(Map<String, String> params) {
+        return params.entrySet().stream()
+                .filter(e -> !"_csrf".equals(e.getKey())) // on ignore seulement le token CSRF
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         e -> Integer.parseInt(e.getValue())
@@ -52,36 +52,24 @@ public class SurveyServiceImpl implements SurveyService {
     @Override
     public void processSurvey(Map<String, Integer> questionsScore) {
 
-        System.out.println(questionsScore);
         List<Question> questions = questionDao.findAll();
-        System.out.println(questions);
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
-        System.out.println(questionsScore);
 
-//        for (String searchedQuestion : questionsScore.keySet()) {
-//            int scoreQuestionSearched = questionsScore.get(searchedQuestion);
-//
-//            // Questions
-//            int questionIndex = 0;
-//            for (Question question : questions) {
-//                question = questionService.fillTotalsAndTagForQuestion(questionsScore, scoreQuestionSearched,
-//                        question, searchedQuestion, questionCategoryMap, questionIndex);
-//                questionDao.save(question);
-//                questionIndex += 1;
-//        }
-//
+        // Questions
+        questionService.checkIfNotPresent(questionCategoryMap, questions);
+        questionService.processQuestionsSave(questionsScore, questions, questionCategoryMap);
+
 //            // Score
 //            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
 //            scoreDao.save(score);
 //
-//            // Periode, le résultat par question n'est pas traité si la persone à repondu Non Concerné
+//            // Periode, le résultat par question n'est pas traité si la personne à repondu Non Concerné
 //            // cad un résultat =0.
 //            if (scoreQuestionSearched >0){
 //                Period currentPeriod = periodService.incrementTotalsPeriode(scoreQuestionSearched);
 //                periodDao.save(currentPeriod);
 //            }
-//        }
     }
 }
 
