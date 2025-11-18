@@ -64,7 +64,7 @@ div a {
 
 .content-wrapper{
     padding-bottom: 2em;
-    background-image: url(../img/Arrière%20plan%20test%202.jpg);
+    background-image: url(../img/arrière-plan.jpg);
     background-size: 100% 100%;         /* L’image couvre tout l’écran */
     background-repeat: no-repeat;   /* Pas de répétition */
     background-position: center;   /* Centrée */

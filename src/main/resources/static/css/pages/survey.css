@@ -9,6 +9,11 @@
     margin-right: .25rem;
 }
 
+.row {
+    justify-content: center;
+    background-image: url("../../img/bois-definitif.jpg");
+}
+
 .question legend {
     font-size: 1rem;
     font-weight: 600;
@@ -18,4 +23,26 @@
 .required::after {
     content: " *";
     color: #dc3545;
+}
+
+.required {
+    color:#7e7e7e
+}
+
+h1 {
+      font-weight: bolder;
+      color: #FFDD00; 
+}
+
+p {
+      color: #ffffff; 
+    }
+
+.card-header {
+    background-color: #FFDD00;
+}
+
+.card-title {
+    font-weight: bolder;
+    color: #7e7e7e;
 }

@@ -1,7 +1,3 @@
-html, body, .container{
-    height: 100%;
-}
-
 .login-form {
     width: 350px;
     padding: 2rem 1rem 1rem;
@@ -9,4 +5,48 @@ html, body, .container{
 
 form {
     padding: 1rem;
+}
+
+.card.login-form{
+  background-image: url("../../img/bois-definitif.jpg");
+  background-size: cover;      /* l'image remplit l'espace */
+  background-position: center; /* centrée */
+  background-repeat: no-repeat; /* pas de répétition */
+  border: none;
+}
+
+.card-title.text-center{
+  font-weight: bolder;   /* gras */
+  color: #FFDD00;      /* remplace par ton code couleur */
+  font-size: 2rem;
+}
+
+.error{
+  font-weight: bold;
+  color: #ff0000;      /* remplace par ton code couleur */
+}
+
+.form-label{
+  font-weight: bolder;
+  color: #ffffff;      /* remplace par ton code couleur */
+}
+
+.sign-up.mt-4{
+  color: #ffffff;      /* remplace par ton code couleur */
+}
+
+.btn.btn-primary.w-100{
+  background-color: #7E7E7E;
+  font-weight: bolder;
+  border: none;
+}
+
+.btn.btn-primary:hover{
+  background-color: #b6b6b6; 
+}
+
+.mb-3{
+  background-color: #FFDD00;  /* remplace par ton code couleur */
+  border-radius: 3px;
+  padding: 0.15rem;
 }
