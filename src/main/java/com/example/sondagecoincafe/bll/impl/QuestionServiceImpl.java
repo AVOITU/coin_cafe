@@ -75,37 +75,27 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void processQuestionsSave(Map<String, Integer> formResponses, List<Question> questions, Map<String, String> questionCategoryMap) {
-        int questionIndex = 0;
-        for (String searchedQuestion : formResponses.keySet()) {
+    public void processQuestionsSave(Map<String, Integer> formResponses, List<Question> questions,
+                                     Map<String, String> questionCategoryMap) {
 
-            int scoreQuestionSearched = formResponses.get(searchedQuestion);
-            Question questionList = questions.get(questionIndex);
-
-            questionList = fillTotalsAndTagForQuestion(formResponses, scoreQuestionSearched,
-                    questionList, searchedQuestion, questionCategoryMap, questionIndex);
-
-            questionDao.save(questionList);
-            questionIndex += 1;
+        for (Question question : questions){
+            int responseScore = formResponses.get(question.getQuestionText()); // fait le lien entre les réponses et les questions
+            question = fillTotalsAndTagForQuestion(question, responseScore);
+            questionDao.save(question);
         }
     }
 
     @Override
-    public Question fillTotalsAndTagForQuestion(Map<String, Integer> formResponses, int responseScore,
-                                                Question question, String searchedQuestion,
-                                                Map<String, String> questionCategoryMap, int questionIndex) {
+    public Question fillTotalsAndTagForQuestion(Question question, int responseScore) {
 
         int questionScore = question.getQuestionTotalScore();
 
-        if (questionScore > 0) {
+        if (responseScore > 0) {
             int newTotalScore = questionScore + responseScore;
             question.setQuestionTotalScore(newTotalScore);
 
             int newQuestionTotalVotes = question.getQuestionTotalVotes() + 1;
             question.setQuestionTotalVotes(newQuestionTotalVotes);
-
-            String tag = questionCategoryMap.get(searchedQuestion);
-            question.setTag(tag);
         }
         return question;
     }
@@ -126,32 +116,29 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void checkIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions) {
-        int questionIndex = 0;
-        for (String initialQuestion : questionCategoryMap.keySet()) {
+    public void checkAndAddQuestionsIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions) {
+        for (String textQuestionToCheck : questionCategoryMap.keySet()) {
             boolean found = false;
 
             for (Question questionBdd : questions) {
-                if (questionBdd.getQuestionText().equals(initialQuestion)) {
+                if (questionBdd.getQuestionText().equals(textQuestionToCheck)) {
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                createNewQuestionIfQuestionNotPresent(questionCategoryMap, questionIndex);
+                createNewQuestionIfQuestionNotPresent(questionCategoryMap, textQuestionToCheck);
             }
-            questionIndex += 1;
         }
     }
 
     @Override
-    public void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex) {
+    public void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, String textQuestion) {
 
-        List<String> questions = new ArrayList<>(questionCategoryMap.keySet());
-        String questionText = questions.get(questionIndex);
         Question question = new Question();
-        question.setQuestionText(questionText);
-        question.setTag(questionCategoryMap.get(questionText));
+        question.setQuestionText(textQuestion);
+        question.setTag(questionCategoryMap.get(textQuestion));
+
         questionDao.save(question);
     }
 }

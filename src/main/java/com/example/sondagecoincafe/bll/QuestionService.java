@@ -17,15 +17,14 @@ public interface QuestionService {
 
     List <Double> calculateAverageByTag(List <Question> questions);
 
-    Question fillTotalsAndTagForQuestion(Map<String, Integer> questionsScore, int scoreQuestionSearched,
-                                         Question question, String searchedQuestion,
-                                         Map<String, String> questionCategoryMap, int questionIndex);
+    Question fillTotalsAndTagForQuestion(Question question, int responseScore);
 
     Map<String, String> buildQuestionCategoryMap();
 
-    void processQuestionsSave(Map<String, Integer> questionsScore, List<Question> questions, Map<String, String> questionCategoryMap);
+    void processQuestionsSave(Map<String, Integer> questionsScore, List<Question> questions,
+                              Map<String, String> questionCategoryMap);
 
-    void checkIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions);
+    void checkAndAddQuestionsIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions);
 
-    void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, int questionIndex);
+    void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, String textQuestion);
 }

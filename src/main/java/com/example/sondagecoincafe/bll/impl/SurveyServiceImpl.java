@@ -57,7 +57,7 @@ public class SurveyServiceImpl implements SurveyService {
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
         // Questions
-        questionService.checkIfNotPresent(questionCategoryMap, questions);
+        questionService.checkAndAddQuestionsIfNotPresent(questionCategoryMap, questions);
         questionService.processQuestionsSave(questionsScore, questions, questionCategoryMap);
 
 //            // Score
