@@ -62,7 +62,7 @@ class GetListVotesWithScoreTest {
         q.setPeriods(new HashSet<>());
         q.setQuestionText("q");
         q.setQuestionTotalVotes(0);
-        q.setAllVotesCount(0);
+        q.setQuestionTotalVotes(0);
         return q;
     }
 

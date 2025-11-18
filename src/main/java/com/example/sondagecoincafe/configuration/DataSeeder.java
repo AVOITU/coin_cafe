@@ -1,11 +1,14 @@
 package com.example.sondagecoincafe.configuration;
 
+import com.example.sondagecoincafe.bll.UserService;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
+import com.example.sondagecoincafe.bo.User;
 import com.example.sondagecoincafe.dal.PeriodDao;
 import com.example.sondagecoincafe.dal.QuestionDao;
 import com.example.sondagecoincafe.dal.ScoreDao;
+import com.example.sondagecoincafe.dal.UserDao;
 import com.github.javafaker.Faker;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

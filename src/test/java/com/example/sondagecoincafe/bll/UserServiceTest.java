@@ -39,14 +39,12 @@ public class UserServiceTest {
     @Test
     void should_create_user_if_password_confirmation_is_ok() {
         String userPassword = "user_password";
-        String passwordConfirmation = userPassword;
-        User user = getUser(userPassword, passwordConfirmation);
+        User user = getUser(userPassword, userPassword);
         assertDoesNotThrow(() -> userService.createUser(user));
     }
 
     private static User getUser(String userPassword, String passwordConfirmation) {
-        User user = new User("username", "name", "firstname", "email@email.com", "street", "phone", "zipCode", "city", userPassword, passwordConfirmation, 0, false);
-        return user;
+        return new User("username", "name", "firstname", "email@email.com", "street", "phone", "zipCode", "city", userPassword, passwordConfirmation, 0, false);
     }
 
     @Test

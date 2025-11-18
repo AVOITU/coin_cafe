@@ -65,7 +65,7 @@ public class QuestionDaoTest {
         Question q = new Question();
         q.setQuestionText(txt);
         q.setQuestionTotalVotes(totalVotes);
-        q.setAllVotesCount(allVotes);
+        q.setQuestionTotalScore(allVotes);
         return q;
     }
 
@@ -86,7 +86,7 @@ public class QuestionDaoTest {
         assertThat(reloaded.getScores()).extracting("score").containsExactlyInAnyOrder(3, 4, 5);
         assertThat(reloaded.getPeriods()).hasSize(2);
         assertThat(reloaded.getQuestionTotalVotes()).isZero();
-        assertThat(reloaded.getAllVotesCount()).isZero();
+        assertThat(reloaded.getQuestionTotalScore()).isZero();
     }
 
     @Test
@@ -106,12 +106,12 @@ public class QuestionDaoTest {
         Question q = questionDao.saveAndFlush(newQuestion("Accessibilité", 1, 3));
         q.setQuestionText("Accessibilité PMR");
         q.setQuestionTotalVotes(5);
-        q.setAllVotesCount(11);
+        q.setQuestionTotalScore(11);
 
         Question updated = questionDao.saveAndFlush(q);
         assertThat(updated.getQuestionText()).isEqualTo("Accessibilité PMR");
         assertThat(updated.getQuestionTotalVotes()).isEqualTo(5);
-        assertThat(updated.getAllVotesCount()).isEqualTo(11);
+        assertThat(updated.getQuestionTotalScore()).isEqualTo(11);
     }
 
     @Test

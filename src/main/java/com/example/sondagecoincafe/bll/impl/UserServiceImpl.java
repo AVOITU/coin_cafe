@@ -13,9 +13,9 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao;
+    private final UserDao userDao;
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getById(Long id) {
-        return Optional.of(userDao.getById(id));
+        return Optional.of(userDao.getReferenceById(id));
     }
 
     @Override

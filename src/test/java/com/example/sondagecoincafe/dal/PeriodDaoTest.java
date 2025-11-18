@@ -82,7 +82,7 @@ class PeriodDaoTest {
         Question q = new Question();
         q.setQuestionText("Ambiance");
         q.setQuestionTotalVotes(0);
-        q.setAllVotesCount(0);
+        q.setQuestionTotalScore(0);
 
         q.getPeriods().addAll(List.of(p1, p2));
         questionDao.saveAndFlush(q);

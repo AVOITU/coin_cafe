@@ -50,7 +50,7 @@ class ScoreDaoTest {
         Question q = new Question();
         q.setQuestionText("Ambiance");
         q.setQuestionTotalVotes(0);
-        q.setAllVotesCount(0);
+        q.setQuestionTotalScore(0);
         q.getScores().addAll(Set.of(s4, s5));
         questionDao.saveAndFlush(q);
 

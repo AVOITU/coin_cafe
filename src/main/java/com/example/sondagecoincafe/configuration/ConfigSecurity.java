@@ -37,7 +37,7 @@ public class ConfigSecurity {
                         login -> {
                             login.loginPage("/login");
                             login.failureUrl("/login?error");
-                            login.defaultSuccessUrl("/encheres").permitAll();
+                            login.defaultSuccessUrl("/stats").permitAll();
                         }
                 ).logout(logout -> {
                     logout
@@ -45,7 +45,7 @@ public class ConfigSecurity {
                             .clearAuthentication(true)
                             .deleteCookies("JSESSIONID")
                             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            .logoutSuccessUrl("/encheres")
+                            .logoutSuccessUrl("/survey")
                             .permitAll();
                 })
                 .build();
