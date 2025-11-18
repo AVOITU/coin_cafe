@@ -1,6 +1,7 @@
 package com.example.sondagecoincafe.bll.impl;
 
 import com.example.sondagecoincafe.bll.ScoreService;
+import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.dal.ScoreDao;
 import lombok.Getter;
@@ -57,10 +58,10 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Score incrementTotalForScore(int scoreQuestionSearched){
-        Score score = scoreDao.findByScore(scoreQuestionSearched);
+    public void incrementAndSaveTotalForScore(Question question, int responseScore){
+        Score score = scoreDao.findByScore(responseScore);
         int totalScoreVoteCount = score.getScoreVoteCount() +1;
         score.setScoreVoteCount(totalScoreVoteCount);
-        return score;
+        scoreDao.save(score);
     }
 }

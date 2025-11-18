@@ -15,5 +15,5 @@ public interface ScoreService {
 
     float getWeightedGlobalRating(List <Score> scores);
 
-    Score incrementTotalForScore(int scoreQuestionSearched);
+    void incrementAndSaveTotalForScore(Question question, int responseScore);
 }

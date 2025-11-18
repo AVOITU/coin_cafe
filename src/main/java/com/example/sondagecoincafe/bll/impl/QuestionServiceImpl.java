@@ -75,10 +75,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void fillTotalsAndTagForQuestion(Question question, Map<String, Integer> formResponses) {
+    public void fillAndSaveTotalsForQuestion(Question question, int responseScore) {
 
         int questionScore = question.getQuestionTotalScore();
-        int responseScore = formResponses.get(question.getQuestionText());
 
         if (responseScore > 0) {
             int newTotalScore = questionScore + responseScore;

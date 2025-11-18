@@ -50,7 +50,7 @@ public class SurveyServiceImpl implements SurveyService {
 
     @Transactional
     @Override
-    public void processSurvey(Map<String, Integer> questionsScore) {
+    public void processSurvey(Map<String, Integer> formResponses) {
 
         List<Question> questions = questionDao.findAll();
 
@@ -63,14 +63,15 @@ public class SurveyServiceImpl implements SurveyService {
         questions = questionDao.findAll();
 
         for (Question question : questions){
-            questionService.fillTotalsAndTagForQuestion(question, questionsScore);
+
+            int responseScore = formResponses.get(question.getQuestionText());
+
+            questionService.fillAndSaveTotalsForQuestion(question, responseScore);
+
+            // Score
+            scoreService.incrementAndSaveTotalForScore (question, responseScore);
         }
 
-
-//            // Score
-//            Score score =scoreService.incrementTotalForScore (scoreQuestionSearched);
-//            scoreDao.save(score);
-//
 //            // Periode, le résultat par question n'est pas traité si la personne à repondu Non Concerné
 //            // cad un résultat =0.
 //            if (scoreQuestionSearched >0){

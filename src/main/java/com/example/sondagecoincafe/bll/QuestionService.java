@@ -17,7 +17,7 @@ public interface QuestionService {
 
     List <Double> calculateAverageByTag(List <Question> questions);
 
-    void fillTotalsAndTagForQuestion(Question question, Map<String, Integer> formResponses);
+    void fillAndSaveTotalsForQuestion(Question question, int responseScore);
 
     Map<String, String> buildQuestionCategoryMap();
 
