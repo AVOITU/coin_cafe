@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -21,33 +20,38 @@ public class ConfigSecurity {
 
 
     private static final Logger log = LoggerFactory.getLogger(ConfigSecurity.class);
-    public static final String SELECT_USER = "SELECT pseudo, mot_de_passe, 1 FROM UTILISATEURS WHERE pseudo = ?";
-    public static final String SELECT_ROLES = "SELECT u.pseudo, r.ROLE FROM UTILISATEURS AS u INNER JOIN ROLES AS r on u.administrateur = r.IS_ADMIN WHERE pseudo = ?";
+    public static final String SELECT_USER =
+            "SELECT username, password, 1 AS enabled FROM users WHERE username = ?";
+    public static final String SELECT_ROLES =
+            "SELECT u.username, r.ROLE FROM USERS AS u INNER JOIN ROLES AS" +
+                    " r on u.administrateur = r.IS_ADMIN WHERE username = ?";
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(
-                        auth -> {
-                            auth.requestMatchers("/mon-compte/**").authenticated();
-                            auth.anyRequest().permitAll();
-                        }
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login",
+                                "/forgot-password",
+                                "/reset-password",
+                                "/survey",
+                                "/results",
+                                "/css/**", "/js/**", "/images/**").permitAll()
                 )
-                .formLogin(
-                        login -> {
-                            login.loginPage("/login");
-                            login.failureUrl("/login?error");
-                            login.defaultSuccessUrl("/stats").permitAll();
-                        }
-                ).logout(logout -> {
-                    logout
-                            .invalidateHttpSession(true)
-                            .clearAuthentication(true)
-                            .deleteCookies("JSESSIONID")
-                            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            .logoutSuccessUrl("/survey")
-                            .permitAll();
-                })
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")        // POST du formulaire
+                        .defaultSuccessUrl("/results", true)
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/login")
+                        .permitAll()
+                )
                 .build();
     }
 

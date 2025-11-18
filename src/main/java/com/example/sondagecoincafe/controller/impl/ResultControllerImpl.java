@@ -35,7 +35,6 @@ public class ResultControllerImpl implements ResultController {
     @GetMapping("/results")
     @Override
     public String updateResults(Model model){
-
         periodService.deletePeriodsOlderThan12Months();
 
         List < Score > scores = scoreService.findAllScores();

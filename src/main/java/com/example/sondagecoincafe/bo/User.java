@@ -13,6 +13,8 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_users_email", columnNames = {"email"})})
 public class User implements UserDetails {
 
     @Id
