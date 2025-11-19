@@ -2,6 +2,18 @@
 
 html, body {
     font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/arrière-plan.jpg);
+    background-size: 100% 100%;         /* L’image couvre tout l’écran */
+    background-repeat: no-repeat;   /* Pas de répétition */
+    background-position: center;   /* Centrée */
+    min-height: 100vh; /* ➜ l’élément occupe 100% de la hauteur de l’écran */
+    background-attachment: fixed;    /* optionnel : effet "parallax" */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1{
@@ -45,16 +57,6 @@ div a {
     margin-right: 10px;
     margin-top: 20px;
     border-radius: 5px;
-}
-
-.content-wrapper{
-    padding-bottom: 2em;
-    background-image: url(../img/arrière-plan.jpg);
-    background-size: 100% 100%;         /* L’image couvre tout l’écran */
-    background-repeat: no-repeat;   /* Pas de répétition */
-    background-position: center;   /* Centrée */
-    min-height: 100vh; /* ➜ l’élément occupe 100% de la hauteur de l’écran */
-    width: 100%;
 }
 
 .logo{
