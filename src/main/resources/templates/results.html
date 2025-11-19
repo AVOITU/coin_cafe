@@ -43,6 +43,15 @@
                 <div class="row mb-2">
                     <div class="col-12">
                         <h1 class="m-0">Tableau de bord</h1>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}" />
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                Déconnexion
+                            </button>
+                        </form>
                         <p class="text-muted mb-0" id="exp"> Synthèse des réponses du sondage de satisfaction du coin café </p>
                     </div>
                 </div>

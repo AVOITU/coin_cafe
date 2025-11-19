@@ -37,8 +37,12 @@ public class ConfigSecurity {
                                 "/forgot-password",
                                 "/reset-password",
                                 "/survey",
-                                "/results",
-                                "/css/**", "/javascript/**", "/images/**").permitAll()
+                                "/css/**", "/javascript/**", "/images/**")
+                        .permitAll()
+                        .requestMatchers("/results")
+                        .hasRole("ADMIN")     // ← protection admin
+                        .anyRequest()
+                        .authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
