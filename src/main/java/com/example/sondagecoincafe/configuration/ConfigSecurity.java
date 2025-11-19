@@ -35,7 +35,7 @@ public class ConfigSecurity {
                                 "/reset-password",
                                 "/survey",
                                 "/results",
-                                "/css/**", "/js/**", "/images/**").permitAll()
+                                "/css/**", "/javascript/**", "/images/**").permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
