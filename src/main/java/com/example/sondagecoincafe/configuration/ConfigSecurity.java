@@ -21,10 +21,13 @@ public class ConfigSecurity {
 
     private static final Logger log = LoggerFactory.getLogger(ConfigSecurity.class);
     public static final String SELECT_USER =
-            "SELECT username, password, 1 AS enabled FROM users WHERE username = ?";
+            "SELECT email AS username, password, 1 AS enabled " +
+                    "FROM users WHERE email = ?";
+
     public static final String SELECT_ROLES =
-            "SELECT u.username, r.ROLE FROM USERS AS u INNER JOIN ROLES AS" +
-                    " r on u.administrateur = r.IS_ADMIN WHERE username = ?";
+            "SELECT email AS username, " +
+                    "CASE WHEN admin = 1 THEN 'ROLE_ADMIN' ELSE 'ROLE_USER' END AS authority " +
+                    "FROM users WHERE email = ?";
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -39,7 +42,9 @@ public class ConfigSecurity {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .loginProcessingUrl("/login")        // POST du formulaire
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("email")     // IMPORTANT
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/results", true)
                         .failureUrl("/login?error")
                         .permitAll()
