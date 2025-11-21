@@ -1,14 +1,12 @@
 package com.example.sondagecoincafe.controller.impl;
 
-import com.example.sondagecoincafe.bll.ScoreService;
-import com.example.sondagecoincafe.bll.PeriodService;
-import com.example.sondagecoincafe.bll.ResultDtoService;
-import com.example.sondagecoincafe.bll.QuestionService;
+import com.example.sondagecoincafe.bll.*;
 import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.controller.ResultController;
 import com.example.sondagecoincafe.dto.ResultsDto;
+import com.example.sondagecoincafe.dto.SurveyAdviceResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +21,16 @@ public class ResultControllerImpl implements ResultController {
     private final PeriodService periodService;
     private final ScoreService scoreService;
     private final ResultDtoService resultDtoService;
+    private final SurveyAdviceService surveyAdviceService;
 
     public ResultControllerImpl(QuestionService questionService, ResultDtoService resultDtoService,
-                                ScoreService scoreService, PeriodService periodService) {
+                                ScoreService scoreService, PeriodService periodService, SurveyAdviceService service) {
+
         this.questionService = questionService;
         this.resultDtoService = resultDtoService;
         this.periodService = periodService;
         this.scoreService = scoreService;
+        this.surveyAdviceService = service;
     }
 
     @GetMapping("/results")
@@ -54,6 +55,10 @@ public class ResultControllerImpl implements ResultController {
         ResultsDto resultsDto = resultDtoService.fillResultsDto(weightedGlobalRating, mapForPieCount,
                                                                 listOfMonths, listOfAverageScore,
                                                                 listOfTags, listOfAverages);
+
+        SurveyAdviceResponse iaAdvices = surveyAdviceService.fetchSurveyAdvice(resultsDto);
+        model.addAttribute("advices", iaAdvices);
+
         model.addAttribute("resultsDto", resultsDto);
         return "results";
     }
