@@ -1,93 +1,129 @@
+body {
+    display: flex;
+    justify-content: center;     /* centrer horizontalement */
+    align-items: center;        /* centrer verticalement */
+    min-height: 100dvh;         /* hauteur réelle mobile */
+}
+
 .login-form {
     width: 32rem;
     height: 40rem;
     padding: 2rem 1rem 1rem;
 }
 
+.content-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  size-adjust: inherit;
+}
+
 form {
     padding: 1rem;
 }
 
-/* Mobile (par défaut) */
-.card.login-form{
+.card.login-form {
   background-image: url("../../img/bois-definitif.jpg");
-  background-size: cover;      /* l'image remplit l'espace */
-  background-position: center; /* centrée */
-  background-repeat: no-repeat; /* pas de répétition */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   border: none;
   display: flex;
-  justify-content: center;   /* horizontal */
-  align-items: center;        /* vertical */
-  font-size: 1rem;
-  width: 90%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* --- Responsivité --- */
+  width: 90%;                  /* éviter tout débordement en vertical mobile */
+  max-width: 500px;            /* largeur max sur PC, ajustable */
+  padding: 1.5rem;             /* marge interne propre */
+  box-sizing: border-box;      /* indispensable pour calculer la largeur correctement */
+
+  /* --- Hauteur --- */
+  max-height: 90rem;           /* laisse apparaître l’arrière-plan en haut et bas */
+  overflow-y: auto;            /* au cas où le contenu dépasse */
+
+  margin: auto;
 }
 
-/* Tablette */
-@media (min-width: 768px) {
-  .card.login-form {
-    font-size: 1.2rem;
-    width: 70%;
-      background-image: url("../../img/bois-definitif.jpg");
-  background-size: cover;      /* l'image remplit l'espace */
-  background-position: center; /* centrée */
-  background-repeat: no-repeat; /* pas de répétition */
-  border: none;
-  display: flex;
-  justify-content: center;   /* horizontal */
-  align-items: center;        /* vertical */
-  }
-}
-
-/* Ordinateur */
-@media (min-width: 1024px) {
-  .card.login-form {
-    font-size: 1.3rem;
-    width: 50%;
-    background-image: url("../../img/bois-definitif.jpg");
-  background-size: cover;      /* l'image remplit l'espace */
-  background-position: center; /* centrée */
-  background-repeat: no-repeat; /* pas de répétition */
-  border: none;
-  display: flex;
-  justify-content: center;   /* horizontal */
-  align-items: center;        /* vertical */
-  }
-}
-
+/*titre*/
 .card-title.text-center{
   font-weight: bolder;   /* gras */
   color: #FFDD00;      /* remplace par ton code couleur */
-  font-size: 2rem;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: auto;
+}
+
+/*cadre de saisie*/
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0.8rem;
 }
 
 .error{
+  background-color: #d30f1b;
   font-weight: bold;
-  color: #ff0000;      /* remplace par ton code couleur */
+  text-align: center;
+  color: #ffffff;      /* remplace par ton code couleur */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.7rem;
 }
 
+/*texte cadres de saisie*/
 .form-label{
   font-weight: bolder;
-  color: #ffffff;      /* remplace par ton code couleur */
+  color: #130f0c;      /* remplace par ton code couleur */
   display: block;
+  font-size: 1.1rem;
+  margin-left: 0.8rem;
+  padding-top: 0.4rem;
   margin-bottom: 0.4rem;
 }
 
+/*mot de passe oublié*/
 .sign-up.mt-4{
+  text-align: end;
   color: #ffffff;      /* remplace par ton code couleur */
+  font-style: italic;
+  font-size: 0.8rem;
 }
 
 .btn.btn-primary.w-100{
   background-color: #7E7E7E;
   font-weight: bolder;
   border: none;
+  color: #ffffff;
+  padding: 0.3rem 1.3rem;
+  font-size: 1.3rem;
+  border-radius: 7px;
 }
 
 .btn.btn-primary:hover{
   background-color: #b6b6b6; 
 }
 
+.center-btn-container {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  width: 100%;
+}
+
 .mb-3{
   background-color: #FFDD00;  /* remplace par ton code couleur */
-  border-radius: 3px;
-  padding: 0.15rem;
+  margin-top: 2rem;
+  border-radius: 1px;
+}
+
+/* marge haut et bas en format paysage*/
+@media (orientation: landscape) {
+  .card.login-form {
+    margin-top: 5em;
+    margin-bottom: 5em;
+  }
 }
