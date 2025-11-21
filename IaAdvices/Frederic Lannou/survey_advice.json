@@ -1,0 +1,541 @@
+{
+  "survey_id": 1,
+  "provider": "openai",
+  "model": "gpt-4.1-mini",
+  "schema": "json_object",
+  "results": [
+    {
+      "label": "Hygiène",
+      "value": 3.9,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note moyenne à 3.9/5 sur l'hygiène suggère une satisfaction globalement correcte mais perfectible, notamment dans un lieu mixte librairie-café où les attentes en propreté sont élevées. La stratégie propose d'abord des actions rapides et peu coûteuses pour améliorer la perception client, puis des chantiers à moyen terme pour consolider ces améliorations.",
+        "actions_rapides": [
+          {
+            "intitule": "Augmentation de la fréquence de nettoyage des zones clés",
+            "description": "Mettre en place un planning précis de nettoyage visible par les clients (toilettes, tables du coin café, présentoirs à livres), avec relevé horodaté pour garantir la régularité.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Réduction de 20% des plaintes/hygiene issues du sondage, mesure via NPS spécifique hygiène"
+          },
+          {
+            "intitule": "Installation de distributeurs de gel hydroalcoolique à l’entrée et près du coin café",
+            "description": "Proposer aux clients une solution facile pour désinfecter leurs mains, renforçant ainsi la perception d’un espace propre et sécurisé.",
+            "cout_estime": "bas",
+            "delai": "1 semaine",
+            "metrique": "Nombre de recharges consommées mensuellement ; score NPS hygiène +1 point"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Réaménagement de zones à fort trafic pour faciliter le nettoyage",
+            "description": "Étudier un réagencement des tables et des rayonnages dans le coin café et la librairie, en privilégiant des matières plus faciles à nettoyer et réduisant les zones difficiles d’accès.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Amélioration de la note hygiène à 4.2/5 sur le sondage clients ; baisse des observations négatives"
+          },
+          {
+            "intitule": "Formation rapide du personnel à l’entretien et à la communication sur l’hygiène",
+            "description": "Former l’équipe aux bonnes pratiques de nettoyage, ainsi qu’à la gestion proactive des remarques des clients sur l’hygiène, pour créer un cercle vertueux d’amélioration du ressenti.",
+            "effort": "bas",
+            "echeance": "3 semaines",
+            "indicateur_succes": "Nombre d’incidents liés à l’hygiène rapportés par le personnel réduit de 30%"
+          },
+          {
+            "intitule": "Audit externe de propreté et plan d’action correctif",
+            "description": "Faire appel à un expert local ou à un prestataire d’audit qualité pour identifier précisément les points faibles et formuler un plan d’amélioration durable.",
+            "effort": "élevé",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Rapport d’audit avec au moins 90% de recommandations mises en œuvre ; note hygiène \u003E4.3/5"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Accueil",
+      "value": 4.2,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "L'accueil dans la librairie avec coin café est jugé globalement très satisfaisant avec une note moyenne de 4.2/5, ce qui indique une expérience client qualitative mais perfectible. Pour maintenir cet avantage et éviter toute dégradation, il convient de mettre en place rapidement des actions peu coûteuses favorisant la personnalisation et la réactivité, tout en préparant des chantiers à moyen terme pour optimiser le parcours client.",
+        "actions_rapides": [
+          {
+            "intitule": "Brief quotidien rapide pour l’équipe",
+            "description": "Organiser une réunion de 5 minutes chaque matin avant l’ouverture pour rappeler les bonnes pratiques d’accueil et partager des retours clients positifs et points d’amélioration, afin de sensibiliser et dynamiser l’équipe.",
+            "cout_estime": "bas",
+            "delai": "jours",
+            "metrique": "Taux de participation au brief, NPS par thème accueil avant/après"
+          },
+          {
+            "intitule": "Cartes de bienvenue personnalisées",
+            "description": "Distribuer discrètement à l’accueil une carte manuscrite simple pour remercier les clients réguliers ou nouveaux à leur arrivée, renforçant la sensation d’attention personnalisée.",
+            "cout_estime": "bas",
+            "delai": "semaines",
+            "metrique": "Nombre de cartes distribuées, % clients mentionnant un impact positif sur sondage"
+          },
+          {
+            "intitule": "Petit signal visuel d’accueil",
+            "description": "Installer un panneau ou un sticker visible avec un message chaleureux et simple (« Bienvenue, nous sommes là pour vous aider ! »), qui rassure immédiatement le client à son entrée.",
+            "cout_estime": "bas",
+            "delai": "semaines",
+            "metrique": "Feedback qualitatif sur ambiance d'accueil, taux de réclamations liées à l’accueil"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Optimisation de la signalétique et zonage accueil",
+            "description": "Analyser et revoir la disposition du coin accueil et café pour mieux guider les clients et fluidifier le contact avec le personnel, incluant des repères visuels clairs et zones dédiées, afin de réduire les temps d’attente et frustrations.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Diminution du temps d’attente moyen, amélioration de la note accueil au sondage"
+          },
+          {
+            "intitule": "Formation approfondie sur l’accueil et la communication non verbale",
+            "description": "Organiser une formation courte pour l’ensemble du personnel centrée sur les techniques d’accueil personnalisé, accueil proactif des clients, et maîtrise du langage corporel positif.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Score NPS interne, % d’observations positives par client mystère"
+          },
+          {
+            "intitule": "Système de feedback client en temps réel",
+            "description": "Mettre en place une solution simple (tablette ou QR code) pour recueillir rapidement l’avis des clients sur leur accueil, leur permettant aussi de signaler immédiatement toute expérience insatisfaisante à corriger.",
+            "effort": "bas à moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Nombre et qualité des feedbacks reçus, taux de résolution rapide des incidents rapportés"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Ambiance",
+      "value": 3.7,
+      "advice": {
+        "priorite": "forte",
+        "resume": "L'ambiance dans la librairie/café est correcte mais laisse une marge d'amélioration notable avec une note moyenne de 3.7 sur 5. Pour maximiser l'impact rapidement, il faut améliorer le confort et l'atmosphère par des actions simples et peu coûteuses, tout en planifiant des améliorations plus structurelles de l'environnement et du parcours client.",
+        "actions_rapides": [
+          {
+            "intitule": "Optimisation de l’éclairage",
+            "description": "Réajuster l’éclairage pour créer une ambiance plus chaleureuse et confortable, en utilisant des ampoules à température chaude et adaptant les zones selon usage (lecture, café, circulation).",
+            "cout_estime": "bas",
+            "delai": "1 semaine",
+            "metrique": "Score satisfaction ambiance dans le sondage + NPS thème ambiance"
+          },
+          {
+            "intitule": "Playlist musicale adaptée et réglage du volume",
+            "description": "Mettre en place une playlist douce et cohérente avec l'identité de la librairie, en ajustant le volume pour ne pas gêner la lecture ou la conversation.",
+            "cout_estime": "bas",
+            "delai": "jours",
+            "metrique": "Feedback qualitatif et score ambiance + analyse commentaires clients"
+          },
+          {
+            "intitule": "Amélioration de la propreté et rangement des espaces",
+            "description": "Renforcer la supervision du coin café et des sièges afin de garantir un environnement toujours propre et accueillant, avec un focus sur horaires de forte affluence.",
+            "cout_estime": "moyen",
+            "delai": "2 semaines",
+            "metrique": "Nombre de réclamations liées à la propreté et score ambiance"
+          },
+          {
+            "intitule": "Favoriser l’intimité des espaces de lecture",
+            "description": "Repositionner ou ajouter des séparateurs légers (plantes, paravents) pour créer des petites bulles calmes propices à la lecture et à la détente.",
+            "cout_estime": "moyen",
+            "delai": "3 semaines",
+            "metrique": "Augmentation du temps moyen passé en zone lecture et score ambiance"
+          },
+          {
+            "intitule": "Signalétique claire et chaleureuse",
+            "description": "Installer une signalétique simple et esthétique qui facilite l’orientation tout en participant à une atmosphère conviviale.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Feedback visiteurs et temps d’orientation en magasin"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Réaménagement complet des espaces café et lecture",
+            "description": "Refonte ergonomique et esthétique des espaces pour mieux délimiter les zones (lecture, café, détente), avec un mobilier confortable et modulable, et une acoustique améliorée.",
+            "effort": "eleve",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Augmentation durable du score ambiance + hausse du temps moyen passé + hausse des ventes café"
+          },
+          {
+            "intitule": "Formation du personnel à la gestion de l’accueil et ambiance",
+            "description": "Former l’équipe à des gestes simples pour créer une ambiance chaleureuse (accueil, gestion des flux, interaction client), et mise en place d’un référent ambiance.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Amélioration NPS accueil + taux de fidélisation + score ambiance"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Accessibilité",
+      "value": 3.8,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note de 3.8/5 sur l’accessibilité indique plusieurs irritants modérés, suggérant qu’une série d’actions pragmatiques et étape par étape permettra d’améliorer l’expérience, sans lourds investissements. La stratégie priorisera des tests rapides à faible coût pour cibler précisément les problématiques avant de déployer des solutions plus structurantes.",
+        "actions_rapides": [
+          {
+            "intitule": "Audit rapide des accès et signalétique",
+            "description": "Réalisons en interne un diagnostic sous 7 jours pour identifier obstacles physiques (escaliers, passages étroits) et clarifier la visibilité de la signalétique pour le coin café et différents espaces.",
+            "cout_estime": "bas",
+            "delai": "7 jours",
+            "metrique": "Nombre d’incidents remontés liés à l’orientation avant/après audit"
+          },
+          {
+            "intitule": "Mise en place d’un plan de circulation simplifié",
+            "description": "Expérimenter une nouvelle organisation du cheminement (balises au sol, panneaux temporaires) testable en 2 semaines pour faciliter la fluidité d’accès aux espaces, notamment pour personnes à mobilité réduite.",
+            "cout_estime": "bas",
+            "delai": "14 jours",
+            "metrique": "Temps moyen d’accès mesuré par un échantillon client + taux de recommandation via sondage rapide"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Amélioration des accès physiques (rampes, portes automatiques)",
+            "description": "Évaluer puis installer des solutions faciles d’accès pour les fauteuils roulants et poussettes, comme rampes amovibles ou portes automatiques sur l’entrée principale, suivant le diagnostic réalisé.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Évolution du NPS ‘Accessibilité’ et baisse du nombre d’incidents clients liés"
+          },
+          {
+            "intitule": "Formation rapide du personnel à l’accueil inclusif",
+            "description": "Former le personnel à mieux accompagner les clients ayant des besoins spécifiques (mobility, visuels, auditifs) via une session rapide axée sur bonnes pratiques et communication claire.",
+            "effort": "bas",
+            "echeance": "1 mois",
+            "indicateur_succes": "% personnel formé + satisfaction client sur accueil (via mini-sondage)"
+          },
+          {
+            "intitule": "Installation de mobilier ergonomique et modulable",
+            "description": "Remplacer ou ajouter des sièges adaptés aux personnes âgées ou avec mobilité réduite dans le coin café, et revoir l’agencement pour une meilleure accessibilité aux passages.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Taux d’utilisation des espaces café + taux de satisfaction clients sur zone café"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Signalétique",
+      "value": 3.4,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note moyenne de 3.4/5 sur la signalétique indique un besoin de clarification et de mise à jour des informations visibles en librairie et au café. La stratégie privilégie d'abord des actions simples et peu coûteuses pour améliorer la lisibilité et fluidifier le parcours client, avant de penser à des solutions plus structurantes.",
+        "actions_rapides": [
+          {
+            "intitule": "Audit express de la signalétique existante",
+            "description": "Identifier les panneaux et indications manquantes, peu visibles ou ambigües via un parcours client et un mini-sondage à chaud auprès de 10 clients en 1 semaine.",
+            "cout_estime": "bas",
+            "delai": "7 jours",
+            "metrique": "Taux de clients signalant une difficulté à s'orienter (\u003C15%)"
+          },
+          {
+            "intitule": "Clarification des zones critiques par stickers ou petits panneaux",
+            "description": "Ajouter des indications simples et contrastées aux endroits clés (accueil, coin café, rayons clés) en utilisant des supports autocollants ou suspendus.",
+            "cout_estime": "bas",
+            "delai": "14 jours",
+            "metrique": "Réduction des questions du personnel sur emplacement (-30%)"
+          },
+          {
+            "intitule": "Affichage visible du plan du lieu à l'entrée",
+            "description": "Installer un plan clair sur affiche ou tableau à l'entrée pour que le client repère rapidement la disposition générale.",
+            "cout_estime": "bas",
+            "delai": "14 jours",
+            "metrique": "Amélioration du NPS sur signalétique (+0.5 point)"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Refonte visuelle des panneaux de signalétique",
+            "description": "Reconcevoir les panneaux pour harmoniser couleurs, typographie, pictogrammes et faciliter la lecture à distance. Impliquer un graphiste professionnel.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Satisfaction signalétique \u003E4/5 dans prochain sondage"
+          },
+          {
+            "intitule": "Installation de signalétique numérique interactive",
+            "description": "Tester un écran tactile avec plan interactif et suggestions personnalisées (ex: nouveautés, promotions café). Pour accroître l'engagement et fluidifier l'information.",
+            "effort": "élevé",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Augmentation des ventes café de 10% et du taux de visiteurs utilisant la signalétique"
+          },
+          {
+            "intitule": "Formation équipe pour orientation active",
+            "description": "Former le personnel à mieux accompagner les clients dans leur repérage et à signaler eux-mêmes les améliorations à apporter en temps réel.",
+            "effort": "bas",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Réduction du temps moyen d'orientation client (-20%)"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Service",
+      "value": 4.1,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note moyenne de 4.1 sur 5 indique un service globalement satisfaisant mais perfectible. Nous recommandons des actions rapides à faible coût pour affiner l'accueil et la réactivité, et des chantiers plus structurants pour améliorer la formation et la fluidité du service, toujours avec un suivi précis.",
+        "actions_rapides": [
+          {
+            "intitule": "Formation flash sur l'accueil client",
+            "description": "Organiser une demi-heure quotidienne pendant 1 semaine pour former l'équipe sur l'accueil chaleureux et proactif, avec des scripts simples.",
+            "cout_estime": "bas",
+            "delai": "7 jours",
+            "metrique": "score NPS service + retour clients (qualitatif) via questionnaire express"
+          },
+          {
+            "intitule": "Mise en place d’un mini-sondage à la sortie",
+            "description": "Proposer aux clients de noter leur satisfaction service sur un terminal simple (tablette ou QR code) en 2 clics à la sortie.",
+            "cout_estime": "bas",
+            "delai": "14 jours",
+            "metrique": "note moyenne et nombre de retours quotidiens"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Optimisation du temps d’attente en caisse et au comptoir café",
+            "description": "Analyser les flux clients et réorganiser les postes ou process pour réduire les temps d’attente lors des pics, envisageant un second point de paiement si pertinent.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "temps moyen d’attente mesuré et évolution satisfaction service"
+          },
+          {
+            "intitule": "Programme de formation continue et coaching personnalisé",
+            "description": "Mettre en place un planning mensuel de sessions de formation et coaching afin d'améliorer compétences relationnelles et connaissance produit chez les employés.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "score NPS service par employé + taux de réclamations liées au service"
+          },
+          {
+            "intitule": "Création d’un espace retour clients physique et digital",
+            "description": "Installer une boîte à idées physique dans la librairie et un formulaire en ligne dédié pour recueillir suggestions et critiques sur le service, favorisant l’amélioration continue.",
+            "effort": "bas",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "nombre de contributions et taux d’action sur les retours"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Produits",
+      "value": 3.6,
+      "advice": {
+        "priorite": "forte",
+        "resume": "La note moyenne de 3.6 sur les produits révèle un potentiel d'amélioration significatif à la fois sur la diversité et la qualité perçue des offres en librairie et cafétéria. La stratégie doit combiner des actions rapides à faible coût pour corriger les points faibles identifiés et des chantiers structurants pour installer une offre plus attractive et différenciante, maximisant ainsi le chiffre d'affaires et la satisfaction client.",
+        "actions_rapides": [
+          {
+            "intitule": "Analyse rapide des produits faibles en vente",
+            "description": "Identifier les 10% de produits les moins vendus ou les moins appréciés (via ventes et retours clients) et éliminer/repositionner rapidement ces références pour optimiser l'offre.",
+            "cout_estime": "bas",
+            "delai": "10 jours",
+            "metrique": "Variation du chiffre d'affaires produits concernés et % retours clients négatifs"
+          },
+          {
+            "intitule": "Sondage express auprès des clients présents",
+            "description": "Distribuer un mini questionnaire papier ou sur tablette au comptoir café pour recueillir en 3 questions les attentes produit spécifiques et immédiates (ex: boissons, livres thèmes).",
+            "cout_estime": "bas",
+            "delai": "7 jours",
+            "metrique": "Taux de réponse et score de satisfaction produit avant/après ajustement"
+          },
+          {
+            "intitule": "Mise en avant de produits thématiques du moment",
+            "description": "Créer un corner ou vitrine dédiée aux nouveautés et best-sellers avec signalétique claire, pour stimuler l’envie et augmenter la visibilité des produits clés.",
+            "cout_estime": "moyen",
+            "delai": "2 semaines",
+            "metrique": "Augmentation des ventes des produits mis en avant (+10% minimum espéré)"
+          },
+          {
+            "intitule": "Amélioration de l’offre café par ciblage local",
+            "description": "Adapter la carte café avec une nouvelle boisson ou un produit local/inédit à tester sur 4 semaines, en demandant un retour précis via fiche ou verbal.",
+            "cout_estime": "moyen",
+            "delai": "3 semaines",
+            "metrique": "Ventes de la nouvelle boisson et % de retours positifs clients"
+          },
+          {
+            "intitule": "Formation rapide des équipes au conseil produit",
+            "description": "Organiser un atelier de 1h avec le personnel pour mieux connaître les produits phares et leurs arguments, améliorant ainsi la recommandation client en boutique et au café.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Evolution du NPS sur le thème produit + % clients conseillés"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Refonte partielle de la gamme produits librairie et café",
+            "description": "Repenser la sélection produit selon des critères de tendance, saisonnalité, et profils clients, incluant fournisseurs locaux, pour optimiser assortiment et différenciation.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Augmentation du chiffre d'affaires produits de 15% et amélioration du score satisfaction produit \u003E4"
+          },
+          {
+            "intitule": "Mise en place d’un programme de fidélisation croisée librairie/café",
+            "description": "Développer un système de points ou avantages cumulables sur achats livres et boissons pour encourager la consommation conjointe et accroître la fidélité.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Taux de réachat clients + taux de fréquentation café/librairie multiplié par 1,2 dans les 6 mois"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Qualité/Prix",
+      "value": 3.8,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note qualité/prix à 3.8 sur 5 indique une satisfaction correcte mais perfectible, avec un potentiel d'amélioration ciblé pour gagner en fidélisation et en panier moyen. La stratégie combine des actions rapides testables pour ajuster la perception et des chantiers plus structurants pour améliorer l'offre et la communication à moyen terme.",
+        "actions_rapides": [
+          {
+            "intitule": "Mise en place de promotions ciblées sur produits café et ouvrages sélectionnés",
+            "description": "Proposer chaque semaine une offre combinée 'livre + café' à prix attractif, avec affichage clair en boutique et sur les réseaux sociaux pour tester la perception d'amélioration qualité/prix.",
+            "cout_estime": "bas",
+            "delai": "1-2 semaines",
+            "metrique": "Taux de conversion des promos + évolution du panier moyen pendant la période"
+          },
+          {
+            "intitule": "Sondage rapide auprès clients post-achat sur perception qualité/prix",
+            "description": "Mettre en place un questionnaire court (1 à 2 questions) en caisse ou via QR code pour recueillir en temps réel la satisfaction qualité/prix et ses attentes, afin d’ajuster rapidement les offres.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Taux de réponse + changement de la note moyenne qualité/prix post-action"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Refonte de l’offre café en axant sur le rapport qualité/prix perçu",
+            "description": "Négocier avec fournisseurs pour améliorer qualité cafés ou pâtisseries tout en maîtrisant les coûts, éventuellement par un sourcing plus local ou responsable, avec une nouvelle carte adaptée.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Évolution des ventes café + augmentation de la note qualité/prix sur ce segment"
+          },
+          {
+            "intitule": "Optimisation des tarifs livres en ciblant offres groupées et fidélisation",
+            "description": "Introduire des réductions progressives pour achats multiples ou clients fidèles (carte de fidélité, points, coupon), afin d’améliorer la perception globale rapport qualité/prix et encourager la récurrence.",
+            "effort": "bas",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Taux de réachat + panier moyen + score NPS qualité/prix"
+          },
+          {
+            "intitule": "Formation du personnel à la valorisation explicite de l’offre",
+            "description": "Sensibiliser les vendeurs et baristas à mieux expliciter les atouts qualité/prix (origine produit, campagnes promotionnelles, valeur ajoutée), pour renforcer la justification du prix et la satisfaction client.",
+            "effort": "bas",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Feedback clients sur explications reçues + progression note qualité/prix"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Diversité",
+      "value": 3.2,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "La note moyenne de 3.2 sur la diversité indique une perception mitigée, un levier à améliorer pour gagner en attractivité et fidélisation. La stratégie vise des actions rapides et peu coûteuses pour mieux représenter la diversité dans l’offre et la communication, puis engager des initiatives plus structurantes à moyen terme.",
+        "actions_rapides": [
+          {
+            "intitule": "Audit rapide de la diversité en rayon",
+            "description": "Analyser en interne la représentation d’auteurs, thématiques et langues diverses, identifier les manques visibles. Communiquer les résultats à l’équipe.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Taux de titres divers identifiés / total titres"
+          },
+          {
+            "intitule": "Signalétique et communication inclusive au café-librairie",
+            "description": "Installer des affiches et flyers valorisant la diversité (auteurs, clientèles, engagements) et inviter à des retours clients sur ce thème.",
+            "cout_estime": "bas",
+            "delai": "2 semaines",
+            "metrique": "Nombre de retours client sur la diversité"
+          },
+          {
+            "intitule": "Formation courte de sensibilisation équipe",
+            "description": "Organiser un atelier interne (1h) pour sensibiliser le personnel aux enjeux de diversité, tant en accueil qu’en conseils livres et café.",
+            "cout_estime": "bas",
+            "delai": "3 semaines",
+            "metrique": "Score de satisfaction interne post-formation"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Renforcement progressif de l’offre eclectic",
+            "description": "Sélectionner et référencer régulièrement des livres et boissons reflétant la diversité culturelle, sociale, et de genre, avec un focus mensuel thématique.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Augmentation % titres divers vendus, augmentation ventes café liées"
+          },
+          {
+            "intitule": "Evénements inclusifs dans espace café-librairie",
+            "description": "Mettre en place des rencontres, lectures ou ateliers autour de la diversité culturelle, sociale ou artistique, pour créer du lien avec des communautés variées.",
+            "effort": "moyen",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Taux de participation aux événements, feedback clients sur diversité"
+          },
+          {
+            "intitule": "Mise en place d’un suivi continu de la diversité",
+            "description": "Créer une grille d’analyse mensuelle (offre, accueil, événements) et intégrer un filtre thématique dans le sondage client pour suivre l’évolution concrète perçue.",
+            "effort": "bas",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Evolution note diversité dans sondage (\u003E4/5 visé)"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Wi-Fi",
+      "value": 3.5,
+      "advice": {
+        "priorite": "ciblee",
+        "resume": "Le Wi-Fi obtient une note moyenne correcte mais perfectible. Améliorer la stabilité et la visibilité du réseau peut renforcer l'expérience client, augmenter le temps passé sur place et potentiellement les ventes au café. La stratégie combine actions rapides à faible coût pour limiter les irritants et un chantier plus technique pour la fiabilité.",
+        "actions_rapides": [
+          {
+            "intitule": "Communication claire des identifiants Wi-Fi",
+            "description": "Afficher de façon visible et esthétique les identifiants du Wi-Fi dans le café et la librairie pour éviter les demandes répétées. Cela réduit la frustration et accélère l'accès.",
+            "cout_estime": "bas",
+            "delai": "jours",
+            "metrique": "Réduction du % de clients demandant assistance pour le Wi-Fi"
+          },
+          {
+            "intitule": "Redémarrage régulier des routeurs Wi-Fi",
+            "description": "Mettre en place un planning hebdomadaire de redémarrage automatique des routeurs pour limiter les ralentissements et pertes de connexion.",
+            "cout_estime": "bas",
+            "delai": "jours",
+            "metrique": "Diminution des incidents déclarés liés à la connexion"
+          },
+          {
+            "intitule": "Recueil rapide de feedback Wi-Fi à la sortie",
+            "description": "Installer un QR code menant à un mini sondage dédié Wi-Fi pour mesurer la satisfaction client en temps réel et détecter les problèmes récurrents.",
+            "cout_estime": "bas",
+            "delai": "jours",
+            "metrique": "Taux de réponse et variation du score satisfaction Wi-Fi"
+          },
+          {
+            "intitule": "Amélioration du placement des points d’accès Wi-Fi",
+            "description": "Réorganiser physiquement (même sans équipement supplémentaire) les points d’accès pour optimiser la couverture dans les zones café et lecture.",
+            "cout_estime": "moyen",
+            "delai": "semaines",
+            "metrique": "Nombre de zones de mauvaise couverture détectées par retour client"
+          },
+          {
+            "intitule": "Formations rapides pour le personnel",
+            "description": "Former le personnel à résoudre les problèmes Wi-Fi basiques (réinitialisation modems, vérification de base) pour un temps d’intervention rapide.",
+            "cout_estime": "moyen",
+            "delai": "semaines",
+            "metrique": "Temps moyen de résolution des problèmes Wi-Fi par le personnel"
+          }
+        ],
+        "chantiers": [
+          {
+            "intitule": "Audit et mise à niveau du matériel Wi-Fi",
+            "description": "Faire un audit professionnel de l’infrastructure pour identifier les points de saturations, câblages obsolètes et investir dans un matériel plus performant (ex: routeurs professionnels, répéteurs).",
+            "effort": "eleve",
+            "echeance": "3-6 mois",
+            "indicateur_succes": "Amélioration tangible de la note Wi-Fi \u003E4, diminution des incidents \u003E50%"
+          },
+          {
+            "intitule": "Mise en place d’un portail captif personnalisé",
+            "description": "Développer un portail d’accès personnalisé avec messages d’accueil, promotions café, et possibilité d’évaluer la connexion Wi-Fi à chaud.",
+            "effort": "moyen",
+            "echeance": "1-3 mois",
+            "indicateur_succes": "Augmentation du taux d’utilisation du Wi-Fi et impact sur ventes café mesuré"
+          }
+        ]
+      }
+    }
+  ]
+}
