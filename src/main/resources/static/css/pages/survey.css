@@ -1,3 +1,8 @@
+.brand-text {
+    color: #ffffff;
+    /* text-align: end; NE MARCHE PAS, METTRE LE TITRE DANS LE CADRE D'EN DESSOUS*/
+}
+
 .likert {
     display: flex;
     gap: .75rem;
@@ -10,6 +15,11 @@
 }
 
 .row {
+    background-color: #FFDD00;
+    margin: 3rem;
+}
+
+.content-wrapper {
     justify-content: center;
     background-image: url("../../img/bois-definitif.jpg");
 }
@@ -26,16 +36,20 @@
 }
 
 .required {
-    color:#7e7e7e
+    color:#7e7e7e;
 }
 
 h1 {
       font-weight: bolder;
-      color: #FFDD00; 
+      color: #7e7e7e; 
+      font-size: 2rem;
+      margin-bottom: 1rem;
 }
 
 p {
       color: #ffffff; 
+      text-align: center;
+      font-weight: bolder;
     }
 
 .card-header {

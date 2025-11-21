@@ -38,13 +38,6 @@ fieldset{
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
 
-legend {
-    background-color: hsl(60, 100%, 50%);
-    color: white;
-    padding: 3px 6px;
-    width: 50%;
-}
-
 div a {
     text-decoration: none;
     margin-right: 10px;

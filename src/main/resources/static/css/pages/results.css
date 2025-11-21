@@ -9,3 +9,10 @@
 .brand-text {
     font-weight: 600;
 }
+
+legend {
+    background-color: hsl(60, 100%, 50%);
+    color: white;
+    padding: 3px 6px;
+    width: 50%;
+}
