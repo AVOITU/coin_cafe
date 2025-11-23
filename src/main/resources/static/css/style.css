@@ -6,28 +6,10 @@ img{
     max-width: 8rem;
 }
 
-.article{
-    text-decoration: underline;
-}
-
 div a {
     text-decoration: none;
     margin-right: 10px;
     align-self: center;
-}
-
-.globalEncheres{
-    display: flex;
-
-    align-items: center;
-    border-style: solid;
-    width: 600px;
-    height: 200px;
-    padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 20px;
-    border-radius: 5px;
 }
 
 .content-wrapper{
