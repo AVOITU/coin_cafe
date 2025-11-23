@@ -29,6 +29,4 @@ public interface QuestionService {
 
     @Transactional
     void fillAndSaveIaComments(List<Question> questions, SurveyAdviceResponse surveyAdviceResponse);
-
-    SurveyAdviceResponse buildSurveyAdviceFromDb(List<Question> questions);
 }

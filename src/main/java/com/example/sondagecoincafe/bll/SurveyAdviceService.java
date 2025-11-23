@@ -20,4 +20,6 @@ public interface SurveyAdviceService {
 
     //    TO DO : replace by fetchSurvey quand plus mock
     SurveyAdviceResponse processIaAdvice(List<Question> questions);
+
+    SurveyAdviceResponse buildSurveyAdviceFromDb(List<Question> questions);
 }

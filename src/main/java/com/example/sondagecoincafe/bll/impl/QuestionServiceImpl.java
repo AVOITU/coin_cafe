@@ -166,42 +166,4 @@ public class QuestionServiceImpl implements QuestionService {
             questionDao.save(question);
         }
     }
-
-    @Override
-    public SurveyAdviceResponse buildSurveyAdviceFromDb(List<Question> questions) {
-
-        SurveyAdviceResponse response = new SurveyAdviceResponse();
-        List<SurveyAdviceResponse.ResultItem> iaResponses = new ArrayList<>();
-
-        for (Question question : questions) {
-            // on ignore les questions sans commentaire IA
-            if (question.getChatgptComments() == null || question.getChatgptComments().isBlank()) {
-                continue;
-            }
-
-            SurveyAdviceResponse.ResultItem resultItem = getResultItem(question);
-
-            iaResponses.add(resultItem);
-        }
-
-        response.setResults(iaResponses);
-        return response;
-    }
-
-    private static SurveyAdviceResponse.ResultItem getResultItem(Question question) {
-        SurveyAdviceResponse.ResultItem resultItem = new SurveyAdviceResponse.ResultItem();
-        resultItem.setLabel(question.getTag());
-        double value;
-        if (question.getQuestionTotalVotes() != null && question.getQuestionTotalVotes() > 0) {
-            value = (double) question.getQuestionTotalScore() / question.getQuestionTotalVotes();
-            value = Math.round(value * 10.0) / 10.0;
-            resultItem.setValue(value);
-        }
-        // error : null puisqu’on lit depuis la BDD
-        resultItem.setError(null);
-        SurveyAdviceResponse.AdviceDto adviceDto = new SurveyAdviceResponse.AdviceDto();
-        adviceDto.setAdvice(question.getChatgptComments());
-        resultItem.setAdviceDto(adviceDto);
-        return resultItem;
-    }
 }
