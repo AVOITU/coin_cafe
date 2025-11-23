@@ -52,15 +52,7 @@ public class SurveyServiceImpl implements SurveyService {
 
         Map<String, String> questionCategoryMap = questionService.buildQuestionCategoryMap();
 
-        // fixe au 1 du mois afin de comparer les périodes par la suite
-        LocalDateTime firstDayOfMonth = LocalDateTime.now()
-                .withDayOfMonth(1)
-                .withHour(0)
-                .withMinute(0)
-                .withSecond(0)
-                .withNano(0);
-
-        Period currentPeriod = periodService.getOrCreateCurrentPeriodByTimestamp(firstDayOfMonth);
+        Period currentPeriod = periodService.getOrCreateCurrentPeriodByTimestamp();
 
         // Questions
         questionService.checkAndAddQuestionsIfNotPresent(questionCategoryMap, questions);

@@ -5,11 +5,15 @@ import com.example.sondagecoincafe.bo.Question;
 import com.example.sondagecoincafe.bo.Score;
 import com.example.sondagecoincafe.configuration.AppConstants;
 import com.example.sondagecoincafe.dal.QuestionDao;
+import com.example.sondagecoincafe.dto.SurveyAdviceResponse;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Getter
@@ -104,6 +108,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void checkAndAddQuestionsIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions) {
         for (String textQuestionToCheck : questionCategoryMap.keySet()) {
             boolean found = false;
@@ -121,6 +126,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional
     public void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, String textQuestion) {
 
         Question question = new Question();
@@ -128,5 +134,74 @@ public class QuestionServiceImpl implements QuestionService {
         question.setTag(questionCategoryMap.get(textQuestion));
 
         questionDao.save(question);
+    }
+
+    @Override
+    @Transactional
+    public void fillAndSaveIaComments(List<Question> questions, SurveyAdviceResponse surveyAdviceResponse) {
+
+        if (surveyAdviceResponse == null || surveyAdviceResponse.getResults() == null) {
+            return;
+        }
+
+        // indexer les résultats IA par label
+        Map<String, SurveyAdviceResponse.ResultItem> byLabel = surveyAdviceResponse.getResults()
+                .stream()
+                .collect(Collectors.toMap(
+                        SurveyAdviceResponse.ResultItem::getLabel,
+                        Function.identity(),
+                        (a, b) -> a   // en cas de doublon de label, on garde le premier
+                ));
+
+        for (Question question : questions) {
+            // à adapter : tag ou questionText selon ce que tu utilises côté IA
+            String key = question.getTag(); // ou question.getQuestionText()
+
+            SurveyAdviceResponse.ResultItem label = byLabel.get(key);
+            if (label == null || label.getAdviceDto() == null) {
+                continue; // pas de conseil pour cette question
+            }
+
+            question.setChatgptComments(label.getAdviceDto().getAdvice());
+            questionDao.save(question);
+        }
+    }
+
+    @Override
+    public SurveyAdviceResponse buildSurveyAdviceFromDb(List<Question> questions) {
+
+        SurveyAdviceResponse response = new SurveyAdviceResponse();
+        List<SurveyAdviceResponse.ResultItem> iaResponses = new ArrayList<>();
+
+        for (Question question : questions) {
+            // on ignore les questions sans commentaire IA
+            if (question.getChatgptComments() == null || question.getChatgptComments().isBlank()) {
+                continue;
+            }
+
+            SurveyAdviceResponse.ResultItem resultItem = getResultItem(question);
+
+            iaResponses.add(resultItem);
+        }
+
+        response.setResults(iaResponses);
+        return response;
+    }
+
+    private static SurveyAdviceResponse.ResultItem getResultItem(Question question) {
+        SurveyAdviceResponse.ResultItem resultItem = new SurveyAdviceResponse.ResultItem();
+        resultItem.setLabel(question.getTag());
+        double value;
+        if (question.getQuestionTotalVotes() != null && question.getQuestionTotalVotes() > 0) {
+            value = (double) question.getQuestionTotalScore() / question.getQuestionTotalVotes();
+            value = Math.round(value * 10.0) / 10.0;
+            resultItem.setValue(value);
+        }
+        // error : null puisqu’on lit depuis la BDD
+        resultItem.setError(null);
+        SurveyAdviceResponse.AdviceDto adviceDto = new SurveyAdviceResponse.AdviceDto();
+        adviceDto.setAdvice(question.getChatgptComments());
+        resultItem.setAdviceDto(adviceDto);
+        return resultItem;
     }
 }

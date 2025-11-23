@@ -30,20 +30,33 @@ public class ConfigSecurity {
                     "FROM users WHERE email = ?";
 
     @Bean
+//    TODO : Decommenter la sécu et retirer le request mtchers qui autorise tout
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login",
-                                "/forgot-password",
-                                "/reset-password",
-                                "/survey",
-                                "/css/**", "/javascript/**", "/images/**")
-                        .permitAll()
-                        .requestMatchers("/results")
-                        .hasRole("ADMIN")     // ← protection admin
-                        .anyRequest()
-                        .authenticated()
-                )
+//                        .requestMatchers("/login",
+//                                "/forgot-password",
+//                                "/reset-password",
+//                                "/survey",
+//                                "/css/**", "/javascript/**", "/images/**")
+//                        .permitAll()
+//                        .requestMatchers("/results")
+//                        .hasRole("ADMIN")     // ← protection admin
+//                        .anyRequest()
+//                        .authenticated()
+//                )
+                .requestMatchers(
+                        "/login",
+                        "/forgot-password",
+                        "/reset-password",
+                        "/survey",
+                        "/css/**",
+                        "/javascript/**",
+                        "/images/**",
+                        "/results"        // toujours autorisé
+                ).permitAll()
+                .anyRequest().authenticated()
+)
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")

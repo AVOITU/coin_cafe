@@ -85,14 +85,20 @@ public class PeriodServiceImpl implements PeriodService {
     }
 
     @Override
-    public Period getOrCreateCurrentPeriodByTimestamp(LocalDateTime actualTimestamp) {
+    public Period getOrCreateCurrentPeriodByTimestamp() {
 
-        return periodDao.findCurrentPeriodByTimestampPeriod(actualTimestamp)
+        // fixe au 1 du mois afin de comparer les périodes par la suite
+        LocalDateTime firstDayOfMonth = LocalDateTime.now()
+                .withDayOfMonth(1)
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+
+        return periodDao.findCurrentPeriodByTimestampPeriod(firstDayOfMonth)
                 .orElseGet(() -> {
                     Period p = new Period();
-                    p.setTimestampPeriod(actualTimestamp);
-                    p.setPeriodTotalVotes(0);
-                    p.setPeriodTotalScore(0);
+                    p.setTimestampPeriod(firstDayOfMonth);
                     return periodDao.save(p);
                 });
     }

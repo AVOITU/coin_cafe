@@ -34,6 +34,10 @@ public class Period {
     @PositiveOrZero
     private int periodTotalVotes;
 
+    @Column(name = "is_analysed_by_ia")
+    @ColumnDefault("0")
+    private boolean isAnalysedByIa;
+
     @Column(name = "period_total_score")
     @ColumnDefault("0")
     @PositiveOrZero

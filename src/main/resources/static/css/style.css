@@ -30,21 +30,6 @@ div a {
     border-radius: 5px;
 }
 
-.displayEnchere{
-    margin: 5px 0;
-    margin-left: auto;
-    align-self: center;
-}
-
-.articleEncheres{
-    display: block;
-    height: 30%;
-}
-
-.infosItems{
-    text-align: center;
-}
-
 .content-wrapper{
     padding-bottom: 2em;
 }

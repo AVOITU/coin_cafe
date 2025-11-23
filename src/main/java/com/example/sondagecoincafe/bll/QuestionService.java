@@ -1,6 +1,8 @@
 package com.example.sondagecoincafe.bll;
 
 import com.example.sondagecoincafe.bo.Question;
+import com.example.sondagecoincafe.dto.SurveyAdviceResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,4 +26,9 @@ public interface QuestionService {
     void checkAndAddQuestionsIfNotPresent(Map<String, String> questionCategoryMap, List<Question> questions);
 
     void createNewQuestionIfQuestionNotPresent(Map<String, String> questionCategoryMap, String textQuestion);
+
+    @Transactional
+    void fillAndSaveIaComments(List<Question> questions, SurveyAdviceResponse surveyAdviceResponse);
+
+    SurveyAdviceResponse buildSurveyAdviceFromDb(List<Question> questions);
 }

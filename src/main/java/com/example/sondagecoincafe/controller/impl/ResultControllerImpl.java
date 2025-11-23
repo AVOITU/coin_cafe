@@ -35,6 +35,7 @@ public class ResultControllerImpl implements ResultController {
 
     @GetMapping("/results")
     @Override
+//    TO DO : Décommenter quand le bouchon ne sera plus nécessaire et supprimer service mock
     public String updateResults(Model model){
         periodService.deletePeriodsOlderThan12Months();
 
@@ -56,9 +57,10 @@ public class ResultControllerImpl implements ResultController {
                                                                 listOfMonths, listOfAverageScore,
                                                                 listOfTags, listOfAverages);
 
-        SurveyAdviceResponse iaAdvices = surveyAdviceService.fetchSurveyAdvice(resultsDto);
-        model.addAttribute("advices", iaAdvices);
+//        SurveyAdviceResponse iaAdvices = surveyAdviceService.fetchSurveyAdvice(resultsDto);
+        SurveyAdviceResponse iaAdvices = surveyAdviceService.processIaAdvice(results);
 
+        model.addAttribute("advices", iaAdvices.getResults());
         model.addAttribute("resultsDto", resultsDto);
         return "results";
     }

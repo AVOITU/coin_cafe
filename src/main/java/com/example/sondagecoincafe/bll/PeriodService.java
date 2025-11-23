@@ -16,7 +16,7 @@ public interface PeriodService {
 
     void incrementAndSaveTotalsPeriod(int score, Period currentPeriod);
 
-    Period getOrCreateCurrentPeriodByTimestamp(LocalDateTime actualTimestamp);
+    Period getOrCreateCurrentPeriodByTimestamp();
 
     void deletePeriodsOlderThan12Months();
 }

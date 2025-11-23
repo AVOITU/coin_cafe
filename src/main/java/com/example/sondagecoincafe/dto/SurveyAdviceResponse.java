@@ -1,5 +1,6 @@
 package com.example.sondagecoincafe.dto;
 
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,15 @@ public class SurveyAdviceResponse {
     public static class ResultItem {
         private String label;
         private double value;
-        private Object advice; // ou Map<String, Object> si tu veux
+        private AdviceDto adviceDto;
+        private String error;
+    }
 
-        private String error; // en cas d’erreur côté PHP
+    @Data
+    @Getter @Setter
+    public static class AdviceDto{
+        private String priority;
+        private String advice;
     }
 }
 
