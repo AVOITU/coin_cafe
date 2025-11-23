@@ -54,7 +54,8 @@ public class ScoreServiceImpl implements ScoreService {
         if (scores == null) return 0f;
         int totalScore = getTotalScore(scores);
         int totalCountVote = getTotalCountVote(scores);
-        return (totalCountVote == 0) ? 0f : (float) totalScore / totalCountVote;
+        float globalAverage = (float) totalScore / totalCountVote;
+        return (totalCountVote == 0) ? 0f : (float) Math.round(globalAverage * 10) /10 ;
     }
 
     @Override
