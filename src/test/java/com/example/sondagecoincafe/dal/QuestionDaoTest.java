@@ -61,17 +61,18 @@ public class QuestionDaoTest {
         return p;
     }
 
-    private Question newQuestion(String txt, int totalVotes, int allVotes) {
+    private Question newQuestion(String txt, int totalVotes, int allVotes, String tag) {
         Question q = new Question();
         q.setQuestionText(txt);
         q.setQuestionTotalVotes(totalVotes);
         q.setQuestionTotalScore(allVotes);
+        q.setTag(tag);
         return q;
     }
 
     @Test
     void save_and_findAll_with_relations_ok() {
-        Question q = newQuestion("Hygiène", 0, 0);
+        Question q = newQuestion("Hygiène", 0, 0, "tag");
         q.getScores().addAll(List.of(s3, s4, s5));
         q.getPeriods().addAll(List.of(p1, p2));
 
@@ -91,7 +92,7 @@ public class QuestionDaoTest {
 
     @Test
     void findById_returns_present_and_absent() {
-        Question q = questionDao.saveAndFlush(newQuestion("Accueil", 2, 7));
+        Question q = questionDao.saveAndFlush(newQuestion("Accueil", 2, 7, "tag"));
         Long id = q.getId();
         Optional<Question> found = questionDao.findById(id);
         Optional<Question> absent = questionDao.findById(-999L);
@@ -103,7 +104,7 @@ public class QuestionDaoTest {
 
     @Test
     void update_question_fields_persists_changes() {
-        Question q = questionDao.saveAndFlush(newQuestion("Accessibilité", 1, 3));
+        Question q = questionDao.saveAndFlush(newQuestion("Accessibilité", 1, 3, "tag"));
         q.setQuestionText("Accessibilité PMR");
         q.setQuestionTotalVotes(5);
         q.setQuestionTotalScore(11);
@@ -116,7 +117,7 @@ public class QuestionDaoTest {
 
     @Test
     void add_and_remove_scores_in_many_to_many() {
-        Question q = questionDao.saveAndFlush(newQuestion("Ambiance", 0, 0));
+        Question q = questionDao.saveAndFlush(newQuestion("Ambiance", 0, 0, "tag"));
 
         // ajout
         q.getScores().addAll(List.of(s3, s4));
@@ -133,7 +134,7 @@ public class QuestionDaoTest {
 
     @Test
     void link_periods_to_question_and_verify_timestamp() {
-        Question q = newQuestion("Propreté", 0, 0);
+        Question q = newQuestion("Propreté", 0, 0, "tag");
         q.getPeriods().addAll(List.of(p1, p2));
         q = questionDao.saveAndFlush(q);
 
@@ -146,7 +147,7 @@ public class QuestionDaoTest {
 
     @Test
     void delete_question_does_not_delete_scores_or_periods() {
-        Question q = newQuestion("Café", 0, 0);
+        Question q = newQuestion("Café", 0, 0, "tag");
         q.getScores().addAll(List.of(s4, s5));
         q.getPeriods().add(p1);
         q = questionDao.saveAndFlush(q);

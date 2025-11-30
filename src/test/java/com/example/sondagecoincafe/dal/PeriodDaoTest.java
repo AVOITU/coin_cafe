@@ -4,6 +4,7 @@ import com.example.sondagecoincafe.bo.Period;
 import com.example.sondagecoincafe.bo.Question;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 //Tester avec application.properties en fixant spring.jpa.hibernate.ddl-auto=none
+@Slf4j
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Transactional
@@ -42,9 +44,8 @@ class PeriodDaoTest {
 
         assertThat(all).isNotEmpty();
         assertThat(all).hasSizeGreaterThanOrEqualTo(2);
-        assertThat(all).extracting("periodTotalVotes")
-                .contains(new BigDecimal("3.40"), new BigDecimal("4.10"));
-
+        assertThat(all).extracting(Period::getPeriodTotalVotes)
+                .contains(340, 410);
         assertThat(all)
                 .allSatisfy(p -> assertThat(p.getTimestampPeriod()).isNotNull());
     }
@@ -81,6 +82,7 @@ class PeriodDaoTest {
     void link_question_and_verify_lazy_loading() {
         Question q = new Question();
         q.setQuestionText("Ambiance");
+        q.setTag("Anbiance");
         q.setQuestionTotalVotes(0);
         q.setQuestionTotalScore(0);
 
@@ -97,34 +99,32 @@ class PeriodDaoTest {
                 .contains("Ambiance");
     }
 
-//    TO DO : Oblige la modification de la BO à voir plus tard
-//    @Test
-//    void delete_period_does_not_delete_questions() {
-//        // given
-//        Question q = new Question();
-//        q.setQuestionText("Hygiène");
-//        q.setQuestionTotalVotes(0);
-//        q.setAllVotesCount(0);
-//        q.getPeriods().add(p1);
-//        q = questionDao.saveAndFlush(q);
-//
-//        Long qId = q.getId();
-//        Long p1Id = p1.getId();
-//        long countBefore = questionDao.count();
-//
-//        // break link on owning side
-//        Question qReloaded = questionDao.findById(qId).orElseThrow();
-//        qReloaded.getPeriods().removeIf(p -> p.getId().equals(p1Id));
-//        questionDao.saveAndFlush(qReloaded); // supprime la ligne de jointure
-//
-//        // then delete period
-//        periodDao.deleteById(p1Id);
-//        periodDao.flush();
-//
-//        assertThat(periodDao.findById(p1Id)).isNotPresent();
-//        assertThat(questionDao.count()).isEqualTo(countBefore);
-//        assertThat(questionDao.findById(qId)).isPresent();
-//    }
+    @Test
+    void delete_period_does_not_delete_questions() {
+        // given
+        Question q = new Question();
+        q.setQuestionText("Hygiène");
+        q.setQuestionTotalVotes(0);
+        q.setQuestionTotalScore(0);
+        q.setTag("Hygiène");
+        q.getPeriods().add(p1);
+        q = questionDao.saveAndFlush(q);
+
+        Long qId = q.getId();
+        Long p1Id = p1.getId();
+        long countBefore = questionDao.count();
+
+        Question qReloaded = questionDao.findById(qId).orElseThrow();
+        qReloaded.getPeriods().removeIf(p -> p.getId().equals(p1Id));
+        questionDao.saveAndFlush(qReloaded); // supprime la ligne de jointure
+
+        periodDao.deleteById(p1Id);
+        periodDao.flush();
+
+        assertThat(periodDao.findById(p1Id)).isNotPresent();
+        assertThat(questionDao.count()).isEqualTo(countBefore);
+        assertThat(questionDao.findById(qId)).isPresent();
+    }
 
     // ---------- helpers ----------
     private Period newPeriod(int totalVotes) {

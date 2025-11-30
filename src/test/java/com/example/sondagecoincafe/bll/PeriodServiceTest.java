@@ -30,35 +30,35 @@ class GetFirstFiveMonthsTest {
     @Test
     void returns_first_five_months_in_order() {
         List<Period> in = List.of(
-                p(2025, 1, 1),  // JANUARY
-                p(2025, 3, 1),  // MARCH
-                p(2025, 2, 1),  // FEBRUARY
-                p(2025, 5, 1),  // MAY
-                p(2025, 4, 1),  // APRIL
-                p(2025, 6, 1)   // JUNE (doit être ignoré, on ne garde que 5)
+                p(1),  // JANUARY
+                p(3),  // MARCH
+                p(2),  // FEBRUARY
+                p(5),  // MAY
+                p(4),  // APRIL
+                p(6)   // JUNE (doit être ignoré, on ne garde que 5)
         );
 
         List<String> out = periodService.getListOfMonths(in);
 
         assertThat(out).hasSize(5);
         // ordre = ordre d’itération d’entrée
-        assertThat(out).containsExactly("JANUARY","MARCH","FEBRUARY","MAY","APRIL");
+        assertThat(out).containsExactly("JANVIER","MARS","FÉVRIER","MAI","AVRIL");
     }
 
     @Test
     void returns_all_when_less_than_five() {
-        List<Period> in = List.of(p(2025, 9, 1), p(2025, 10, 1));
+        List<Period> in = List.of(p(9), p(10));
 
         List<String> out = periodService.getListOfMonths(in);
 
         assertThat(out).hasSize(2)
-                .containsExactly("SEPTEMBER","OCTOBER");
+                .containsExactly("SEPTEMBRE","OCTOBRE");
     }
 
     // ---------- helper ----------
-    private static Period p(int y, int m, int d) {
+    private static Period p(int m) {
         Period p = new Period();
-        p.setTimestampPeriod(LocalDateTime.of(y, m, d, 0, 0));
+        p.setTimestampPeriod(LocalDateTime.of(2025, m, 1, 0, 0));
         return p;
     }
 }

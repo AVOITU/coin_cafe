@@ -51,38 +51,17 @@ class ScoreDaoTest {
         q.setQuestionText("Ambiance");
         q.setQuestionTotalVotes(0);
         q.setQuestionTotalScore(0);
+        q.setTag("tag");
         q.getScores().addAll(Set.of(s4, s5));
         questionDao.saveAndFlush(q);
 
-        // when
         Question reloaded = questionDao.findById(q.getId()).orElseThrow();
 
-        // then
         assertThat(reloaded.getScores()).hasSize(2);
         assertThat(reloaded.getScores())
                 .extracting("score")
                 .contains(4, 5);
     }
-
-//    @Test
-//    void delete_score_does_not_delete_question() {
-//        Score s = scoreDao.save(newScore(2));
-//        Question q = new Question();
-//        q.setQuestionText("Accessibilité");
-//        q.setQuestionTotalVotes(0);
-//        q.setAllVotesCount(0);
-//        q.getScores().add(s);
-//        questionDao.saveAndFlush(q);
-//
-//        long countBefore = questionDao.count();
-//
-//        scoreDao.delete(s);
-//        em.clear();
-//        scoreDao.flush();
-//
-//        assertThat(questionDao.count()).isEqualTo(countBefore);
-//        assertThat(scoreDao.findById(s.getId())).isNotPresent();
-//    }
 
     private Score newScore(int value) {
         Score s = new Score();

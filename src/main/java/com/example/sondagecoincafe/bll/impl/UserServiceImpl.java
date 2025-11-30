@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
             throw businessException;
         }
         user.setPassword(
-                this.passwordEncoder.encode(user.getPassword())
-        );
+            this.passwordEncoder.encode(user.getPassword()));
+            user.setPasswordConfirmation(null);
         userDao.save(user);
     }
 
