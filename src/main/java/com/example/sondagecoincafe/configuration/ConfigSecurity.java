@@ -45,18 +45,18 @@ public class ConfigSecurity {
 //                        .anyRequest()
 //                        .authenticated()
 //                )
-                .requestMatchers(
-                        "/login",
-                        "/forgot-password",
-                        "/reset-password",
-                        "/survey",
-                        "/css/**",
-                        "/javascript/**",
-                        "/images/**",
-                        "/results"        // toujours autorisé
-                ).permitAll()
-                .anyRequest().authenticated()
-)
+                                .requestMatchers(
+                                        "/login",
+                                        "/forgot-password",
+                                        "/reset-password",
+                                        "/survey",
+                                        "/css/**",
+                                        "/javascript/**",
+                                        "/images/**",
+                                        "/results"        // toujours autorisé
+                                ).permitAll()
+                                .anyRequest().authenticated()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
